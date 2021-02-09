@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: to-do-app
+  namespace: to-do-ns
+  labels:
+    app: to-do-app
+spec:
+  selector:
+    matchLabels:
+      app: to-do-app
+
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: to-do-app
+    spec:
+      containers:
+        - name: to-do-app
+          image: contaparatestespoupas/to-do-app
+          resources: {}
+
+          ports:
+            - containerPort: 3000
+          
+          env:
+            - name: REACT_APP_API_URL
+              value: api
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: to-do-app-service
+  namespace: to-do-ns
+spec:
+  selector:
+    app: to-do-app
+
+  ports:
+    - port: 3000
+      targetPort: 3000
