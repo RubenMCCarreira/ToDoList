@@ -14,12 +14,12 @@ app.get('/api/', (req, res) => {
 })
 
 app.get('/api/todo/', (req, res) => {
-  res.json(myToDoList)
+  res.json(myToDoList.filter(it => !it.removed))
 })
 
 app.post('/api/todo/', (req, res) => {
   const id = myToDoList.length +1
-  myToDoList.push({id, ...req.body, done: false})
+  myToDoList.push({ id, ...req.body, done: false, removed: false })
   res.send({id})
 })
 

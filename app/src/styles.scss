@@ -7,6 +7,7 @@ $white-1: white;
 $green-1: green;
 $green-2: rgb(106, 209, 106);
 $green-3: rgb(92, 151, 92);
+
 $childLength: 8;
 $add: 7;
 $top: 56;
@@ -53,7 +54,7 @@ select {
 
 .Application {
   margin: auto;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 %to-do {
@@ -68,12 +69,51 @@ select {
 
 .to-do-red {
   @extend %to-do;
+
   border-color: $red-2;
 }
 
 .to-do-green {
   @extend %to-do;
-  border-color: green;
+
+  border-color: $green-1;
+}
+
+%to-do-footer {
+  display: flex;
+
+  button {
+    color: $white-1;
+    border: none;
+  }
+}
+
+.to-do-footer-red {
+  @extend %to-do-footer;
+
+  button {
+    background-color: $red-2;
+  }
+}
+
+.to-do-footer-green {
+  @extend %to-do-footer;
+
+  button {
+    background-color: $green-1;
+  }
+}
+
+%to-do-controls {
+  margin-right: auto;
+}
+
+.to-do-controls-red {
+  @extend %to-do-controls;
+}
+
+.to-do-controls-green {
+  @extend %to-do-controls;
 }
 
 .to-do-control-done-red {
