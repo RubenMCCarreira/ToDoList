@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import ToDo from './ToDo';
 import { connect } from 'react-redux';
-import { toDoMapStateToProps, toDoMapDispatchToProps } from './store/toDo';
+import { toDoMapStateToProps, toDoMapDispatchToProps } from '../store/toDo';
+import Spinier from './Spinier';
 
-const ToDos = ({ getList, list, reset, saveItem }) => {
+const ToDos = ({ getList, list, reset, saveItem, loading }) => {
   useEffect(() => {
     return () => {
       reset();
@@ -17,12 +18,15 @@ const ToDos = ({ getList, list, reset, saveItem }) => {
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <section className="ToDos">
-      <h2>To Dos ({(list || []).length})</h2>
-      {(list || []).map((toDo) => (
-        <ToDo key={toDo.id} item={toDo} updateItem={saveItem} />
-      ))}
-    </section>
+    <>
+      {loading && <Spinier />}
+      <section className="ToDos">
+        <h2>To Dos ({(list || []).length})</h2>
+        {(list || []).map((toDo) => (
+          <ToDo key={toDo.id} item={toDo} updateItem={saveItem} />
+        ))}
+      </section>
+    </>
   );
 };
 

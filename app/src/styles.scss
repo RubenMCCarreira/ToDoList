@@ -79,3 +79,59 @@ input[type='submit'].full-width {
 .NewToDo-input {
   width: 100%;
 }
+
+.lds-roller {
+  margin-left: 40%;
+}
+
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+
+.lds-roller div:after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin: -4px 0 0 -4px;
+}
+
+$add: 7;
+$top: 56;
+$childLength: 8;
+
+@for $i from 1 through $childLength {
+  $time: ($i * 36) / -1000;
+
+  .lds-roller div:nth-child(#{$i}) {
+    animation-delay: #{$time}s;
+  }
+
+  $top: $top + if($i <= ($childLength / 2), $add, (-$add));
+
+  .lds-roller div:nth-child(#{$i}):after {
+    background-color: #f32e5b;
+    left: #{64 - (($i - 1) * 8)}px;
+    top: #{$top}px;
+  }
+
+  @if ($i < ($childLength / 2)) {
+    $add: $add - 2;
+  } @else if($i == ($childLength / 2)) {
+    $add: 1;
+  } @else {
+    $add: $add + 2;
+  }
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

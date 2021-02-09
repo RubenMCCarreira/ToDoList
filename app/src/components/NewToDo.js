@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { toDoMapDispatchToProps, toDoMapStateToProps } from './store/toDo';
+import { toDoMapDispatchToProps, toDoMapStateToProps } from '../store/toDo';
 
 const NewToDo = React.memo(({ saveItem }) => {
+  console.log('NewToDo');
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
 

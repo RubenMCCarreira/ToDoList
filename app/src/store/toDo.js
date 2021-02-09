@@ -1,4 +1,4 @@
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api/';
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
 const Actions = ['LOADING', 'RESET', 'LIST', 'ITEM', 'SAVE', 'DELETE'];
 
@@ -136,10 +136,6 @@ export const toDoMapDispatchToProps = (dispatch) => ({
   deleteItem: (id) => deleteItemAction(dispatch, id)
 });
 
-export const toDoMapStateToProps = ({ toDo: { list, item, saved } }) => ({
-  list,
-  item,
-  saved
-});
+export const toDoMapStateToProps = ({ toDo }) => toDo;
 
 export default reducer;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ToDos from './ToDos';
-import NewToDo from './NewToDo';
+import ToDos from './components/ToDos';
+import NewToDo from './components/NewToDo';
 
 const Application = () => {
   return (

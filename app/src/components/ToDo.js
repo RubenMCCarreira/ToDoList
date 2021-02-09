@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 
 const ToDo = React.memo(({ item, updateItem }) => {
+  console.log('ToDo', item.id);
   const onChange = useCallback(() => {
     const nextItem = { ...item };
     nextItem.done = !nextItem.done;
