@@ -137,76 +137,6 @@ select {
   }
 }
 
-%lds-roller {
-  margin-left: 40%;
-
-  div {
-    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    transform-origin: 40px 40px;
-
-    &:after {
-      content: ' ';
-      display: block;
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      margin: -4px 0 0 -4px;
-    }
-
-    @for $i from 1 through $childLength {
-      $time: ($i * 36) / -1000;
-      $top: $top + if($i <= ($childLength / 2), $add, (-$add));
-
-      &:nth-child(#{$i}) {
-        animation-delay: #{$time}s;
-
-        &:after {
-          left: #{64 - (($i - 1) * 8)}px;
-          top: #{$top}px;
-        }
-      }
-
-      @if ($i < ($childLength / 2)) {
-        $add: $add - 2;
-      } @else if($i == ($childLength / 2)) {
-        $add: 1;
-      } @else {
-        $add: $add + 2;
-      }
-    }
-  }
-}
-
-.lds-roller-red {
-  @extend %lds-roller;
-
-  @for $i from 1 through $childLength {
-    div:nth-child(#{$i}):after {
-      background-color: $red-2;
-    }
-  }
-}
-
-.lds-roller-green {
-  @extend %lds-roller;
-
-  @for $i from 1 through $childLength {
-    div:nth-child(#{$i}):after {
-      background-color: $green-1;
-    }
-  }
-}
-
-@keyframes lds-roller {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .error {
   color: $red-1;
 }
@@ -226,4 +156,84 @@ select {
   @extend %dropdown;
   border-color: $green-1;
   background-color: $green-2;
+}
+
+%spinier {
+  .lds-ellipsis {
+    margin-left: 13%;
+    margin-top: 27px;
+    position: absolute;
+  }
+
+  .lds-ellipsis div {
+    content: ' ';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+
+  .lds-ellipsis div:nth-child(1) {
+    left: 6px;
+    animation: lds-ellipsis1 0.6s infinite;
+  }
+
+  .lds-ellipsis div:nth-child(2) {
+    left: 6px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+
+  .lds-ellipsis div:nth-child(3) {
+    left: 26px;
+    animation: lds-ellipsis2 0.6s infinite;
+  }
+
+  .lds-ellipsis div:nth-child(4) {
+    left: 45px;
+    animation: lds-ellipsis3 0.6s infinite;
+  }
+}
+
+.spinier-red {
+  @extend %spinier;
+
+  .lds-ellipsis div {
+    background: $red-1;
+  }
+}
+
+.spinier-green {
+  @extend %spinier;
+
+  .lds-ellipsis div {
+    background: $green-1;
+  }
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
 }

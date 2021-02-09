@@ -19,7 +19,7 @@ const ToDos = ({ getList, list, reset, saveItem, loading, error }) => {
 
   return (
     <>
-      <Spinier />
+      {loading && <Spinier />}
       <section>
         <h2>To Dos ({(list || []).length})</h2>
         {!!error && <h4 className="error">{error}</h4>}

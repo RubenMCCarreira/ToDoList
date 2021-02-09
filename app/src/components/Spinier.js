@@ -5,15 +5,12 @@ const Spinier = () => {
   const { color } = useThemeContext();
 
   return (
-    <div className={`lds-roller-${color}`}>
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
-      <div />
+    <div className={`spinier-${color}`}>
+      <div className={`lds-ellipsis`}>
+        <div />
+        <div />
+        <div />
+      </div>
     </div>
   );
 };
