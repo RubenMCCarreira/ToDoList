@@ -19,8 +19,10 @@ spec:
     spec:
       containers:
         - name: to-do-api
-          image: contaparatestespoupas/to-do-api
+          image: contaparatestespoupas/to-do-api:latest
+          imagePullPolicy: Always
           resources: {}
+          
           ports:
             - containerPort: 4000
 

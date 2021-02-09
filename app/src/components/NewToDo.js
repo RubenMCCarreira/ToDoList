@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useThemeContext } from '../contexts/Theme';
 import { toDoMapDispatchToProps, toDoMapStateToProps } from '../store/toDo';
 
 const NewToDo = React.memo(({ saveItem }) => {
-  console.log('NewToDo');
+  const { color } = useThemeContext();
+
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
 
-  const handleChange = (event) => {
-    event.preventDefault();
+  const handleChange = (e) => {
+    e.preventDefault();
     saveItem({ title, description });
     setTitle(null);
     setDescription(null);
   };
 
   return (
-    <form className="NewToDo" onSubmit={handleChange}>
+    <form className={`new-to-do-${color}`} onSubmit={handleChange}>
       <input
-        className="NewToDo-input"
+        className={`new-to-do-${color} input`}
         placeholder="Title"
-        type="text"
         value={title || ''}
-        onChange={(event) => setTitle(event.target.value)}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        className="NewToDo-input"
+        className={`new-to-do-${color} input`}
         placeholder="Description"
-        type="text"
         value={description || ''}
-        onChange={(event) => setDescription(event.target.value)}
+        onChange={(e) => setDescription(e.target.value)}
       />
-      <input className="NewToDo-submit button" type="submit" />
+      <input className={`new-to-do-${color} submit`} type="submit" />
     </form>
   );
 });

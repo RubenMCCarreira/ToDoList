@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
+import { useThemeContext } from '../contexts/Theme';
 
 const ToDo = React.memo(({ item, updateItem }) => {
-  console.log('ToDo', item.id);
+  const { color } = useThemeContext();
+
   const onChange = useCallback(() => {
     const nextItem = { ...item };
     nextItem.done = !nextItem.done;
@@ -9,11 +11,11 @@ const ToDo = React.memo(({ item, updateItem }) => {
   }, [item, updateItem]);
 
   return (
-    <article className="ToDo">
+    <article className={`to-do-${color}`}>
       <h3>{item.title}</h3>
       <p>{item.description}</p>
-      <div className="ToDo-controls">
-        <label className="ToDo-done">
+      <div className={`to-do-controls-${color}`}>
+        <label className={`to-do-control-done-${color}`}>
           <input type="checkbox" checked={item.done} onChange={onChange} /> Done
         </label>
       </div>

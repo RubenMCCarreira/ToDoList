@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { toDoMapStateToProps, toDoMapDispatchToProps } from '../store/toDo';
 import Spinier from './Spinier';
 
-const ToDos = ({ getList, list, reset, saveItem, loading }) => {
+const ToDos = ({ getList, list, reset, saveItem, loading, error }) => {
   useEffect(() => {
     return () => {
       reset();
@@ -19,11 +19,12 @@ const ToDos = ({ getList, list, reset, saveItem, loading }) => {
 
   return (
     <>
-      {loading && <Spinier />}
-      <section className="ToDos">
+      <Spinier />
+      <section>
         <h2>To Dos ({(list || []).length})</h2>
-        {(list || []).map((toDo) => (
-          <ToDo key={toDo.id} item={toDo} updateItem={saveItem} />
+        {!!error && <h4 className="error">{error}</h4>}
+        {(list || []).map((it) => (
+          <ToDo key={it.id} item={it} updateItem={saveItem} />
         ))}
       </section>
     </>

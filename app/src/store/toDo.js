@@ -1,6 +1,6 @@
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
-const Actions = ['LOADING', 'RESET', 'LIST', 'ITEM', 'SAVE', 'DELETE'];
+const Actions = ['LOADING', 'RESET', 'LIST', 'ITEM', 'SAVE', 'DELETE', 'ERROR'];
 
 export const UserActions = Actions.reduce((acc, current) => {
   return { ...acc, [current]: 'TODO_' + current };
@@ -11,7 +11,8 @@ export const initialState = {
   list: null,
   item: null,
   saved: null,
-  deleted: null
+  deleted: null,
+  error: null
 };
 
 const reducer = (draft = initialState, action) => {
@@ -26,6 +27,13 @@ const reducer = (draft = initialState, action) => {
       return {
         ...draft,
         loading: true
+      };
+
+    case UserActions.ERROR:
+      return {
+        ...draft,
+        loading: false,
+        error: action.payload
       };
 
     case UserActions.LIST:
@@ -66,15 +74,19 @@ export const resetAction = (dispatch) => {
 };
 
 export const getListAction = async (dispatch) => {
-  dispatch({ type: UserActions.LOADING });
+  try {
+    dispatch({ type: UserActions.LOADING });
 
-  let payload = await fetch(`${apiUrl}/todo/`, {
-    method: 'GET',
-    headers: {}
-  });
-  payload = await payload.json();
+    let payload = await fetch(`${apiUrl}/todo/`, {
+      method: 'GET',
+      headers: {}
+    });
+    payload = await payload.json();
 
-  dispatch({ type: UserActions.LIST, payload });
+    dispatch({ type: UserActions.LIST, payload });
+  } catch (error) {
+    dispatch({ type: UserActions.ERROR, payload: error.message });
+  }
 };
 
 export const getItemAction = async (dispatch, id) => {

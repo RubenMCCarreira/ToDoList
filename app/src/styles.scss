@@ -1,17 +1,29 @@
+$red-1: red;
+$red-2: #f32e5b;
+$red-3: #e10d3d;
+$pink-1: #fbbfcd;
+$pink-2: #f65e81;
+$white-1: white;
+$green-1: green;
+$green-2: rgb(106, 209, 106);
+$green-3: rgb(92, 151, 92);
+$childLength: 8;
+$add: 7;
+$top: 56;
+
 html,
 * {
   box-sizing: border-box;
 }
 
 body,
-input {
+input,
+select {
   font: caption;
 }
 
 input {
   padding: 0.5em;
-  border: 1px solid #f32e5b;
-  background-color: #fbbfcd;
 }
 
 input:not(:first-of-type) {
@@ -21,23 +33,9 @@ input:not(:first-of-type) {
 button,
 .button,
 input[type='submit'] {
-  background-color: #f32e5b;
-  border: 1px solid #e10d3d;
-  color: white;
+  color: $white-1;
   padding: 0.5em;
   transition: all 0.2s;
-}
-
-button:hover,
-.button:hover,
-input[type='submit']:hover {
-  background-color: #f65e81;
-}
-
-button:active,
-.button:active,
-input[type='submit']:active {
-  background-color: #f4466e;
 }
 
 button.full-width,
@@ -47,83 +45,156 @@ input[type='submit'].full-width {
   margin: 1em 0;
 }
 
+select {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 10px;
+}
+
 .Application {
   margin: auto;
   max-width: 400px;
 }
 
-.ToDos-searchTerm {
-  background-color: white;
-  margin-bottom: 0.5em;
-  width: 100%;
-}
-
-.ToDo {
-  border: 1px solid #f4466e;
+%to-do {
+  border: 1px solid;
   padding: 1em;
   margin: 1em 0;
+
+  h3 {
+    margin-top: 0;
+  }
 }
 
-.ToDo h3 {
-  margin-top: 0;
+.to-do-red {
+  @extend %to-do;
+  border-color: $red-2;
 }
 
-.ToDo-done {
-  color: #f4466e;
+.to-do-green {
+  @extend %to-do;
+  border-color: green;
 }
 
-.NewToDo {
+.to-do-control-done-red {
+  color: $red-2;
+}
+
+.to-do-control-done-green {
+  color: $green-1;
+}
+
+%new-to-do {
   display: flex;
+
+  .input {
+    border: 1px solid;
+    width: 100%;
+  }
+
+  .submit {
+    border: 1px solid;
+
+    &:hover {
+      background-color: $white-1;
+    }
+  }
 }
 
-.NewToDo-input {
-  width: 100%;
+.new-to-do-red {
+  @extend %new-to-do;
+
+  .input {
+    border-color: $red-2;
+    background-color: $pink-1;
+  }
+
+  .submit {
+    background-color: $red-2;
+    border-color: $red-3;
+
+    &:hover {
+      background-color: $pink-2;
+    }
+  }
 }
 
-.lds-roller {
+.new-to-do-green {
+  @extend %new-to-do;
+
+  .input {
+    border-color: $green-1;
+    background-color: $green-2;
+  }
+
+  .submit {
+    background-color: $green-1;
+    border-color: $green-3;
+
+    &:hover {
+      background-color: $green-2;
+    }
+  }
+}
+
+%lds-roller {
   margin-left: 40%;
-}
 
-.lds-roller div {
-  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  transform-origin: 40px 40px;
-}
+  div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
 
-.lds-roller div:after {
-  content: ' ';
-  display: block;
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  margin: -4px 0 0 -4px;
-}
+    &:after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      margin: -4px 0 0 -4px;
+    }
 
-$add: 7;
-$top: 56;
-$childLength: 8;
+    @for $i from 1 through $childLength {
+      $time: ($i * 36) / -1000;
+      $top: $top + if($i <= ($childLength / 2), $add, (-$add));
 
-@for $i from 1 through $childLength {
-  $time: ($i * 36) / -1000;
+      &:nth-child(#{$i}) {
+        animation-delay: #{$time}s;
 
-  .lds-roller div:nth-child(#{$i}) {
-    animation-delay: #{$time}s;
+        &:after {
+          left: #{64 - (($i - 1) * 8)}px;
+          top: #{$top}px;
+        }
+      }
+
+      @if ($i < ($childLength / 2)) {
+        $add: $add - 2;
+      } @else if($i == ($childLength / 2)) {
+        $add: 1;
+      } @else {
+        $add: $add + 2;
+      }
+    }
   }
+}
 
-  $top: $top + if($i <= ($childLength / 2), $add, (-$add));
+.lds-roller-red {
+  @extend %lds-roller;
 
-  .lds-roller div:nth-child(#{$i}):after {
-    background-color: #f32e5b;
-    left: #{64 - (($i - 1) * 8)}px;
-    top: #{$top}px;
+  @for $i from 1 through $childLength {
+    div:nth-child(#{$i}):after {
+      background-color: $red-2;
+    }
   }
+}
 
-  @if ($i < ($childLength / 2)) {
-    $add: $add - 2;
-  } @else if($i == ($childLength / 2)) {
-    $add: 1;
-  } @else {
-    $add: $add + 2;
+.lds-roller-green {
+  @extend %lds-roller;
+
+  @for $i from 1 through $childLength {
+    div:nth-child(#{$i}):after {
+      background-color: $green-1;
+    }
   }
 }
 
@@ -134,4 +205,25 @@ $childLength: 8;
   100% {
     transform: rotate(360deg);
   }
+}
+
+.error {
+  color: $red-1;
+}
+
+%dropdown {
+  border: 1px solid;
+  width: 100%;
+}
+
+.dropdown-red {
+  @extend %dropdown;
+  border-color: $red-2;
+  background-color: $pink-1;
+}
+
+.dropdown-green {
+  @extend %dropdown;
+  border-color: $green-1;
+  background-color: $green-2;
 }

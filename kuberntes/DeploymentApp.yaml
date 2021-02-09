@@ -19,7 +19,8 @@ spec:
     spec:
       containers:
         - name: to-do-app
-          image: contaparatestespoupas/to-do-app
+          image: contaparatestespoupas/to-do-app:latest
+          imagePullPolicy: Always
           resources: {}
 
           ports:
