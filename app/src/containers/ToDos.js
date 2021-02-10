@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import ToDo from './ToDo';
 import { connect } from 'react-redux';
 import { toDoMapStateToProps, toDoMapDispatchToProps } from '../store/toDo';
-import Spinier from './Spinier';
+import Spinier from '../components/Spinier';
 import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
 

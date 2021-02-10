@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ToDos from '../components/ToDos';
+import ToDos from '../containers/ToDos';
 
-const AllToDos = () => {
+const All = () => {
   return (
     <div className="Initial">
       <ToDos all />
@@ -10,4 +10,4 @@ const AllToDos = () => {
   );
 };
 
-export default AllToDos;
+export default All;

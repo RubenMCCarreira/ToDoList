@@ -70,13 +70,14 @@ select {
     margin-top: 0;
   }
 
-  div {
+  > div {
     @extend %side-by-side;
   }
 }
 
 .to-do-red {
   @extend %to-do;
+  @extend %new-to-do-red;
 
   border-color: $red-2;
 
@@ -91,6 +92,7 @@ select {
 
 .to-do-green {
   @extend %to-do;
+  @extend %new-to-do-green;
 
   border-color: $green-1;
 
@@ -135,32 +137,38 @@ select {
   display: flex;
 }
 
-.new-to-do-red {
-  @extend %new-to-do;
-
+%new-to-do-red {
   input {
     border-color: $red-2;
     background-color: $pink-1;
   }
 
-  button {
+  input[type='submit'] {
     background-color: $red-2;
     border-color: $red-3;
   }
 }
 
-.new-to-do-green {
+.new-to-do-red {
   @extend %new-to-do;
+  @extend %new-to-do-red;
+}
 
+%new-to-do-green {
   input {
     border-color: $green-1;
     background-color: $green-2;
   }
 
-  button {
+  input[type='submit'] {
     background-color: $green-1;
     border-color: $green-3;
   }
+}
+
+.new-to-do-green {
+  @extend %new-to-do;
+  @extend %new-to-do-green;
 }
 
 .error {

@@ -23,7 +23,7 @@ app.get('/api/todo/all', (req, res) => {
 
 app.post('/api/todo/', (req, res) => {
   const id = myToDoList.length +1
-  myToDoList.push({ id, ...req.body, done: false, removed: false })
+  myToDoList.unshift({ id, ...req.body, done: false, removed: false })
   res.send({id})
 })
 

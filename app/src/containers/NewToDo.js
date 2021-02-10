@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Input from '../components/Input';
 import { useThemeContext } from '../contexts/Theme';
 import { toDoMapDispatchToProps, toDoMapStateToProps } from '../store/toDo';
 
@@ -9,7 +10,8 @@ const NewToDo = React.memo(({ saveItem }) => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
 
-  const handleChange = () => {
+  const handleChange = (e) => {
+    e.preventDefault();
     saveItem({ title, description });
     setTitle(null);
     setDescription(null);
@@ -17,19 +19,13 @@ const NewToDo = React.memo(({ saveItem }) => {
 
   return (
     <form className={`new-to-do-${color}`} onSubmit={handleChange}>
-      <input
-        placeholder="Title"
-        value={title || ''}
-        onChange={(e) => setTitle(e.target.value)}
-        type="text"
-      />
-      <input
+      <Input value={title} placeholder="Title" onChange={setTitle} />
+      <Input
+        value={description}
         placeholder="Description"
-        value={description || ''}
-        onChange={(e) => setDescription(e.target.value)}
-        type="text"
+        setDescription={setTitle}
       />
-      <button onClick={handleChange}>Create</button>
+      <input type="submit" />
     </form>
   );
 });
