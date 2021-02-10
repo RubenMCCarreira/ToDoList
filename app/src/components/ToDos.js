@@ -3,8 +3,12 @@ import ToDo from './ToDo';
 import { connect } from 'react-redux';
 import { toDoMapStateToProps, toDoMapDispatchToProps } from '../store/toDo';
 import Spinier from './Spinier';
+import { useThemeContext } from '../contexts/Theme';
+import { Link } from 'react-router-dom';
 
-const ToDos = ({ getList, list, reset, saveItem, loading, error }) => {
+const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
+  const { color } = useThemeContext();
+
   useEffect(() => {
     return () => {
       reset();
@@ -13,16 +17,29 @@ const ToDos = ({ getList, list, reset, saveItem, loading, error }) => {
 
   useEffect(() => {
     if (!list) {
-      getList();
+      getList(all);
     }
-  }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [list, all]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       {loading && <Spinier />}
       <section>
-        <h2>To Dos ({(list || []).length})</h2>
-        {!!error && <h4 className="error">{error}</h4>}
+        <div className={`to-dos-header-${color}`}>
+          <div>
+            <h2>To Dos ({(list || []).length})</h2>
+            {!!error && <h4 className="error">{error}</h4>}
+          </div>
+          {all ? (
+            <Link to="/">
+              <button>Back</button>
+            </Link>
+          ) : (
+            <Link to="/all">
+              <button>See All</button>
+            </Link>
+          )}
+        </div>
         {(list || []).map((it) => (
           <ToDo key={it.id} item={it} updateItem={saveItem} />
         ))}

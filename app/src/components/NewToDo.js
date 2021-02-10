@@ -9,8 +9,7 @@ const NewToDo = React.memo(({ saveItem }) => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
 
-  const handleChange = (e) => {
-    e.preventDefault();
+  const handleChange = () => {
     saveItem({ title, description });
     setTitle(null);
     setDescription(null);
@@ -19,18 +18,18 @@ const NewToDo = React.memo(({ saveItem }) => {
   return (
     <form className={`new-to-do-${color}`} onSubmit={handleChange}>
       <input
-        className={`new-to-do-${color} input`}
         placeholder="Title"
         value={title || ''}
         onChange={(e) => setTitle(e.target.value)}
+        type="text"
       />
       <input
-        className={`new-to-do-${color} input`}
         placeholder="Description"
         value={description || ''}
         onChange={(e) => setDescription(e.target.value)}
+        type="text"
       />
-      <input className={`new-to-do-${color} submit`} type="submit" />
+      <button onClick={handleChange}>Create</button>
     </form>
   );
 });

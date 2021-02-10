@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import Application from './Application';
+import App from './App';
 import ThemeProvider from './contexts/Theme';
 import store from './store';
 
@@ -13,7 +13,7 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider>
-      <Application />
+      <App />
     </ThemeProvider>
   </Provider>,
   rootElement

@@ -16,18 +16,19 @@ const ToDo = React.memo(({ item, updateItem }) => {
     <article className={`to-do-${color}`}>
       <h3>{item.title}</h3>
       <p>{item.description}</p>
-      <div className={`to-do-footer-${color}`}>
-        <div className={`to-do-controls-${color}`}>
-          <label className={`to-do-control-done-${color}`}>
-            <input
-              type="checkbox"
-              checked={item.done}
-              onChange={handleMarkDone}
-            />
-            Done
-          </label>
-        </div>
-        <button onClick={handleRemove}>Remove</button>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={item.done}
+            disabled={item.removed}
+            onChange={handleMarkDone}
+          />
+          Done
+        </label>
+        <button onClick={handleRemove} disabled={item.removed}>
+          Remove
+        </button>
       </div>
     </article>
   );

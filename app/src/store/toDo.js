@@ -73,11 +73,11 @@ export const resetAction = (dispatch) => {
   return dispatch({ type: UserActions.RESET });
 };
 
-export const getListAction = async (dispatch) => {
+export const getListAction = async (dispatch, all) => {
   try {
     dispatch({ type: UserActions.LOADING });
 
-    let payload = await fetch(`${apiUrl}/todo/`, {
+    let payload = await fetch(`${apiUrl}/todo/${all ? 'all/' : ''}`, {
       method: 'GET',
       headers: {}
     });
@@ -142,7 +142,7 @@ export const deleteItemAction = async (dispatch, id) => {
 
 export const toDoMapDispatchToProps = (dispatch) => ({
   reset: () => resetAction(dispatch),
-  getList: () => getListAction(dispatch),
+  getList: (all) => getListAction(dispatch, all),
   getItem: (id) => getItemAction(dispatch, id),
   saveItem: (data) => saveItemAction(dispatch, data),
   deleteItem: (id) => deleteItemAction(dispatch, id)

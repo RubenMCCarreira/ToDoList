@@ -2,15 +2,11 @@ $red-1: red;
 $red-2: #f32e5b;
 $red-3: #e10d3d;
 $pink-1: #fbbfcd;
-$pink-2: #f65e81;
 $white-1: white;
+$black-1: black;
 $green-1: green;
 $green-2: rgb(106, 209, 106);
 $green-3: rgb(92, 151, 92);
-
-$childLength: 8;
-$add: 7;
-$top: 56;
 
 html,
 * {
@@ -19,42 +15,50 @@ html,
 
 body,
 input,
-select {
+select,
+button {
   font: caption;
 }
 
-input {
+input,
+button,
+select {
   padding: 0.5em;
-}
-
-input:not(:first-of-type) {
-  border-left: none;
+  border: none;
 }
 
 button,
-.button,
-input[type='submit'] {
-  color: $white-1;
-  padding: 0.5em;
+input[type='submit'],
+input[type='checkbox'],
+select {
   transition: all 0.2s;
+  color: $white-1;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 
-button.full-width,
-.button.full-width,
-input[type='submit'].full-width {
-  width: 100%;
-  margin: 1em 0;
-}
-
+input[type='text'],
 select {
   width: 100%;
-  padding: 0.5em;
-  margin-bottom: 10px;
 }
 
-.Application {
+.Initial {
   margin: auto;
   max-width: 500px;
+}
+
+input,
+button,
+select {
+  border: 1px solid;
 }
 
 %to-do {
@@ -65,42 +69,45 @@ select {
   h3 {
     margin-top: 0;
   }
+
+  div {
+    @extend %side-by-side;
+  }
 }
 
 .to-do-red {
   @extend %to-do;
 
   border-color: $red-2;
+
+  button {
+    background-color: $red-2;
+  }
+
+  label {
+    color: $red-2;
+  }
 }
 
 .to-do-green {
   @extend %to-do;
 
   border-color: $green-1;
-}
-
-%to-do-footer {
-  display: flex;
-
-  button {
-    color: $white-1;
-    border: none;
-  }
-}
-
-.to-do-footer-red {
-  @extend %to-do-footer;
-
-  button {
-    background-color: $red-2;
-  }
-}
-
-.to-do-footer-green {
-  @extend %to-do-footer;
 
   button {
     background-color: $green-1;
+  }
+
+  label {
+    color: $green-1;
+  }
+}
+
+%side-by-side {
+  display: flex;
+
+  :first-child {
+    margin-right: auto;
   }
 }
 
@@ -126,54 +133,33 @@ select {
 
 %new-to-do {
   display: flex;
-
-  .input {
-    border: 1px solid;
-    width: 100%;
-  }
-
-  .submit {
-    border: 1px solid;
-
-    &:hover {
-      background-color: $white-1;
-    }
-  }
 }
 
 .new-to-do-red {
   @extend %new-to-do;
 
-  .input {
+  input {
     border-color: $red-2;
     background-color: $pink-1;
   }
 
-  .submit {
+  button {
     background-color: $red-2;
     border-color: $red-3;
-
-    &:hover {
-      background-color: $pink-2;
-    }
   }
 }
 
 .new-to-do-green {
   @extend %new-to-do;
 
-  .input {
+  input {
     border-color: $green-1;
     background-color: $green-2;
   }
 
-  .submit {
+  button {
     background-color: $green-1;
     border-color: $green-3;
-
-    &:hover {
-      background-color: $green-2;
-    }
   }
 }
 
@@ -182,20 +168,46 @@ select {
 }
 
 %dropdown {
-  border: 1px solid;
-  width: 100%;
+  color: $black-1;
+  margin-bottom: 10px;
 }
 
 .dropdown-red {
   @extend %dropdown;
+
   border-color: $red-2;
   background-color: $pink-1;
 }
 
 .dropdown-green {
   @extend %dropdown;
+
   border-color: $green-1;
   background-color: $green-2;
+}
+
+%to-dos-header {
+  @extend %side-by-side;
+
+  button {
+    margin-top: 15px;
+  }
+}
+
+.to-dos-header-red {
+  @extend %to-dos-header;
+
+  button {
+    background-color: $red-2;
+  }
+}
+
+.to-dos-header-green {
+  @extend %to-dos-header;
+
+  button {
+    background-color: $green-1;
+  }
 }
 
 %spinier {
