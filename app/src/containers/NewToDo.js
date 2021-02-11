@@ -5,7 +5,7 @@ import { useThemeContext } from '../contexts/Theme';
 import { toDoMapDispatchToProps, toDoMapStateToProps } from '../store/toDo';
 
 const NewToDo = React.memo(({ saveItem }) => {
-  const { color } = useThemeContext();
+  const { theme } = useThemeContext();
 
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
@@ -18,7 +18,7 @@ const NewToDo = React.memo(({ saveItem }) => {
   };
 
   return (
-    <form className={`new-to-do-${color}`} onSubmit={handleChange}>
+    <form className={`new-to-do-${theme}`} onSubmit={handleChange}>
       <Input value={title} placeholder="Title" onChange={setTitle} />
       <Input
         value={description}

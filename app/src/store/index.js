@@ -1,8 +1,8 @@
-import { createStore } from 'redux';
-import { combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import toDo from './toDo';
+import theme from './theme';
 
-const combinedReducers = combineReducers({ toDo });
+const combinedReducers = combineReducers({ toDo, theme });
 
 const store = createStore(
   combinedReducers,

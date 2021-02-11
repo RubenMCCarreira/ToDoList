@@ -2,7 +2,7 @@ const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
 const Actions = ['LOADING', 'RESET', 'LIST', 'ITEM', 'SAVE', 'DELETE', 'ERROR'];
 
-export const UserActions = Actions.reduce((acc, current) => {
+const ToDoActions = Actions.reduce((acc, current) => {
   return { ...acc, [current]: 'TODO_' + current };
 }, {});
 
@@ -20,37 +20,37 @@ const reducer = (draft = initialState, action) => {
     default:
       return draft;
 
-    case UserActions.RESET:
+    case ToDoActions.RESET:
       return initialState;
 
-    case UserActions.LOADING:
+    case ToDoActions.LOADING:
       return {
         ...draft,
         loading: true
       };
 
-    case UserActions.ERROR:
+    case ToDoActions.ERROR:
       return {
         ...draft,
         loading: false,
         error: action.payload
       };
 
-    case UserActions.LIST:
+    case ToDoActions.LIST:
       return {
         ...draft,
         loading: null,
         list: action.payload
       };
 
-    case UserActions.ITEM:
+    case ToDoActions.ITEM:
       return {
         ...draft,
         loading: null,
         item: action.payload
       };
 
-    case UserActions.SAVE:
+    case ToDoActions.SAVE:
       return {
         ...draft,
         loading: null,
@@ -59,7 +59,7 @@ const reducer = (draft = initialState, action) => {
         saved: !!action.payload
       };
 
-    case UserActions.DELETE:
+    case ToDoActions.DELETE:
       return {
         ...draft,
         loading: null,
@@ -70,12 +70,12 @@ const reducer = (draft = initialState, action) => {
 };
 
 export const resetAction = (dispatch) => {
-  return dispatch({ type: UserActions.RESET });
+  return dispatch({ type: ToDoActions.RESET });
 };
 
 export const getListAction = async (dispatch, all) => {
   try {
-    dispatch({ type: UserActions.LOADING });
+    dispatch({ type: ToDoActions.LOADING });
 
     let payload = await fetch(`${apiUrl}/todo/${all ? 'all/' : ''}`, {
       method: 'GET',
@@ -83,14 +83,14 @@ export const getListAction = async (dispatch, all) => {
     });
     payload = await payload.json();
 
-    dispatch({ type: UserActions.LIST, payload });
+    dispatch({ type: ToDoActions.LIST, payload });
   } catch (error) {
-    dispatch({ type: UserActions.ERROR, payload: error.message });
+    dispatch({ type: ToDoActions.ERROR, payload: error.message });
   }
 };
 
 export const getItemAction = async (dispatch, id) => {
-  dispatch({ type: UserActions.LOADING });
+  dispatch({ type: ToDoActions.LOADING });
 
   let payload = await fetch(`${apiUrl}/todo/${id}`, {
     method: 'GET',
@@ -99,11 +99,11 @@ export const getItemAction = async (dispatch, id) => {
   payload = await payload.json();
   payload = payload.data;
 
-  dispatch({ type: UserActions.ITEM, payload });
+  dispatch({ type: ToDoActions.ITEM, payload });
 };
 
 export const saveItemAction = async (dispatch, data) => {
-  dispatch({ type: UserActions.LOADING });
+  dispatch({ type: ToDoActions.LOADING });
 
   let payload;
   if (data.id) {
@@ -126,18 +126,18 @@ export const saveItemAction = async (dispatch, data) => {
   payload = await payload.json();
   payload = payload.id || payload.updated;
 
-  dispatch({ type: UserActions.SAVE, payload });
+  dispatch({ type: ToDoActions.SAVE, payload });
 };
 
 export const deleteItemAction = async (dispatch, id) => {
-  dispatch({ type: UserActions.LOADING });
+  dispatch({ type: ToDoActions.LOADING });
 
   await fetch(`${apiUrl}/todo/${id}`, {
     method: 'DELETE',
     headers: {}
   });
 
-  dispatch({ type: UserActions.DELETE, payload: true });
+  dispatch({ type: ToDoActions.DELETE, payload: true });
 };
 
 export const toDoMapDispatchToProps = (dispatch) => ({

@@ -9,6 +9,9 @@ $red-3: darken($red-main, 15%);
 $green-1: saturate($green-main, 20%);
 $green-2: lighten($green-main, 65%);
 $green-3: darken($green-main, 7%);
+$black-1: saturate($black-main, 20%);
+$black-2: lighten($black-main, 65%);
+$black-3: darken($black-main, 7%);
 
 html {
   box-sizing: border-box;
@@ -109,6 +112,22 @@ select {
   }
 }
 
+.to-do-black {
+  @extend %to-do;
+  @extend %new-to-do-black;
+
+  border-color: $black-3;
+
+  button {
+    border-color: $black-3;
+    background-color: $black-1;
+  }
+
+  label {
+    color: $black-1;
+  }
+}
+
 %side-by-side {
   display: flex;
 
@@ -149,6 +168,18 @@ select {
   }
 }
 
+%new-to-do-black {
+  input {
+    border-color: $black-3;
+    background-color: $black-2;
+  }
+
+  input[type='submit'] {
+    border-color: $black-3;
+    background-color: $black-1;
+  }
+}
+
 .new-to-do-red {
   @extend %new-to-do;
   @extend %new-to-do-red;
@@ -157,6 +188,11 @@ select {
 .new-to-do-green {
   @extend %new-to-do;
   @extend %new-to-do-green;
+}
+
+.new-to-do-black {
+  @extend %new-to-do;
+  @extend %new-to-do-black;
 }
 
 %dropdown {
@@ -176,6 +212,13 @@ select {
 
   border-color: $green-3;
   background-color: $green-2;
+}
+
+.dropdown-black {
+  @extend %dropdown;
+
+  border-color: $black-3;
+  background-color: $black-2;
 }
 
 %to-dos-header {
@@ -201,6 +244,15 @@ select {
   button {
     border-color: $green-3;
     background-color: $green-1;
+  }
+}
+
+.to-dos-header-black {
+  @extend %to-dos-header;
+
+  button {
+    border-color: $black-3;
+    background-color: $black-1;
   }
 }
 
@@ -254,6 +306,14 @@ select {
 
   .lds-ellipsis div {
     background: $green-1;
+  }
+}
+
+.spinier-black {
+  @extend %spinier;
+
+  .lds-ellipsis div {
+    background: $black-1;
   }
 }
 

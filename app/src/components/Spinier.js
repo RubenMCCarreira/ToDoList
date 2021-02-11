@@ -2,10 +2,10 @@ import React from 'react';
 import { useThemeContext } from '../contexts/Theme';
 
 const Spinier = () => {
-  const { color } = useThemeContext();
+  const { theme } = useThemeContext();
 
   return (
-    <div className={`spinier-${color}`}>
+    <div className={`spinier-${theme}`}>
       <div className={`lds-ellipsis`}>
         <div />
         <div />

@@ -7,7 +7,7 @@ import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
 
 const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
-  const { color } = useThemeContext();
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     return () => {
@@ -25,7 +25,7 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
     <>
       {loading && <Spinier />}
       <section>
-        <div className={`to-dos-header-${color}`}>
+        <div className={`to-dos-header-${theme}`}>
           <div>
             <h2>To Dos ({(list || []).length})</h2>
             {!!error && <h4 className="error">{error}</h4>}

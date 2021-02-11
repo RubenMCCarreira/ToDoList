@@ -9,7 +9,7 @@ const ToDo = React.memo(({ item, updateItem }) => {
   const [description, setDescription] = useState(null);
   const [removed, setRemoved] = useState(null);
 
-  const { color } = useThemeContext();
+  const { theme } = useThemeContext();
 
   useEffect(() => {
     setTitle(item.title);
@@ -36,7 +36,7 @@ const ToDo = React.memo(({ item, updateItem }) => {
   }, [item]);
 
   return (
-    <article className={`to-do-${color}`}>
+    <article className={`to-do-${theme}`}>
       {showEdit ? (
         <>
           <Input value={title} placeholder="Title" onChange={setTitle} />

@@ -1,17 +1,21 @@
 import React from 'react';
 import { useThemeContext } from '../contexts/Theme';
 
-const Dropdown = () => {
-  const { color, setColor, colors } = useThemeContext();
+const Dropdown = ({ value, values, onChange }) => {
+  const { theme } = useThemeContext();
+
+  const handleOnChange = (e) => {
+    onChange(e.target.value);
+  };
 
   return (
     <select
-      className={`dropdown-${color}`}
+      className={`dropdown-${theme}`}
       name="Theme"
-      value={color}
-      onChange={(e) => setColor(e.target.value)}
+      value={value}
+      onChange={handleOnChange}
     >
-      {colors.map((it) => (
+      {values.map((it) => (
         <option key={`option-${it}`} value={it}>
           {it}
         </option>
