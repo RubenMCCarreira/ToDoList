@@ -5,7 +5,7 @@ metadata:
   namespace: to-do-ns
 spec:
   rules:
-  - host: todo.my.com
+  - host: todo-list.my
     http:
       paths:
       - path: /api/

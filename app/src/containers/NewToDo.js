@@ -23,7 +23,7 @@ const NewToDo = React.memo(({ saveItem }) => {
       <Input
         value={description}
         placeholder="Description"
-        setDescription={setTitle}
+        onChange={setDescription}
       />
       <input type="submit" />
     </form>

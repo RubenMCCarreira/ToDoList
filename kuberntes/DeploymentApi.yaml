@@ -10,8 +10,6 @@ spec:
     matchLabels:
       app: to-do-api
 
-  replicas: 1
-
   template:
     metadata:
       labels:

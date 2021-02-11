@@ -1,30 +1,35 @@
-$red-1: red;
-$red-2: #f32e5b;
-$red-3: #e10d3d;
-$pink-1: #fbbfcd;
-$white-1: white;
-$black-1: black;
-$green-1: green;
-$green-2: rgb(106, 209, 106);
-$green-3: rgb(92, 151, 92);
+$red-main: red;
+$green-main: green;
+$blue-main: blue;
+$white-main: white;
+$black-main: black;
+$red-1: saturate($red-main, 20%);
+$red-2: lighten($red-main, 40%);
+$red-3: darken($red-main, 15%);
+$green-1: saturate($green-main, 20%);
+$green-2: lighten($green-main, 65%);
+$green-3: darken($green-main, 7%);
 
-html,
-* {
+html {
   box-sizing: border-box;
-}
-
-body,
-input,
-select,
-button {
   font: caption;
 }
 
+.Initial {
+  margin: auto;
+  max-width: 55%;
+}
+
+.error {
+  color: $red-main;
+}
+
 input,
-button,
-select {
+select,
+button {
   padding: 0.5em;
-  border: none;
+  border: 2px solid;
+  font: caption;
 }
 
 button,
@@ -32,7 +37,7 @@ input[type='submit'],
 input[type='checkbox'],
 select {
   transition: all 0.2s;
-  color: $white-1;
+  color: $white-main;
 
   &:hover {
     cursor: pointer;
@@ -50,19 +55,12 @@ select {
   width: 100%;
 }
 
-.Initial {
-  margin: auto;
-  max-width: 500px;
-}
-
-input,
-button,
 select {
-  border: 1px solid;
+  text-transform: capitalize;
 }
 
 %to-do {
-  border: 1px solid;
+  border: 2px solid;
   padding: 1em;
   margin: 1em 0;
 
@@ -73,20 +71,25 @@ select {
   > div {
     @extend %side-by-side;
   }
+
+  button:not(:last-child) {
+    margin-right: 5px;
+  }
 }
 
 .to-do-red {
   @extend %to-do;
   @extend %new-to-do-red;
 
-  border-color: $red-2;
+  border-color: $red-3;
 
   button {
-    background-color: $red-2;
+    border-color: $red-3;
+    background-color: $red-1;
   }
 
   label {
-    color: $red-2;
+    color: $red-1;
   }
 }
 
@@ -94,9 +97,10 @@ select {
   @extend %to-do;
   @extend %new-to-do-green;
 
-  border-color: $green-1;
+  border-color: $green-3;
 
   button {
+    border-color: $green-3;
     background-color: $green-1;
   }
 
@@ -113,39 +117,35 @@ select {
   }
 }
 
-%to-do-controls {
-  margin-right: auto;
-}
-
-.to-do-controls-red {
-  @extend %to-do-controls;
-}
-
-.to-do-controls-green {
-  @extend %to-do-controls;
-}
-
-.to-do-control-done-red {
-  color: $red-2;
-}
-
-.to-do-control-done-green {
-  color: $green-1;
-}
-
 %new-to-do {
   display: flex;
+
+  :not(:last-child) {
+    margin-right: 5px;
+  }
 }
 
 %new-to-do-red {
   input {
-    border-color: $red-2;
-    background-color: $pink-1;
+    border-color: $red-3;
+    background-color: $red-2;
   }
 
   input[type='submit'] {
-    background-color: $red-2;
     border-color: $red-3;
+    background-color: $red-1;
+  }
+}
+
+%new-to-do-green {
+  input {
+    border-color: $green-3;
+    background-color: $green-2;
+  }
+
+  input[type='submit'] {
+    border-color: $green-3;
+    background-color: $green-1;
   }
 }
 
@@ -154,43 +154,27 @@ select {
   @extend %new-to-do-red;
 }
 
-%new-to-do-green {
-  input {
-    border-color: $green-1;
-    background-color: $green-2;
-  }
-
-  input[type='submit'] {
-    background-color: $green-1;
-    border-color: $green-3;
-  }
-}
-
 .new-to-do-green {
   @extend %new-to-do;
   @extend %new-to-do-green;
 }
 
-.error {
-  color: $red-1;
-}
-
 %dropdown {
-  color: $black-1;
+  color: $black-main;
   margin-bottom: 10px;
 }
 
 .dropdown-red {
   @extend %dropdown;
 
-  border-color: $red-2;
-  background-color: $pink-1;
+  border-color: $red-3;
+  background-color: $red-2;
 }
 
 .dropdown-green {
   @extend %dropdown;
 
-  border-color: $green-1;
+  border-color: $green-3;
   background-color: $green-2;
 }
 
@@ -206,7 +190,8 @@ select {
   @extend %to-dos-header;
 
   button {
-    background-color: $red-2;
+    border-color: $red-3;
+    background-color: $red-1;
   }
 }
 
@@ -214,14 +199,15 @@ select {
   @extend %to-dos-header;
 
   button {
+    border-color: $green-3;
     background-color: $green-1;
   }
 }
 
 %spinier {
   .lds-ellipsis {
-    margin-left: 13%;
-    margin-top: 27px;
+    margin-left: 25%;
+    margin-top: 28px;
     position: absolute;
   }
 
