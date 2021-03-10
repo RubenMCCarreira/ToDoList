@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ToDo from './ToDo';
 import { connect } from 'react-redux';
 import { toDoMapStateToProps, toDoMapDispatchToProps } from '../store/toDo';
 import Spinier from '../components/Spinier';
 import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
+import DragDropList from '../components/DragDropList';
 
 const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   const { theme } = useThemeContext();
@@ -40,9 +41,13 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
             </Link>
           )}
         </div>
-        {(list || []).map((it) => (
-          <ToDo key={it.id} item={it} updateItem={saveItem} />
-        ))}
+        {all ? (
+          (list || []).map((it) => (
+            <ToDo key={it.id} item={it} updateItem={saveItem} />
+          ))
+        ) : (
+          <DragDropList list={list || []} component={ToDo} />
+        )}
       </section>
     </>
   );

@@ -3,7 +3,7 @@ const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 const Actions = ['LOADING', 'RESET', 'ITEM', 'SAVE', 'ERROR'];
 
 const ThemeActions = Actions.reduce((acc, current) => {
-  return { ...acc, [current]: 'TODO_' + current };
+  return { ...acc, [current]: 'THEME_' + current };
 }, {});
 
 export const initialState = {

@@ -13,7 +13,7 @@ const ThemeContext = createContext();
 
 const ThemeProvider = ({ children, saveItem, getItem, item }) => {
   const [color, setColor] = useState('black');
-  const colors = useMemo(() => ['red', 'green'], []);
+  const colors = useMemo(() => ['black', 'green', 'red'], []);
 
   useEffect(() => {
     if (!color) {

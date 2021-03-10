@@ -3,7 +3,7 @@ import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import { useThemeContext } from '../contexts/Theme';
 
-const ToDo = React.memo(({ item, updateItem }) => {
+const ToDo = React.memo(({ item, updateItem, ...rest }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
@@ -23,6 +23,7 @@ const ToDo = React.memo(({ item, updateItem }) => {
 
   const handleUpdate = useCallback(() => {
     updateItem({ ...item, title, description, removed });
+    setShowEdit(false);
   }, [item, updateItem, title, description, removed]);
 
   const handleRemove = useCallback(() => {
@@ -36,7 +37,7 @@ const ToDo = React.memo(({ item, updateItem }) => {
   }, [item]);
 
   return (
-    <article className={`to-do-${theme}`}>
+    <article className={`to-do-${theme}`} {...rest}>
       {showEdit ? (
         <>
           <Input value={title} placeholder="Title" onChange={setTitle} />
