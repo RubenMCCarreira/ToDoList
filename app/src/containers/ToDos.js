@@ -46,7 +46,11 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
             <ToDo key={it.id} item={it} updateItem={saveItem} />
           ))
         ) : (
-          <DragDropList list={list || []} component={ToDo} />
+          <DragDropList
+            list={list || []}
+            component={ToDo}
+            updateItem={saveItem}
+          />
         )}
       </section>
     </>

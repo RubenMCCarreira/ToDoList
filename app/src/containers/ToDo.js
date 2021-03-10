@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
+import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
 
 const ToDo = React.memo(({ item, updateItem, ...rest }) => {
@@ -8,6 +9,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [removed, setRemoved] = useState(null);
+  const [priority, setPriority] = useState(null);
 
   const { theme } = useThemeContext();
 
@@ -15,6 +17,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
     setTitle(item.title);
     setDescription(item.description);
     setRemoved(item.removed);
+    setPriority(item.priority);
   }, [item]);
 
   const handleMarkDone = useCallback(() => {
@@ -22,9 +25,9 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
   }, [item, updateItem]);
 
   const handleUpdate = useCallback(() => {
-    updateItem({ ...item, title, description, removed });
+    updateItem({ ...item, title, description, removed, priority });
     setShowEdit(false);
-  }, [item, updateItem, title, description, removed]);
+  }, [item, updateItem, title, description, removed, priority]);
 
   const handleRemove = useCallback(() => {
     updateItem({ ...item, removed: true });
@@ -40,19 +43,30 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
     <article className={`to-do-${theme}`} {...rest}>
       {showEdit ? (
         <>
-          <Input value={title} placeholder="Title" onChange={setTitle} />
-          <Input
-            value={description}
-            placeholder="Description"
-            onChange={setDescription}
-          />
+          <div>
+            <div>
+              <Input value={title} placeholder="Title" onChange={setTitle} />
+              <Input
+                value={description}
+                placeholder="Description"
+                onChange={setDescription}
+              />
+            </div>
+            <Priority value={priority} onChange={setPriority} />
+          </div>
+
           <button onClick={handleCancel}>Cancel</button>
           <button onClick={handleUpdate}>Save</button>
         </>
       ) : (
         <>
-          <h3>{title}</h3>
-          <p>{description}</p>
+          <div>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+            <Priority value={priority} disabled />
+          </div>
           <div>
             <Checkbox
               title="Done"

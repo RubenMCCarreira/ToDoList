@@ -55,11 +55,15 @@ select {
 
 input[type='text'],
 select {
-  width: 100%;
+  width: -webkit-fill-available;
 }
 
 select {
   text-transform: capitalize;
+}
+
+input[type='checkbox'] {
+  width: auto !important;
 }
 
 %to-do {
@@ -133,6 +137,7 @@ select {
 
   :first-child {
     margin-right: auto;
+    width: -webkit-fill-available;
   }
 }
 
@@ -223,6 +228,10 @@ select {
 
 %to-dos-header {
   @extend %side-by-side;
+
+  > div:first-child {
+    width: auto;
+  }
 
   button {
     margin-top: 15px;
