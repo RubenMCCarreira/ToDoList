@@ -142,7 +142,8 @@ input[type='checkbox'] {
 }
 
 %new-to-do {
-  display: flex;
+  white-space: nowrap;
+  width: 45%;
 
   :not(:last-child) {
     margin-right: 5px;
