@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ToDo from './ToDo';
-import { connect } from 'react-redux';
 import reducer, {
   toDoMapStateToProps,
   toDoMapDispatchToProps
@@ -10,8 +9,10 @@ import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
 import DragDropList from '../components/DragDropList';
 import withReducer from '../store/withReducer';
+import SortOrder from '../components/SortOrder';
 
 const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
+  const [currentOrder, setCurrentOrder] = useState({});
   const { theme } = useThemeContext();
 
   useEffect(() => {
@@ -26,37 +27,57 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
     }
   }, [list, all]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const handleSortOrder = (nextOrder) => {
+    setCurrentOrder(nextOrder);
+    getList(all, nextOrder);
+  };
+
   return (
     <>
       {loading && <Spinier />}
-      <section>
-        <div className={`to-dos-header-${theme}`}>
-          <div>
-            <h2>To Dos ({(list || []).length})</h2>
-            {!!error && <h4 className="error">{error}</h4>}
-          </div>
-          {all ? (
-            <Link to="/">
-              <button>Back</button>
-            </Link>
-          ) : (
-            <Link to="/all">
-              <button>See All</button>
-            </Link>
-          )}
+      <div className={`to-dos-header-${theme}`}>
+        <div>
+          <h2>To Dos ({(list || []).length})</h2>
+          {!!error && <h4 className="error">{error}</h4>}
         </div>
         {all ? (
-          (list || []).map((it) => (
-            <ToDo key={it.id} item={it} updateItem={saveItem} />
-          ))
+          <Link to="/">
+            <button>Back</button>
+          </Link>
         ) : (
-          <DragDropList
-            list={list || []}
-            component={ToDo}
-            updateItem={saveItem}
-          />
+          <Link to="/all">
+            <button>See All</button>
+          </Link>
         )}
-      </section>
+      </div>
+      <div>
+        <SortOrder
+          title="title"
+          currentOrder={currentOrder}
+          onChange={handleSortOrder}
+        />
+        <SortOrder
+          title="done"
+          currentOrder={currentOrder}
+          onChange={handleSortOrder}
+        />
+        <SortOrder
+          title="priority"
+          currentOrder={currentOrder}
+          onChange={handleSortOrder}
+        />
+      </div>
+      {all ? (
+        (list || []).map((it) => (
+          <ToDo key={it.id} item={it} updateItem={saveItem} />
+        ))
+      ) : (
+        <DragDropList
+          list={list || []}
+          component={ToDo}
+          updateItem={saveItem}
+        />
+      )}
     </>
   );
 };

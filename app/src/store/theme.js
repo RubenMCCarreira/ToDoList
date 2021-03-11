@@ -1,4 +1,5 @@
 import generate from 'common/redux/client';
+import { GET, PUT } from '../fetch';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
@@ -12,11 +13,7 @@ export const getItemAction = async (dispatch, id) => {
   try {
     ThemeActions.LOADING(dispatch);
 
-    let payload = await fetch(`${apiUrl}/theme/`, {
-      method: 'GET',
-      headers: {}
-    });
-    payload = await payload.json();
+    const payload = await GET(`${apiUrl}/theme`);
 
     ThemeActions.ITEM(dispatch, payload);
   } catch (error) {
@@ -28,18 +25,9 @@ export const saveItemAction = async (dispatch, data) => {
   try {
     ThemeActions.LOADING(dispatch);
 
-    let payload = await fetch(`${apiUrl}/theme/`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+    const payload = await PUT(`${apiUrl}/theme/`, data);
 
-    payload = await payload.json();
-    payload = payload.id || payload.updated;
-
-    ThemeActions.SAVE(dispatch, payload);
+    ThemeActions.SAVE(dispatch, payload.id || payload.updated);
   } catch (error) {
     ThemeActions.ERROR(dispatch, error.message);
   }

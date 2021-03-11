@@ -34,13 +34,10 @@ const generateReducer = (actionTypes, moreState = {}) => (
       return draft;
 
     case actionTypes.RESET:
-      return DEFAULT_STATE;
+      return Object.assign(draft, DEFAULT_STATE, moreState);
 
     case actionTypes.ERROR:
-      return {
-        ...draft,
-        error: action.payload,
-      };
+      return Object.assign(draft, { error: action.payload });
 
     case actionTypes.LIST:
       return Object.assign(draft, { list: action.payload });
@@ -61,11 +58,7 @@ const generateReducer = (actionTypes, moreState = {}) => (
     }
 
     case actionTypes.DELETE:
-      return {
-        ...draft,
-        item: null,
-        deleted: action.payload,
-      };
+      return Object.assign(draft, { deleted: action.payload });
   }
 };
 

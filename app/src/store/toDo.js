@@ -1,4 +1,5 @@
 import generate from 'common/redux/client';
+import { GET, PUT, POST, DELETE } from '../fetch';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
@@ -8,15 +9,16 @@ export const resetAction = (dispatch) => {
   return ToDoActions.RESET(dispatch);
 };
 
-export const getListAction = async (dispatch, all) => {
+export const getListAction = async (dispatch, all, order) => {
   try {
     ToDoActions.LOADING(dispatch);
 
-    let payload = await fetch(`${apiUrl}/todo/${all ? 'all/' : ''}`, {
-      method: 'GET',
-      headers: {}
-    });
-    payload = await payload.json();
+    let payload;
+    if (all) {
+      payload = await GET(`${apiUrl}/todo/${all ? 'all/' : ''}`);
+    } else {
+      payload = await POST(`${apiUrl}/todo/operations`, { order });
+    }
 
     ToDoActions.LIST(dispatch, payload);
   } catch (error) {
@@ -28,12 +30,7 @@ export const getItemAction = async (dispatch, id) => {
   try {
     ToDoActions.LOADING(dispatch);
 
-    let payload = await fetch(`${apiUrl}/todo/${id}`, {
-      method: 'GET',
-      headers: {}
-    });
-    payload = await payload.json();
-    payload = payload.data;
+    const payload = await GET(`${apiUrl}/todo/${id}`);
 
     ToDoActions.ITEM(dispatch, payload);
   } catch (error) {
@@ -47,26 +44,12 @@ export const saveItemAction = async (dispatch, data) => {
 
     let payload;
     if (data.id) {
-      payload = await fetch(`${apiUrl}/todo/`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+      payload = await PUT(`${apiUrl}/todo/`, data);
     } else {
-      payload = await fetch(`${apiUrl}/todo/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      });
+      payload = await POST(`${apiUrl}/todo/`, data);
     }
-    payload = await payload.json();
-    payload = payload.id || payload.updated;
 
-    ToDoActions.SAVE(dispatch, payload);
+    ToDoActions.SAVE(dispatch, payload.id || payload.updated);
   } catch (error) {
     ToDoActions.ERROR(dispatch, error.message);
   }
@@ -76,12 +59,9 @@ export const deleteItemAction = async (dispatch, id) => {
   try {
     ToDoActions.LOADING(dispatch);
 
-    await fetch(`${apiUrl}/todo/${id}`, {
-      method: 'DELETE',
-      headers: {}
-    });
+    const payload = await DELETE(`${apiUrl}/todo/${id}`);
 
-    ToDoActions.DELETE(dispatch, true);
+    ToDoActions.DELETE(dispatch, payload);
   } catch (error) {
     ToDoActions.ERROR(dispatch, error.message);
   }
@@ -89,7 +69,7 @@ export const deleteItemAction = async (dispatch, id) => {
 
 export const toDoMapDispatchToProps = (dispatch) => ({
   reset: () => resetAction(dispatch),
-  getList: (all) => getListAction(dispatch, all),
+  getList: (all, order) => getListAction(dispatch, all, order),
   getItem: (id) => getItemAction(dispatch, id),
   saveItem: (data) => saveItemAction(dispatch, data),
   deleteItem: (id) => deleteItemAction(dispatch, id)
