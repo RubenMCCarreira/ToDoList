@@ -1,4 +1,4 @@
-import withInjectReducer from 'common/redux/client/withInjectReducer';
+import withInjectReducer from 'tool/redux/withInjectReducer';
 import React, { useState } from 'react';
 import Input from '../components/Input';
 import { useThemeContext } from '../contexts/Theme';

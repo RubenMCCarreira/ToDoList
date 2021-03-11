@@ -9,7 +9,7 @@ import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
 import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
-import withInjectReducer from 'common/redux/client/withInjectReducer';
+import withInjectReducer from 'tool/redux/withInjectReducer';
 
 const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   const [currentOrder, setCurrentOrder] = useState({});

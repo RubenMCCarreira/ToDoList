@@ -1,4 +1,4 @@
-const generate = require('common/redux/server');
+const generate = require('tool/redux/server');
 
 const { reducer, actions: themeActions } = generate('theme');
 

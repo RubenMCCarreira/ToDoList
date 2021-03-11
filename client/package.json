@@ -1,7 +1,9 @@
 {
-  "name": "app",
-  "version": "0.1.0",
+  "name": "client",
+  "version": "0.2.0",
   "private": true,
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "react": "^17.0.1",
     "react-cookies": "^0.1.1",

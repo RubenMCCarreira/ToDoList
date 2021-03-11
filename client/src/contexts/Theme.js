@@ -1,4 +1,4 @@
-import withInjectReducer from 'common/redux/client/withInjectReducer';
+import withInjectReducer from 'tool/redux/withInjectReducer';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import reducer, {
   themeMapStateToProps,
@@ -10,7 +10,7 @@ const ThemeContext = createContext();
 const ThemeProvider = ({ children, saveItem, getItem, item }) => {
   const [tryGet, setTryGet] = useState(false);
   const [color, setColor] = useState();
-  const colors = () => ['black', 'green', 'red'];
+  const colors = ['black', 'green', 'red'];
 
   useEffect(() => {
     if (!color && !tryGet) {
