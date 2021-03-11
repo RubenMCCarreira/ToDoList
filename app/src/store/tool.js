@@ -22,10 +22,7 @@ const generateActions = (prefix) => {
       ITEM: (dispatch, payload) => dispatch({ type: types.ITEM, payload }),
       SAVE: (dispatch, payload) => dispatch({ type: types.SAVE, payload }),
       DELETE: (dispatch, payload) => dispatch({ type: types.DELETE, payload }),
-      RESET: (dispatch) => {
-        console.log('reset');
-        dispatch({ type: types.RESET });
-      }
+      RESET: (dispatch) => dispatch({ type: types.RESET })
     }
   ];
 };
@@ -45,7 +42,6 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
       return draft;
 
     case actionTypes.RESET:
-      console.log(11111);
       return DEFAULT_STATE;
 
     case actionTypes.LOADING:
@@ -96,7 +92,6 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
 
 const generate = (prefix) => {
   const [types, actions] = generateActions(prefix);
-  console.log(types, actions);
   const reducer = generateReducer(types);
 
   return { reducer, actions };

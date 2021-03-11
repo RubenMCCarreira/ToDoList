@@ -1,15 +1,26 @@
-import { createStore, combineReducers } from 'redux';
-import toDo from './toDo';
-import theme from './theme';
+import { combineReducers, createStore } from 'redux';
 
-const combinedReducers = combineReducers({ toDo, theme });
+const createReducer = (asyncReducers) => combineReducers({ ...asyncReducers });
 
-const store = createStore(
-  combinedReducers,
-  typeof window === 'object' &&
-    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
-    ? window.__REDUX_DEVTOOLS_EXTENSION__()
-    : (f) => f
-);
+const initializeStore = () => {
+  const store = createStore(
+    createReducer(),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+
+  store.asyncReducers = {};
+  store.injectReducer = (key, reducer) => {
+    store.asyncReducers[key] = reducer;
+
+    store.replaceReducer(createReducer(store.asyncReducers));
+  };
+  return store;
+};
+
+const store = initializeStore();
+
+export const injectReducer = (key, reducer) => {
+  store.injectReducer(key, reducer);
+};
 
 export default store;

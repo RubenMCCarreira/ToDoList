@@ -6,20 +6,27 @@ import React, {
   useMemo,
   useState
 } from 'react';
-import { connect } from 'react-redux';
-import { themeMapStateToProps, themeMapDispatchToProps } from '../store/theme';
+import reducer, {
+  themeMapStateToProps,
+  themeMapDispatchToProps
+} from '../store/theme';
+import withReducer from '../store/withReducer';
 
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children, saveItem, getItem, item }) => {
-  const [color, setColor] = useState('black');
+  const [tryGet, setTryGet] = useState(false);
+  const [color, setColor] = useState();
   const colors = useMemo(() => ['black', 'green', 'red'], []);
 
   useEffect(() => {
-    if (!color) {
+    if (!color && !tryGet) {
       getItem();
+      setTryGet(true);
+    } else if (!color && tryGet) {
+      setColor(colors[0]);
     }
-  }, [getItem, color]);
+  }, [getItem, color, tryGet]);
 
   useEffect(() => {
     if (item) {
@@ -46,7 +53,10 @@ export const useThemeContext = () => {
   return useContext(ThemeContext);
 };
 
-export default connect(
+export default withReducer(
+  'theme',
+  reducer,
   themeMapStateToProps,
-  themeMapDispatchToProps
-)(ThemeProvider);
+  themeMapDispatchToProps,
+  ThemeProvider
+);

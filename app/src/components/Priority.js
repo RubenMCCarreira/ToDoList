@@ -4,7 +4,7 @@ const Priority = ({ value, onChange, disabled }) => {
   const options = [
     { value: 1, name: 'arrow-very-low' },
     { value: 2, name: 'arrow-low' },
-    { value: 3, name: 'null' },
+    { value: 3, name: 'normal' },
     { value: 4, name: 'arrow-high' },
     { value: 5, name: 'arrow-very-high' }
   ];

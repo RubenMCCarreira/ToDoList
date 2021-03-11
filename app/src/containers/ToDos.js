@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import ToDo from './ToDo';
 import { connect } from 'react-redux';
-import { toDoMapStateToProps, toDoMapDispatchToProps } from '../store/toDo';
+import reducer, {
+  toDoMapStateToProps,
+  toDoMapDispatchToProps
+} from '../store/toDo';
 import Spinier from '../components/Spinier';
 import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
 import DragDropList from '../components/DragDropList';
+import withReducer from '../store/withReducer';
 
 const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   const { theme } = useThemeContext();
@@ -57,4 +61,10 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   );
 };
 
-export default connect(toDoMapStateToProps, toDoMapDispatchToProps)(ToDos);
+export default withReducer(
+  'toDo',
+  reducer,
+  toDoMapStateToProps,
+  toDoMapDispatchToProps,
+  ToDos
+);
