@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/api/', (req, res) => {
-  res.send('API');
+  res.json(state);
 });
 
 app.get('/api/todo/', (req, res) => {
@@ -25,10 +25,7 @@ app.get('/api/todo/all', (req, res) => {
 app.post('/api/todo/', (req, res) => {
   const id = state.toDo.list.length + 1;
 
-  dispatch({
-    type: todoActions.ADD,
-    payload: { id, ...req.body, done: false, removed: false },
-  });
+  todoActions.ADD(dispatch, { id, ...req.body, done: false, removed: false });
 
   res.send({ id });
 });
@@ -36,19 +33,22 @@ app.post('/api/todo/', (req, res) => {
 app.put('/api/todo/', (req, res) => {
   const index = state.toDo.list.findIndex((it) => it.id == req.body.id);
   let updated = false;
+
   if (index > -1) {
-    dispatch({ type: todoActions.EDIT, payload: { index, toDo: req.body } });
+    todoActions.EDIT(dispatch, { index, item: req.body });
     updated = req.body.id;
   }
+
   res.send({ updated });
 });
 
 app.get('/api/theme/', (req, res) => {
-  res.json(state.theme);
+  res.json(state.theme.item);
 });
 
 app.put('/api/theme/', (req, res) => {
-  dispatch({ type: themeActions.EDIT, payload: req.body });
+  themeActions.ITEM(dispatch, req.body);
+
   res.send({ updated: true });
 });
 
