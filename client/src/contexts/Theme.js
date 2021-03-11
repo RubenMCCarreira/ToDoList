@@ -1,23 +1,16 @@
-import React, {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import withInjectReducer from 'common/redux/client/withInjectReducer';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import reducer, {
   themeMapStateToProps,
   themeMapDispatchToProps
 } from '../store/theme';
-import withReducer from '../store/withReducer';
 
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children, saveItem, getItem, item }) => {
   const [tryGet, setTryGet] = useState(false);
   const [color, setColor] = useState();
-  const colors = useMemo(() => ['black', 'green', 'red'], []);
+  const colors = () => ['black', 'green', 'red'];
 
   useEffect(() => {
     if (!color && !tryGet) {
@@ -34,13 +27,10 @@ const ThemeProvider = ({ children, saveItem, getItem, item }) => {
     }
   }, [item]);
 
-  const changeTheme = useCallback(
-    (nextColor) => {
-      saveItem({ color: nextColor });
-      setColor(nextColor);
-    },
-    [saveItem]
-  );
+  const changeTheme = (nextColor) => {
+    saveItem({ color: nextColor });
+    setColor(nextColor);
+  };
 
   const value = { theme: color, changeTheme, themes: colors };
 
@@ -53,7 +43,7 @@ export const useThemeContext = () => {
   return useContext(ThemeContext);
 };
 
-export default withReducer(
+export default withInjectReducer(
   'theme',
   reducer,
   themeMapStateToProps,

@@ -1,8 +1,11 @@
+import withInjectReducer from 'common/redux/client/withInjectReducer';
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import Input from '../components/Input';
 import { useThemeContext } from '../contexts/Theme';
-import { toDoMapDispatchToProps, toDoMapStateToProps } from '../store/toDo';
+import reducer, {
+  toDoMapDispatchToProps,
+  toDoMapStateToProps
+} from '../store/toDo';
 
 const NewToDo = React.memo(({ saveItem }) => {
   const { theme } = useThemeContext();
@@ -30,4 +33,10 @@ const NewToDo = React.memo(({ saveItem }) => {
   );
 });
 
-export default connect(toDoMapStateToProps, toDoMapDispatchToProps)(NewToDo);
+export default withInjectReducer(
+  'toDo',
+  reducer,
+  toDoMapStateToProps,
+  toDoMapDispatchToProps,
+  NewToDo
+);

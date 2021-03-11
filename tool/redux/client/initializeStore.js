@@ -20,7 +20,9 @@ const initializeStore = () => {
 const store = initializeStore();
 
 export const injectReducer = (key, reducer) => {
-  store.injectReducer(key, reducer);
+  if (!store.asyncReducers[key]) {
+    store.injectReducer(key, reducer);
+  }
 };
 
 export default store;

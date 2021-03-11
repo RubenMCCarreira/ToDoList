@@ -1,43 +1,42 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: to-do-app
+  name: to-do-client
   namespace: to-do-ns
   labels:
-    app: to-do-app
+    app: to-do-client
 spec:
   selector:
     matchLabels:
-      app: to-do-app
+      app: to-do-client
 
   template:
     metadata:
       labels:
-        app: to-do-app
+        app: to-do-client
     spec:
       containers:
-        - name: to-do-app
-          image: contaparatestespoupas/to-do-app:latest
+        - name: to-do-client
+          image: contaparatestespoupas/to-do-client:latest
           imagePullPolicy: Always
           resources: {}
 
           ports:
             - containerPort: 3000
-          
+
           env:
             - name: REACT_APP_API_URL
               value: api
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: to-do-app-service
+  name: to-do-client-service
   namespace: to-do-ns
 spec:
   selector:
-    app: to-do-app
+    app: to-do-client
 
   ports:
     - port: 3000

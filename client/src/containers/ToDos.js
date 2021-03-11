@@ -8,8 +8,8 @@ import Spinier from '../components/Spinier';
 import { useThemeContext } from '../contexts/Theme';
 import { Link } from 'react-router-dom';
 import DragDropList from '../components/DragDropList';
-import withReducer from '../store/withReducer';
 import SortOrder from '../components/SortOrder';
+import withInjectReducer from 'common/redux/client/withInjectReducer';
 
 const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   const [currentOrder, setCurrentOrder] = useState({});
@@ -82,7 +82,7 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   );
 };
 
-export default withReducer(
+export default withInjectReducer(
   'toDo',
   reducer,
   toDoMapStateToProps,

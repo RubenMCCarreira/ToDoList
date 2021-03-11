@@ -1,39 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: to-do-api
+  name: to-do-server
   namespace: to-do-ns
   labels:
-    app: to-do-api
+    app: to-do-server
 spec:
   selector:
     matchLabels:
-      app: to-do-api
+      app: to-do-server
 
   template:
     metadata:
       labels:
-        app: to-do-api
+        app: to-do-server
     spec:
       containers:
-        - name: to-do-api
-          image: contaparatestespoupas/to-do-api:latest
+        - name: to-do-server
+          image: contaparatestespoupas/to-do-server:latest
           imagePullPolicy: Always
           resources: {}
-          
+
           ports:
             - containerPort: 4000
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
-  name: to-do-api-service
+  name: to-do-server-service
   namespace: to-do-ns
 spec:
   selector:
-    app: to-do-api
+    app: to-do-server
 
   ports:
     - port: 4000

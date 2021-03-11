@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import App from './containers/App';
 import ThemeProvider from './contexts/Theme';
-import store from './store';
+import store from 'common/redux/client/initializeStore';
 
 import './styles.scss';
 

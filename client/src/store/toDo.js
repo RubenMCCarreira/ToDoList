@@ -1,5 +1,5 @@
 import generate from 'common/redux/client';
-import { GET, PUT, POST, DELETE } from '../fetch';
+import { GET, PUT, POST, DELETE } from 'common/fetch';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
