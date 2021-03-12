@@ -5,11 +5,6 @@ const ItemTypes = {
   CARD: 'card'
 };
 
-const style = {
-  borderStyle: 'dashed',
-  cursor: 'move'
-};
-
 const DragDrop = ({
   component: Component,
   item,
@@ -17,6 +12,11 @@ const DragDrop = ({
   index,
   ...rest
 }) => {
+  const style = {
+    borderStyle: 'dashed',
+    cursor: 'move',
+    opacity: null
+  };
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -75,11 +75,15 @@ const DragDrop = ({
 
   drag(drop(ref));
 
+  if (isDragging) {
+    style.opacity = 0.5;
+  }
+
   return (
     <div ref={ref}>
       <Component
         item={item}
-        style={{ ...style, opacity: isDragging ? 0 : 1 }}
+        style={style}
         data-handler-id={handlerId}
         {...rest}
       />
