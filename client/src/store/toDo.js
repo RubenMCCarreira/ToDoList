@@ -3,7 +3,9 @@ import { GET, PUT, POST, DELETE } from 'tool/fetch';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
-const { reducer, actions: ToDoActions } = generate('todo');
+export const stateToDoKey = 'todo';
+
+const { reducer, actions: ToDoActions } = generate(stateToDoKey);
 
 export const resetAction = (dispatch) => {
   return ToDoActions.RESET(dispatch);
@@ -75,6 +77,6 @@ export const toDoMapDispatchToProps = (dispatch) => ({
   deleteItem: (id) => deleteItemAction(dispatch, id)
 });
 
-export const toDoMapStateToProps = ({ toDo }) => toDo;
+export const toDoMapStateToProps = (state) => state[stateToDoKey];
 
 export default reducer;

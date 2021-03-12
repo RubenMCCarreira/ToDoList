@@ -2,7 +2,8 @@ import withInjectReducer from 'tool/redux/withInjectReducer';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import reducer, {
   themeMapStateToProps,
-  themeMapDispatchToProps
+  themeMapDispatchToProps,
+  stateThemeKey
 } from '../store/theme';
 
 const ThemeContext = createContext();
@@ -44,7 +45,7 @@ export const useThemeContext = () => {
 };
 
 export default withInjectReducer(
-  'theme',
+  stateThemeKey,
   reducer,
   themeMapStateToProps,
   themeMapDispatchToProps,

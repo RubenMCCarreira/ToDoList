@@ -54,6 +54,7 @@ select {
 }
 
 input[type='text'],
+input[type='password'],
 select {
   width: -webkit-fill-available;
 }
@@ -64,6 +65,7 @@ select {
 
 input[type='checkbox'] {
   width: auto !important;
+  margin-right: 5px !important;
 }
 
 %to-do {
@@ -351,5 +353,59 @@ input[type='checkbox'] {
   }
   100% {
     transform: translate(19px, 0);
+  }
+}
+
+%button-logout {
+  button {
+    margin-bottom: 10px;
+  }
+}
+
+.button-logout-red {
+  @extend %button-logout;
+
+  button {
+    border-color: $red-3;
+    background-color: $red-1;
+  }
+}
+
+.button-logout-green {
+  @extend %button-logout;
+
+  button {
+    border-color: $green-3;
+    background-color: $green-1;
+  }
+}
+
+.button-logout-black {
+  @extend %button-logout;
+
+  button {
+    border-color: $black-3;
+    background-color: $black-1;
+  }
+}
+
+.button-home-red {
+  button {
+    border-color: $red-3;
+    background-color: $red-1;
+  }
+}
+
+.button-home-green {
+  button {
+    border-color: $green-3;
+    background-color: $green-1;
+  }
+}
+
+.button-home-black {
+  button {
+    border-color: $black-3;
+    background-color: $black-1;
   }
 }

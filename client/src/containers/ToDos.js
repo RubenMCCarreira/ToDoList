@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import ToDo from './ToDo';
 import reducer, {
   toDoMapStateToProps,
-  toDoMapDispatchToProps
+  toDoMapDispatchToProps,
+  stateToDoKey
 } from '../store/toDo';
 import Spinier from '../components/Spinier';
 import { useThemeContext } from '../contexts/Theme';
@@ -83,7 +84,7 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
 };
 
 export default withInjectReducer(
-  'toDo',
+  stateToDoKey,
   reducer,
   toDoMapStateToProps,
   toDoMapDispatchToProps,

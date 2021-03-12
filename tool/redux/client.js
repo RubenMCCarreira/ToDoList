@@ -1,12 +1,4 @@
-const DEFAULT_ACTIONS = [
-  'LOADING',
-  'ERROR',
-  'LIST',
-  'ITEM',
-  'SAVE',
-  'DELETE',
-  'RESET'
-];
+const DEFAULT_ACTIONS = ['LOADING', 'ERROR', 'LIST', 'ITEM', 'SAVE', 'DELETE', 'RESET'];
 
 const generateActions = (prefix) => {
   const types = DEFAULT_ACTIONS.reduce((acc, current) => {
@@ -22,8 +14,8 @@ const generateActions = (prefix) => {
       ITEM: (dispatch, payload) => dispatch({ type: types.ITEM, payload }),
       SAVE: (dispatch, payload) => dispatch({ type: types.SAVE, payload }),
       DELETE: (dispatch, payload) => dispatch({ type: types.DELETE, payload }),
-      RESET: (dispatch) => dispatch({ type: types.RESET })
-    }
+      RESET: (dispatch) => dispatch({ type: types.RESET }),
+    },
   ];
 };
 
@@ -33,7 +25,7 @@ const DEFAULT_STATE = {
   list: null,
   item: null,
   saved: null,
-  deleted: null
+  deleted: null,
 };
 
 const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
@@ -47,28 +39,30 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
     case actionTypes.LOADING:
       return {
         ...draft,
-        loading: true
+        loading: true,
       };
 
     case actionTypes.ERROR:
       return {
         ...draft,
         loading: false,
-        error: action.payload
+        error: action.payload,
       };
 
     case actionTypes.LIST:
       return {
         ...draft,
         loading: null,
-        list: action.payload
+        error: null,
+        list: action.payload,
       };
 
     case actionTypes.ITEM:
       return {
         ...draft,
         loading: null,
-        item: action.payload
+        error: null,
+        item: action.payload,
       };
 
     case actionTypes.SAVE:
@@ -77,7 +71,8 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
         loading: null,
         item: null,
         list: null,
-        saved: action.payload
+        error: null,
+        saved: action.payload,
       };
 
     case actionTypes.DELETE:
@@ -85,7 +80,8 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
         ...draft,
         loading: null,
         item: null,
-        deleted: action.payload
+        error: null,
+        deleted: action.payload,
       };
   }
 };

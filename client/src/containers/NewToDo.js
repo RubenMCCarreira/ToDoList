@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Input from '../components/Input';
 import { useThemeContext } from '../contexts/Theme';
 import reducer, {
+  stateToDoKey,
   toDoMapDispatchToProps,
   toDoMapStateToProps
 } from '../store/toDo';
@@ -34,7 +35,7 @@ const NewToDo = React.memo(({ saveItem }) => {
 });
 
 export default withInjectReducer(
-  'toDo',
+  stateToDoKey,
   reducer,
   toDoMapStateToProps,
   toDoMapDispatchToProps,

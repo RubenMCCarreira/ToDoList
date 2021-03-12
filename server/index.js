@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { todoActions } = require('./store/todo');
 const { themeActions } = require('./store/theme');
+const { loginActions } = require('./store/login');
 const { state, dispatch } = require('./store');
 
 const app = express();
@@ -106,6 +107,50 @@ app.put('/api/theme/', (req, res) => {
   themeActions.ITEM(dispatch, req.body);
 
   res.send({ updated: true });
+});
+
+//
+//
+// EXPLANATION: login
+var rand = function () {
+  return Math.random().toString(36).substr(2);
+};
+
+var generateToken = function () {
+  return rand() + rand() + rand() + rand();
+};
+
+// EXPLANATION: new login
+app.post('/api/login', (req, res) => {
+  const token = generateToken();
+
+  const index = state.login.list.findIndex((it) => it.username == req.body.username);
+  const item = { ...req.body, token };
+
+  if (index > -1) {
+    loginActions.EDIT(dispatch, { index, item });
+  } else {
+    loginActions.ADD(dispatch, item);
+  }
+
+  res.send(item);
+});
+
+// EXPLANATION: get token by username
+app.post('/api/login/revalidate', (req, res) => {
+  const token = generateToken();
+
+  const index = state.login.list.findIndex((it) => it.username == req.body.username);
+  const item = { ...state.login.list[index], token };
+
+  let toSend = null;
+
+  if (index > -1) {
+    loginActions.EDIT(dispatch, { index, item });
+    toSend = item;
+  }
+
+  res.send(toSend);
 });
 
 //

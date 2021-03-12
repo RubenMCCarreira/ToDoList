@@ -3,7 +3,9 @@ import { GET, PUT } from 'tool/fetch';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
 
-const { reducer, actions: ThemeActions } = generate('theme');
+export const stateThemeKey = 'theme';
+
+const { reducer, actions: ThemeActions } = generate(stateThemeKey);
 
 export const resetAction = (dispatch) => {
   return ThemeActions.RESET(dispatch);
@@ -39,6 +41,6 @@ export const themeMapDispatchToProps = (dispatch) => ({
   saveItem: (data) => saveItemAction(dispatch, data)
 });
 
-export const themeMapStateToProps = ({ theme }) => theme;
+export const themeMapStateToProps = (state) => state[stateThemeKey];
 
 export default reducer;
