@@ -22,14 +22,14 @@ const NewToDo = React.memo(({ saveItem }) => {
   };
 
   return (
-    <form className={`new-to-do-${theme}`} onSubmit={handleChange}>
+    <form className={`no-wrap ${theme}`} onSubmit={handleChange}>
       <Input value={title} placeholder="Title" onChange={setTitle} />
       <Input
         value={description}
         placeholder="Description"
         onChange={setDescription}
       />
-      <input type="submit" />
+      <button type="submit">Submit</button>
     </form>
   );
 });

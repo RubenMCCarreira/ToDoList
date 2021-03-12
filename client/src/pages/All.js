@@ -1,11 +1,12 @@
 import React from 'react';
+import Layout from '../containers/Layout';
 import ToDos from '../containers/ToDos';
 
 const All = () => {
   return (
-    <div className="Initial">
+    <Layout>
       <ToDos all />
-    </div>
+    </Layout>
   );
 };
 

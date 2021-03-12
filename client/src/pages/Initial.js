@@ -3,20 +3,24 @@ import ToDos from '../containers/ToDos';
 import NewToDo from '../containers/NewToDo';
 import Dropdown from '../components/Dropdown';
 import { useThemeContext } from '../contexts/Theme';
-import { Link } from 'react-router-dom';
+import Layout from '../containers/Layout';
 
-const Initial = () => {
+const Initial = ({ history }) => {
   const { theme, changeTheme, themes } = useThemeContext();
 
+  const onClick = () => {
+    history.push('/logout');
+  };
+
   return (
-    <div className="Initial">
-      <Dropdown value={theme} values={themes} onChange={changeTheme} />
-      <Link to="/logout" className={`button-logout-${theme}`}>
-        <button>Log out</button>
-      </Link>
+    <Layout>
+      <div className={`no-wrap ${theme}`}>
+        <Dropdown value={theme} values={themes} onChange={changeTheme} />
+        <button onClick={onClick}>Log out</button>
+      </div>
       <NewToDo />
       <ToDos />
-    </div>
+    </Layout>
   );
 };
 

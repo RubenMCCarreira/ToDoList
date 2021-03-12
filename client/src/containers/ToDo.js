@@ -10,6 +10,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
   const [description, setDescription] = useState(null);
   const [removed, setRemoved] = useState(null);
   const [priority, setPriority] = useState(null);
+  const [done, setDone] = useState(null);
 
   const { theme } = useThemeContext();
 
@@ -18,6 +19,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
     setDescription(item.description);
     setRemoved(item.removed);
     setPriority(item.priority);
+    setDone(item.done);
   }, [item]);
 
   const handleMarkDone = useCallback(() => {
@@ -25,9 +27,9 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
   }, [item, updateItem]);
 
   const handleUpdate = useCallback(() => {
-    updateItem({ ...item, title, description, removed, priority });
+    updateItem({ ...item, title, description, removed, priority, done });
     setShowEdit(false);
-  }, [item, updateItem, title, description, removed, priority]);
+  }, [item, updateItem, title, description, removed, priority, done]);
 
   const handleRemove = useCallback(() => {
     updateItem({ ...item, removed: true });
@@ -40,46 +42,56 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
   }, [item]);
 
   return (
-    <article className={`to-do-${theme}`} {...rest}>
+    <article className={`to-do ${theme}`} {...rest}>
       {showEdit ? (
         <>
-          <div>
-            <div>
+          <div className={`no-wrap ${theme} pushes`}>
+            <form>
               <Input value={title} placeholder="Title" onChange={setTitle} />
               <Input
                 value={description}
                 placeholder="Description"
                 onChange={setDescription}
               />
-            </div>
+            </form>
             <Priority value={priority} onChange={setPriority} />
           </div>
-
-          <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleUpdate}>Save</button>
+          <div className={`no-wrap ${theme} pushes`}>
+            <Checkbox
+              title="Done"
+              checked={done}
+              onChange={() => setDone(!done)}
+            />
+            <div>
+              <button onClick={handleCancel}>Cancel</button>
+              <button onClick={handleUpdate}>Save</button>
+            </div>
+          </div>
         </>
       ) : (
         <>
-          <div>
+          <div className={`no-wrap ${theme} pushes`}>
             <div>
               <h3>{title}</h3>
               <p>{description}</p>
             </div>
             <Priority value={priority} disabled />
           </div>
-          <div>
+          <div className={`no-wrap ${theme} pushes`}>
             <Checkbox
               title="Done"
               checked={item.done}
               disabled={removed}
               onChange={handleMarkDone}
             />
-            <button onClick={() => setShowEdit(true)} disabled={removed}>
-              Edit
-            </button>
-            <button onClick={handleRemove} disabled={removed}>
-              Remove
-            </button>
+            <div>
+              <button onClick={() => setShowEdit(true)} disabled={removed}>
+                Edit
+              </button>
+              <button onClick={handleRemove} disabled={removed}>
+                Remove
+              </button>
+            </div>
           </div>
         </>
       )}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import Input from '../components/Input';
+import Layout from '../containers/Layout';
+import { useThemeContext } from '../contexts/Theme';
 import reducer, {
   loginMapDispatchToProps,
   loginMapStateToProps,
@@ -9,6 +11,8 @@ import reducer, {
 import { getLogin } from '../tools/cookies';
 
 const Login = ({ saveItem, updateItem, reset, history, match }) => {
+  const { theme } = useThemeContext();
+
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
 
@@ -31,16 +35,18 @@ const Login = ({ saveItem, updateItem, reset, history, match }) => {
   }, [!!withLogin]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Input value={username} placeholder="username" onChange={setUserName} />
-      <Input
-        value={password}
-        placeholder="Password"
-        onChange={setPassword}
-        type="password"
-      />
-      <input type="submit" />
-    </form>
+    <Layout>
+      <form className={`no-wrap ${theme}`} onSubmit={handleSubmit}>
+        <Input value={username} placeholder="Username" onChange={setUserName} />
+        <Input
+          value={password}
+          placeholder="Password"
+          onChange={setPassword}
+          type="password"
+        />
+        <button type="submit">Log In</button>
+      </form>
+    </Layout>
   );
 };
 

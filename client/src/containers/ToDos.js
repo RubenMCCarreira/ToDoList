@@ -36,7 +36,7 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
   return (
     <>
       {loading && <Spinier />}
-      <div className={`to-dos-header-${theme}`}>
+      <div className={`no-wrap ${theme} pushes`}>
         <div>
           <h2>To Dos ({(list || []).length})</h2>
           {!!error && <h4 className="error">{error}</h4>}
@@ -51,7 +51,7 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
           </Link>
         )}
       </div>
-      <div>
+      <div className={`to-dos-options ${theme}`}>
         <SortOrder
           title="title"
           currentOrder={currentOrder}

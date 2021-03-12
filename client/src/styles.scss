@@ -13,35 +13,49 @@ $black-1: saturate($black-main, 20%);
 $black-2: lighten($black-main, 65%);
 $black-3: darken($black-main, 7%);
 
-html {
-  box-sizing: border-box;
-  font: caption;
-}
-
-.Initial {
+main {
   margin: auto;
   max-width: 55%;
 }
 
-.error {
-  color: $red-main;
+h3,
+p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 }
 
-input,
-select,
-button {
+%input {
   padding: 0.5em;
   border: 2px solid;
-  font: caption;
+  margin: 0.5rem 0;
+}
+
+input[type='submit'],
+button {
+  @extend %input;
+
+  border-color: $black-3;
+  background-color: $black-1;
+  color: $white-main;
+}
+
+input[type='text'],
+input[type='password'],
+select {
+  @extend %input;
+
+  flex: 1;
+  background-color: $black-2;
+}
+
+select {
+  text-transform: capitalize;
 }
 
 button,
 input[type='submit'],
 input[type='checkbox'],
 select {
-  transition: all 0.2s;
-  color: $white-main;
-
   &:hover {
     cursor: pointer;
     opacity: 0.8;
@@ -53,218 +67,98 @@ select {
   }
 }
 
-input[type='text'],
-input[type='password'],
-select {
-  width: -webkit-fill-available;
-}
-
-select {
-  text-transform: capitalize;
-}
-
-input[type='checkbox'] {
-  width: auto !important;
-  margin-right: 5px !important;
-}
-
-%to-do {
-  border: 2px solid;
-  padding: 1em;
-  margin: 1em 0;
-
-  h3 {
-    margin-top: 0;
-  }
-
-  > div {
-    @extend %side-by-side;
-  }
-
-  button:not(:last-child) {
-    margin-right: 5px;
-  }
-}
-
-.to-do-red {
-  @extend %to-do;
-  @extend %new-to-do-red;
-
-  border-color: $red-3;
-
-  button {
-    border-color: $red-3;
-    background-color: $red-1;
-  }
-
-  label {
-    color: $red-1;
-  }
-}
-
-.to-do-green {
-  @extend %to-do;
-  @extend %new-to-do-green;
-
-  border-color: $green-3;
-
-  button {
-    border-color: $green-3;
-    background-color: $green-1;
-  }
-
-  label {
-    color: $green-1;
-  }
-}
-
-.to-do-black {
-  @extend %to-do;
-  @extend %new-to-do-black;
-
-  border-color: $black-3;
-
-  button {
-    border-color: $black-3;
-    background-color: $black-1;
-  }
-
-  label {
-    color: $black-1;
-  }
-}
-
-%side-by-side {
-  display: flex;
-
-  :first-child {
-    margin-right: auto;
-    width: -webkit-fill-available;
-  }
-}
-
-%new-to-do {
+.no-wrap {
   white-space: nowrap;
-  width: 45%;
+  display: flex;
+  align-items: center;
 
   :not(:last-child) {
-    margin-right: 5px;
+    margin-right: 0.5rem;
+  }
+
+  > form {
+    display: flex;
+    flex: 1;
+  }
+
+  &.green {
+    select {
+      color: $black-main;
+      border-color: $green-3;
+      background-color: $green-2;
+    }
+    button {
+      border-color: $green-3;
+      background-color: $green-1;
+    }
+    input {
+      border-color: $green-3;
+      background-color: $green-2;
+    }
+    h2,
+    h3,
+    p,
+    label {
+      color: $green-main;
+    }
+  }
+
+  &.red {
+    select {
+      color: $black-main;
+      border-color: $red-3;
+      background-color: $red-2;
+    }
+    button {
+      border-color: $red-3;
+      background-color: $red-1;
+    }
+    input {
+      border-color: $red-3;
+      background-color: $red-2;
+    }
+    h2,
+    h3,
+    p,
+    label {
+      color: $red-main;
+    }
   }
 }
 
-%new-to-do-red {
-  input {
-    border-color: $red-3;
-    background-color: $red-2;
-  }
-
-  input[type='submit'] {
-    border-color: $red-3;
-    background-color: $red-1;
+.pushes {
+  > :last-child {
+    margin-left: auto;
   }
 }
 
-%new-to-do-green {
-  input {
+.error {
+  color: $red-main;
+}
+
+.to-dos-options {
+  margin-bottom: 0.5rem;
+
+  &.green {
+    color: $green-main;
+  }
+
+  &.red {
+    color: $red-main;
+  }
+}
+
+.to-do {
+  border-style: solid;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+
+  &.green {
     border-color: $green-3;
-    background-color: $green-2;
   }
 
-  input[type='submit'] {
-    border-color: $green-3;
-    background-color: $green-1;
-  }
-}
-
-%new-to-do-black {
-  input {
-    border-color: $black-3;
-    background-color: $black-2;
-  }
-
-  input[type='submit'] {
-    border-color: $black-3;
-    background-color: $black-1;
-  }
-}
-
-.new-to-do-red {
-  @extend %new-to-do;
-  @extend %new-to-do-red;
-}
-
-.new-to-do-green {
-  @extend %new-to-do;
-  @extend %new-to-do-green;
-}
-
-.new-to-do-black {
-  @extend %new-to-do;
-  @extend %new-to-do-black;
-}
-
-%dropdown {
-  color: $black-main;
-  margin-bottom: 10px;
-}
-
-.dropdown-red {
-  @extend %dropdown;
-
-  border-color: $red-3;
-  background-color: $red-2;
-}
-
-.dropdown-green {
-  @extend %dropdown;
-
-  border-color: $green-3;
-  background-color: $green-2;
-}
-
-.dropdown-black {
-  @extend %dropdown;
-
-  border-color: $black-3;
-  background-color: $black-2;
-}
-
-%to-dos-header {
-  @extend %side-by-side;
-
-  > div:first-child {
-    width: auto;
-  }
-
-  button {
-    margin-top: 15px;
-  }
-}
-
-.to-dos-header-red {
-  @extend %to-dos-header;
-
-  button {
+  &.red {
     border-color: $red-3;
-    background-color: $red-1;
-  }
-}
-
-.to-dos-header-green {
-  @extend %to-dos-header;
-
-  button {
-    border-color: $green-3;
-    background-color: $green-1;
-  }
-}
-
-.to-dos-header-black {
-  @extend %to-dos-header;
-
-  button {
-    border-color: $black-3;
-    background-color: $black-1;
   }
 }
 
@@ -353,59 +247,5 @@ input[type='checkbox'] {
   }
   100% {
     transform: translate(19px, 0);
-  }
-}
-
-%button-logout {
-  button {
-    margin-bottom: 10px;
-  }
-}
-
-.button-logout-red {
-  @extend %button-logout;
-
-  button {
-    border-color: $red-3;
-    background-color: $red-1;
-  }
-}
-
-.button-logout-green {
-  @extend %button-logout;
-
-  button {
-    border-color: $green-3;
-    background-color: $green-1;
-  }
-}
-
-.button-logout-black {
-  @extend %button-logout;
-
-  button {
-    border-color: $black-3;
-    background-color: $black-1;
-  }
-}
-
-.button-home-red {
-  button {
-    border-color: $red-3;
-    background-color: $red-1;
-  }
-}
-
-.button-home-green {
-  button {
-    border-color: $green-3;
-    background-color: $green-1;
-  }
-}
-
-.button-home-black {
-  button {
-    border-color: $black-3;
-    background-color: $black-1;
   }
 }
