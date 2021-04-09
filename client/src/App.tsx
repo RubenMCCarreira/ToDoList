@@ -4,6 +4,7 @@ import All from './pages/All';
 import Initial from './pages/Initial';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
+import Chat from './pages/Chat';
 
 const App = () => {
   const login = useSelector((state) => state['login']);
@@ -17,6 +18,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Initial} />
         <Route exact path="/all" component={All} />
+        <Route exact path="/chat" component={Chat} />
         <Route exact path="/logout" component={Login} />
         <Route component={NotFound} />
       </Switch>

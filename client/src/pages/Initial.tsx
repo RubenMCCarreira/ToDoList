@@ -11,10 +11,15 @@ const Initial = ({ history }) => {
     history.push('/logout');
   };
 
+  const goChat = () => {
+    history.push('/chat');
+  };
+
   return (
     <Layout>
       <div className={`no-wrap ${theme} space-between`}>
         <Dropdown value={theme} values={themes} onChange={changeTheme} />
+        <button onClick={goChat}>Chat</button>
         <button onClick={onClick}>Log out</button>
       </div>
       <NewToDo />

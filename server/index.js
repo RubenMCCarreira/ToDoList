@@ -13,6 +13,13 @@ app.use(express.json());
 
 //
 //
+// EXPLANATION: listen
+app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}`);
+});
+
+//
+//
 // EXPLANATION: home
 app.get('/api/', (req, res) => {
   res.send('API');
@@ -151,11 +158,4 @@ app.post('/api/login/revalidate', (req, res) => {
   }
 
   res.send(toSend);
-});
-
-//
-//
-// EXPLANATION: listen
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}`);
 });

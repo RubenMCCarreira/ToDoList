@@ -6,13 +6,14 @@
   "license": "ISC",
   "description": "",
   "scripts": {
-    "start": "node index.js",
+    "start": "node index.js & node socket.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "redux": "^4.0.5",
+    "socket.io": "^4.0.1",
     "tool": "file:../tool"
   }
 }
