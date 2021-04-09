@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import Input from '../components/Input';
 import Layout from '../containers/Layout';

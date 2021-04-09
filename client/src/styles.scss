@@ -1,6 +1,5 @@
 $red-main: red;
 $green-main: green;
-$blue-main: blue;
 $white-main: white;
 $black-main: black;
 $red-1: saturate($red-main, 20%);
@@ -50,6 +49,7 @@ select {
 
 select {
   text-transform: capitalize;
+  height: 32px;
 }
 
 button,
@@ -68,17 +68,18 @@ select {
 }
 
 .no-wrap {
-  white-space: nowrap;
   display: flex;
   align-items: center;
+  flex-flow: row nowrap;
 
-  :not(:last-child) {
-    margin-right: 0.5rem;
-  }
+  @extend %space-between;
 
-  > form {
-    display: flex;
-    flex: 1;
+  @media (max-width: 750px) {
+    flex-flow: row wrap;
+
+    > :not(:last-child) {
+      margin-right: 0;
+    }
   }
 
   &.green {
@@ -124,6 +125,22 @@ select {
       color: $red-main;
     }
   }
+}
+
+.to-do-edit {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+%space-between {
+  > :not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}
+
+.space-between {
+  @extend %space-between;
 }
 
 .pushes {
@@ -247,5 +264,23 @@ select {
   }
   100% {
     transform: translate(19px, 0);
+  }
+}
+
+.sort-order {
+  > p {
+    font-weight: bold;
+  }
+
+  > span {
+    > img {
+      width: 10px;
+      height: 10px;
+      margin-left: 5px;
+    }
+
+    &:not(:last-of-type) {
+      margin-right: 15px;
+    }
   }
 }

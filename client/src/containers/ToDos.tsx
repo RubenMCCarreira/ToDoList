@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ToDo from './ToDo';
 import reducer, {
   toDoMapStateToProps,
@@ -53,17 +53,7 @@ const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
       </div>
       <div className={`to-dos-options ${theme}`}>
         <SortOrder
-          title="title"
-          currentOrder={currentOrder}
-          onChange={handleSortOrder}
-        />
-        <SortOrder
-          title="done"
-          currentOrder={currentOrder}
-          onChange={handleSortOrder}
-        />
-        <SortOrder
-          title="priority"
+          values={['title', 'done', 'priority']}
           currentOrder={currentOrder}
           onChange={handleSortOrder}
         />

@@ -8,7 +8,11 @@ import reducer, {
   toDoMapStateToProps
 } from '../store/toDo';
 
-const NewToDo = React.memo(({ saveItem }) => {
+type NewToDoProps = {
+  saveItem: Function;
+};
+
+const NewToDo = React.memo(({ saveItem }: NewToDoProps) => {
   const { theme } = useThemeContext();
 
   const [title, setTitle] = useState(null);

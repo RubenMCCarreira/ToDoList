@@ -1,9 +1,7 @@
-import React from 'react';
-
 const ASC = 'ASC';
 const DSC = 'DSC';
 
-const SortOrder = ({ title, currentOrder, onChange }) => {
+const SortOrder = ({ values, currentOrder, onChange }) => {
   const { prop, value } = currentOrder;
 
   const handleChange = (event) => {
@@ -28,15 +26,17 @@ const SortOrder = ({ title, currentOrder, onChange }) => {
   };
 
   return (
-    <span style={{ marginRight: '15px' }} onClick={() => handleChange(title)}>
-      {title}
-      {!!(currentOrder.prop == title && currentOrder.value) && (
-        <img
-          src={`/sortOrder/arrow-${currentOrder.value}.png`}
-          style={{ width: '10px', height: '10px' }}
-        />
-      )}
-    </span>
+    <div className="sort-order">
+      <p>Sort Order</p>
+      {values.map((it) => (
+        <span key={`sort-order-${it}`} onClick={() => handleChange(it)}>
+          {it}
+          {!!(currentOrder.prop == it && currentOrder.value) && (
+            <img src={`/sortOrder/arrow-${currentOrder.value}.png`} />
+          )}
+        </span>
+      ))}
+    </div>
   );
 };
 

@@ -4,11 +4,11 @@ const setCookie = (
   key,
   value,
   hoursToExpire = 24,
-  path,
-  maxAge,
-  domain,
-  secure,
-  httpOnly
+  path = undefined,
+  maxAge = undefined,
+  domain = undefined,
+  secure = undefined,
+  httpOnly = undefined
 ) => {
   const expires = new Date();
   expires.setTime(expires.getTime() + hoursToExpire * 60 * 60 * 1000);

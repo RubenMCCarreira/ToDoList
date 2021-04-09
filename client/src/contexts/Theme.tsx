@@ -6,19 +6,24 @@ import reducer, {
   stateThemeKey
 } from '../store/theme';
 
-const ThemeContext = createContext();
+const COLORS = ['black', 'green', 'red'];
+
+const ThemeContext = createContext({
+  theme: '',
+  changeTheme: (nextColor: any) => {},
+  themes: COLORS
+});
 
 const ThemeProvider = ({ children, saveItem, getItem, item }) => {
   const [tryGet, setTryGet] = useState(false);
-  const [color, setColor] = useState();
-  const colors = ['black', 'green', 'red'];
+  const [color, setColor] = useState('');
 
   useEffect(() => {
     if (!color && !tryGet) {
       getItem();
       setTryGet(true);
     } else if (!color && tryGet) {
-      setColor(colors[0]);
+      setColor(COLORS[0]);
     }
   }, [getItem, color, tryGet]);
 
@@ -33,16 +38,14 @@ const ThemeProvider = ({ children, saveItem, getItem, item }) => {
     setColor(nextColor);
   };
 
-  const value = { theme: color, changeTheme, themes: colors };
+  const value = { theme: color, changeTheme, themes: COLORS };
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
-export const useThemeContext = () => {
-  return useContext(ThemeContext);
-};
+export const useThemeContext = () => useContext(ThemeContext);
 
 export default withInjectReducer(
   stateThemeKey,

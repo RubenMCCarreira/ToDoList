@@ -1,22 +1,11 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 const ItemTypes = {
   CARD: 'card'
 };
 
-const DragDrop = ({
-  component: Component,
-  item,
-  reorderItem,
-  index,
-  ...rest
-}) => {
-  const style = {
-    borderStyle: 'dashed',
-    cursor: 'move',
-    opacity: null
-  };
+function DragDrop({ component: Component, item, reorderItem, index, ...rest }) {
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -75,6 +64,12 @@ const DragDrop = ({
 
   drag(drop(ref));
 
+  const style = {
+    borderStyle: 'dashed',
+    cursor: 'move',
+    opacity: 1
+  };
+
   if (isDragging) {
     style.opacity = 0.5;
   }
@@ -89,6 +84,6 @@ const DragDrop = ({
       />
     </div>
   );
-};
+}
 
 export default DragDrop;

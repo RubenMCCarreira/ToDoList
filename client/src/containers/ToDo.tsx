@@ -1,16 +1,28 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
 
-const ToDo = React.memo(({ item, updateItem, ...rest }) => {
+interface ToDoProps {
+  item: {
+    title: string;
+    description: string;
+    removed: boolean;
+    priority: number;
+    done: boolean;
+  };
+  updateItem: Function;
+}
+
+const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   const [showEdit, setShowEdit] = useState(false);
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [removed, setRemoved] = useState(null);
-  const [priority, setPriority] = useState(null);
-  const [done, setDone] = useState(null);
+  const [title, setTitle] = useState<null | string>(null);
+  const [description, setDescription] = useState<null | string>(null);
+  const [removed, setRemoved] = useState<boolean>(false);
+  const [priority, setPriority] = useState<null | number>(null);
+  const [done, setDone] = useState<null | boolean>(null);
 
   const { theme } = useThemeContext();
 
@@ -46,7 +58,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
       {showEdit ? (
         <>
           <div className={`no-wrap ${theme} pushes`}>
-            <form>
+            <form className="to-do-edit">
               <Input value={title} placeholder="Title" onChange={setTitle} />
               <Input
                 value={description}
@@ -62,7 +74,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
               checked={done}
               onChange={() => setDone(!done)}
             />
-            <div>
+            <div className={`space-between`}>
               <button onClick={handleCancel}>Cancel</button>
               <button onClick={handleUpdate}>Save</button>
             </div>
@@ -84,13 +96,17 @@ const ToDo = React.memo(({ item, updateItem, ...rest }) => {
               disabled={removed}
               onChange={handleMarkDone}
             />
-            <div>
-              <button onClick={() => setShowEdit(true)} disabled={removed}>
-                Edit
-              </button>
-              <button onClick={handleRemove} disabled={removed}>
-                Remove
-              </button>
+            <div className={`space-between`}>
+              <Button
+                label="Edit"
+                onClick={() => setShowEdit(true)}
+                disabled={removed}
+              />
+              <Button
+                label="Remove"
+                onClick={handleRemove}
+                disabled={removed}
+              />
             </div>
           </div>
         </>

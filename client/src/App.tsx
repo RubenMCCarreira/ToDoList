@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import All from './pages/All';
@@ -7,7 +6,7 @@ import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 
 const App = () => {
-  const login = useSelector(({ login }) => login);
+  const login = useSelector((state) => state['login']);
 
   if (!login || !login.saved) {
     return <Login />;

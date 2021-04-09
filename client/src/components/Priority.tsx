@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const Priority = ({ value, onChange, disabled }) => {
+const Priority = ({ value, onChange = (A) => A, disabled = false }) => {
   const options = [
     { value: 1, name: 'arrow-very-low' },
     { value: 2, name: 'arrow-low' },

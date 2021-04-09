@@ -1,4 +1,3 @@
-import React from 'react';
 import ToDos from '../containers/ToDos';
 import NewToDo from '../containers/NewToDo';
 import Dropdown from '../components/Dropdown';
@@ -14,7 +13,7 @@ const Initial = ({ history }) => {
 
   return (
     <Layout>
-      <div className={`no-wrap ${theme}`}>
+      <div className={`no-wrap ${theme} space-between`}>
         <Dropdown value={theme} values={themes} onChange={changeTheme} />
         <button onClick={onClick}>Log out</button>
       </div>

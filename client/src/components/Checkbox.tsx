@@ -1,6 +1,4 @@
-import React from 'react';
-
-const Checkbox = ({ title, checked, disabled, onChange }) => {
+const Checkbox = ({ title, checked, onChange, disabled = false }) => {
   return (
     <label>
       <input

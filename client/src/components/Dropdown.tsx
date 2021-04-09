@@ -1,4 +1,3 @@
-import React from 'react';
 import { useThemeContext } from '../contexts/Theme';
 
 const Dropdown = ({ value, values, onChange }) => {
@@ -11,7 +10,6 @@ const Dropdown = ({ value, values, onChange }) => {
   return (
     <select
       className={`dropdown-${theme}`}
-      name="Theme"
       value={value}
       onChange={handleOnChange}
     >
