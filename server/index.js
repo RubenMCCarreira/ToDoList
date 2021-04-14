@@ -3,18 +3,32 @@ const cors = require('cors');
 const { todoActions } = require('./store/todo');
 const { themeActions } = require('./store/theme');
 const { loginActions } = require('./store/login');
+const { chatActions } = require('./store/chat');
 const { state, dispatch } = require('./store');
+const http = require('http');
+const socketio = require('socket.io');
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom,
+  getMessagesInRoom,
+  addMessage,
+} = require('./chat');
 
 const app = express();
-const port = 4000;
+const port = 5000;
 
 app.use(cors());
 app.use(express.json());
 
+const server = http.createServer(app);
+const io = socketio(server);
+
 //
 //
 // EXPLANATION: listen
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
 
@@ -158,4 +172,53 @@ app.post('/api/login/revalidate', (req, res) => {
   }
 
   res.send(toSend);
+});
+
+//
+//
+// EXPLANATION: chat
+io.on('connect', (socket) => {
+  socket.on('join', ({ name, room }, callback) => {
+    const { error, user } = addUser({ id: socket.id, name, room });
+
+    if (error) return callback(error);
+
+    socket.join(user.room);
+
+    socket.broadcast
+      .to(user.room)
+      .emit('message', { user: 'Admin', text: `${user.name} has joined!` });
+
+    socket.emit('roomData', {
+      room: user.room,
+      users: getUsersInRoom(user.room),
+      messages: getMessagesInRoom(user.room),
+    });
+
+    socket.emit('welcome', { user: 'Admin', text: `${user.name}, welcome to room ${user.room}.` });
+
+    callback();
+  });
+
+  socket.on('sendMessage', (text, callback) => {
+    const user = getUser(socket.id);
+
+    chatActions.ADD(dispatch, { user: user.name, room: user.room, text });
+    addMessage({ user: user.name, room: user.room, text });
+
+    io.to(user.room).emit('message', { user: user.name, text });
+
+    callback();
+  });
+
+  socket.on('disconnect', () => {
+    const user = removeUser(socket.id);
+
+    if (user) {
+      socket.broadcast
+        .to(user.room)
+        .emit('message', { user: 'Admin', text: `${user.name} has left.` });
+      // io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+    }
+  });
 });

@@ -1,4 +1,5 @@
-const { state } = require('./store');
+const { state, dispatch } = require('./store');
+const { chatActions } = require('./store/chat');
 
 const users = [];
 const messages = [];
@@ -32,6 +33,7 @@ const getUser = (id) => {
 const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
 const addMessage = (message) => {
+  chatActions.ADD(dispatch, message);
   messages.push(message);
 };
 
