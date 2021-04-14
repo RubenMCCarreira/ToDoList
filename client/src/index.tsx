@@ -5,13 +5,16 @@ import ThemeProvider from './contexts/Theme';
 import store from 'tool/redux/initializeStore';
 
 import './styles.scss';
+import SocketProvider from './contexts/Socket';
 
 const rootElement = document.getElementById('root');
 
 render(
   <Provider store={store}>
     <ThemeProvider>
-      <App />
+      <SocketProvider>
+        <App />
+      </SocketProvider>
     </ThemeProvider>
   </Provider>,
   rootElement

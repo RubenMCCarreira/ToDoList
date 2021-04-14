@@ -3,7 +3,6 @@ const cors = require('cors');
 const { todoActions } = require('./store/todo');
 const { themeActions } = require('./store/theme');
 const { loginActions } = require('./store/login');
-const { chatActions } = require('./store/chat');
 const { state, dispatch } = require('./store');
 const http = require('http');
 const socketio = require('socket.io');
@@ -15,6 +14,7 @@ const {
   getMessagesInRoom,
   addMessage,
 } = require('./chat');
+const { generateToken, generateId } = require('tool');
 
 const app = express();
 const port = 5000;
@@ -130,18 +130,7 @@ app.put('/api/theme/', (req, res) => {
   res.send({ updated: true });
 });
 
-//
-//
 // EXPLANATION: login
-var rand = function () {
-  return Math.random().toString(36).substr(2);
-};
-
-var generateToken = function () {
-  return rand() + rand() + rand() + rand();
-};
-
-// EXPLANATION: new login
 app.post('/api/login', (req, res) => {
   const token = generateToken();
 
@@ -185,9 +174,14 @@ io.on('connect', (socket) => {
 
     socket.join(user.room);
 
-    socket.broadcast
-      .to(user.room)
-      .emit('message', { user: 'Admin', text: `${user.name} has joined!` });
+    const nextMessage = {
+      id: generateId(),
+      user: 'Admin',
+      room: user.room,
+      text: `${user.name} has joined!`,
+    };
+
+    socket.broadcast.to(user.room).emit('message', nextMessage);
 
     socket.emit('roomData', {
       room: user.room,
@@ -195,7 +189,10 @@ io.on('connect', (socket) => {
       messages: getMessagesInRoom(user.room),
     });
 
-    socket.emit('welcome', { user: 'Admin', text: `${user.name}, welcome to room ${user.room}.` });
+    nextMessage.id = generateId();
+    nextMessage.text = `${user.name}, welcome to room ${user.room}.`;
+
+    socket.emit('welcome', nextMessage);
 
     callback();
   });
@@ -203,10 +200,11 @@ io.on('connect', (socket) => {
   socket.on('sendMessage', (text, callback) => {
     const user = getUser(socket.id);
 
-    chatActions.ADD(dispatch, { user: user.name, room: user.room, text });
-    addMessage({ user: user.name, room: user.room, text });
+    const nextMessage = { id: generateId(), user: user.name, room: user.room, text };
 
-    io.to(user.room).emit('message', { user: user.name, text });
+    addMessage(nextMessage);
+
+    io.to(user.room).emit('message', nextMessage);
 
     callback();
   });
@@ -215,9 +213,14 @@ io.on('connect', (socket) => {
     const user = removeUser(socket.id);
 
     if (user) {
-      socket.broadcast
-        .to(user.room)
-        .emit('message', { user: 'Admin', text: `${user.name} has left.` });
+      const nextMessage = {
+        id: generateId(),
+        user: 'Admin',
+        room: user.room,
+        text: `${user.name} has left.`,
+      };
+
+      socket.broadcast.to(user.room).emit('message', nextMessage);
       // io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
     }
   });

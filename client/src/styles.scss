@@ -284,3 +284,23 @@ select {
     }
   }
 }
+
+.messages {
+  > p {
+    &.my-self {
+      text-align: right;
+    }
+
+    > span {
+      font-weight: bold;
+    }
+  }
+
+  &.green {
+    color: $green-3;
+  }
+
+  &.red {
+    color: $red-3;
+  }
+}

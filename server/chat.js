@@ -2,7 +2,6 @@ const { state, dispatch } = require('./store');
 const { chatActions } = require('./store/chat');
 
 const users = [];
-const messages = [];
 
 const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
@@ -34,11 +33,8 @@ const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
 const addMessage = (message) => {
   chatActions.ADD(dispatch, message);
-  messages.push(message);
 };
 
-const getMessagesInRoom = (room) => {
-  return messages.filter((it) => it.room == room);
-};
+const getMessagesInRoom = (room) => state.chat.list.filter((it) => it.room == room);
 
 module.exports = { addUser, removeUser, getUser, getUsersInRoom, getMessagesInRoom, addMessage };
