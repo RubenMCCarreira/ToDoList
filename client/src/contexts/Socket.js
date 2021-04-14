@@ -50,7 +50,51 @@ const SocketProvider = ({ children }) => {
     }
   }, [socket]);
 
-  const value = { socket, connect, disconnect };
+  const onMessage = useCallback(
+    (callback) => {
+      if (socket) {
+        socket.on('message', callback);
+      }
+    },
+    [socket]
+  );
+
+  const onWelcome = useCallback(
+    (callback) => {
+      if (socket) {
+        socket.on('welcome', callback);
+      }
+    },
+    [socket]
+  );
+
+  const onRoomData = useCallback(
+    (callback) => {
+      if (socket) {
+        socket.on('roomData', callback);
+      }
+    },
+    [socket]
+  );
+
+  const sendMessage = useCallback(
+    (message, callback) => {
+      if (socket) {
+        socket.emit('sendMessage', message, callback);
+      }
+    },
+    [socket]
+  );
+
+  const value = {
+    socket,
+    connect,
+    disconnect,
+    onMessage,
+    onWelcome,
+    onRoomData,
+    sendMessage
+  };
 
   return (
     <SocketContext.Provider value={value}>{children}</SocketContext.Provider>

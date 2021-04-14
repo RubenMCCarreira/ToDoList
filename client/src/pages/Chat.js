@@ -9,7 +9,15 @@ const Chat = ({ history }) => {
   const [message, setMessage] = useState(null);
   const [messages, setMessages] = useState([]);
   const { theme } = useThemeContext();
-  const { socket, connect, disconnect } = useSocketContext();
+  const {
+    socket,
+    connect,
+    disconnect,
+    onMessage,
+    onWelcome,
+    onRoomData,
+    sendMessage
+  } = useSocketContext();
 
   const onBack = () => {
     history.goBack();
@@ -27,23 +35,23 @@ const Chat = ({ history }) => {
 
   useEffect(() => {
     if (socket) {
-      socket.on('message', (data) => {
+      onMessage((data) => {
         setMessages((messages) => [...messages, data]);
       });
-      socket.on('welcome', (data) => {
+      onWelcome((data) => {
         setMessages((messages) => [...messages, data]);
       });
-      socket.on('roomData', ({ users, messages: newMessages }) => {
+      onRoomData(({ users, messages: newMessages }) => {
         setMessages((messages) => [...messages, ...newMessages]);
       });
     }
   }, [socket]);
 
-  const sendMessage = (e) => {
+  const handleSendMessage = (e) => {
     e.preventDefault();
 
     if (socket) {
-      socket.emit('sendMessage', message, () => console.log('sent'));
+      sendMessage(message, () => console.log('sent'));
     }
 
     setMessage(null);
@@ -66,7 +74,7 @@ const Chat = ({ history }) => {
         ))}
       </div>
 
-      <form className={`no-wrap ${theme}`} onSubmit={sendMessage}>
+      <form className={`no-wrap ${theme}`} onSubmit={handleSendMessage}>
         <Input value={message} placeholder="Message" onChange={setMessage} />
         <button type="submit">Send</button>
       </form>
