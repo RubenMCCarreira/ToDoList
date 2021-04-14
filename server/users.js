@@ -1,4 +1,7 @@
+const { state } = require('./store');
+
 const users = [];
+const messages = [];
 
 const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
@@ -23,10 +26,17 @@ const removeUser = (id) => {
 };
 
 const getUser = (id) => {
-  console.log('id', id, users);
   return users.find((user) => user.id === id);
 };
 
 const getUsersInRoom = (room) => users.filter((user) => user.room === room);
 
-module.exports = { addUser, removeUser, getUser, getUsersInRoom };
+const addMessage = (message) => {
+  messages.push(message);
+};
+
+const getMessagesInRoom = (room) => {
+  return messages.filter((it) => it.room == room);
+};
+
+module.exports = { addUser, removeUser, getUser, getUsersInRoom, getMessagesInRoom, addMessage };
