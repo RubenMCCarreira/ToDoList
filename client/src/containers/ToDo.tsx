@@ -4,7 +4,7 @@ import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
-import { IState } from '../interfaces';
+import { IItemState } from '../interfaces';
 
 export interface IToDo {
   id: number;
@@ -22,8 +22,8 @@ interface ToDoProps {
 
 const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   const [showEdit, setShowEdit] = useState(false);
-  const [title, setTitle] = useState<IState>({ value: null, error: false });
-  const [description, setDescription] = useState<IState>({
+  const [title, setTitle] = useState<IItemState>({ value: null, error: false });
+  const [description, setDescription] = useState<IItemState>({
     value: null,
     error: false
   });

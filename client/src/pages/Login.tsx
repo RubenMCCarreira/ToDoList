@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import Layout from '../containers/Layout';
 import { useThemeContext } from '../contexts/Theme';
-import { IHistory, IMatch, IState } from '../interfaces';
+import { IHistory, IMatch, IItemState } from '../interfaces';
 import reducer, {
   loginMapDispatchToProps,
   loginMapStateToProps,
@@ -23,11 +22,11 @@ interface ILogin {
 const Login = ({ saveItem, updateItem, reset, history, match }: ILogin) => {
   const { theme } = useThemeContext();
 
-  const [username, setUserName] = useState<IState>({
+  const [username, setUserName] = useState<IItemState>({
     value: null,
     error: false
   });
-  const [password, setPassword] = useState<IState>({
+  const [password, setPassword] = useState<IItemState>({
     value: null,
     error: false
   });
@@ -52,7 +51,7 @@ const Login = ({ saveItem, updateItem, reset, history, match }: ILogin) => {
   }, [!!withLogin]);
 
   return (
-    <Layout>
+    <>
       <form className={`no-wrap ${theme}`} onSubmit={handleSubmit}>
         <Input
           item={username}
@@ -71,7 +70,7 @@ const Login = ({ saveItem, updateItem, reset, history, match }: ILogin) => {
         />
         <Button label="Log In" type="submit" />
       </form>
-    </Layout>
+    </>
   );
 };
 

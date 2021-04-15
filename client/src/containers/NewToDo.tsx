@@ -1,5 +1,5 @@
-import withInjectReducer from 'tool/redux/withInjectReducer';
 import React, { useState } from 'react';
+import withInjectReducer from 'tool/redux/withInjectReducer';
 import Input from '../components/Input';
 import { useThemeContext } from '../contexts/Theme';
 import reducer, {

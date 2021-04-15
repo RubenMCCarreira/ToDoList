@@ -1,5 +1,5 @@
+import withInjectReducer from 'tool/redux/withInjectReducer';
 import { useThemeContext } from '../contexts/Theme';
-import Layout from '../containers/Layout';
 import { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -8,10 +8,9 @@ import reducer, {
   roomMapStateToProps,
   stateRoomKey
 } from '../store/room';
-import withInjectReducer from 'tool/redux/withInjectReducer';
 import Room, { IRoom } from '../containers/Room';
 import Spinier from '../components/Spinier';
-import { IHistory, IState } from '../interfaces';
+import { IHistory, IItemState } from '../interfaces';
 
 interface ChatProps {
   history: IHistory;
@@ -34,7 +33,7 @@ const Chat = ({
   error,
   saved
 }: ChatProps) => {
-  const [name, setName] = useState<IState>({ value: null, error: false });
+  const [name, setName] = useState<IItemState>({ value: null, error: false });
   const [activeRoomId, setActiveRoomId] = useState<null | number>(null);
   const { theme } = useThemeContext();
 
@@ -73,7 +72,7 @@ const Chat = ({
   }, [saved]);
 
   return (
-    <Layout>
+    <>
       <>{loading && <Spinier />}</>
       <div className={`no-wrap ${theme} pushes`}>
         <h2>Chat</h2>
@@ -111,7 +110,7 @@ const Chat = ({
       ) : (
         <p>No rooms</p>
       )}
-    </Layout>
+    </>
   );
 };
 

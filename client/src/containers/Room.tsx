@@ -1,5 +1,6 @@
-import { useThemeContext } from '../contexts/Theme';
 import { useEffect, useState } from 'react';
+import withInjectReducer from 'tool/redux/withInjectReducer';
+import { useThemeContext } from '../contexts/Theme';
 import Input from '../components/Input';
 import { getLogin } from '../tools/cookies';
 import { useSocketContext } from '../contexts/Socket';
@@ -9,7 +10,6 @@ import reducer, {
   roomMapStateToProps,
   stateRoomKey
 } from '../store/room';
-import withInjectReducer from 'tool/redux/withInjectReducer';
 
 export interface IRoom {
   id: number;

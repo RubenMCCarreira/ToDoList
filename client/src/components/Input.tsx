@@ -1,10 +1,8 @@
+import { IItemState } from '../interfaces';
 import Missing from './Missing';
 
 interface IInput {
-  item: {
-    value: null | string;
-    error: boolean;
-  };
+  item: IItemState;
   onChange: Function;
   placeholder: string;
   type?: 'text' | 'password';

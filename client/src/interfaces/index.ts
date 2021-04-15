@@ -7,7 +7,7 @@ export interface IMatch {
   path: string;
 }
 
-export interface IState {
+export interface IItemState {
   value: null | string;
   error: boolean;
 }

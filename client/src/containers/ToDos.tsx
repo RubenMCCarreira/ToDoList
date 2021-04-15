@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import withInjectReducer from 'tool/redux/withInjectReducer';
 import ToDo, { IToDo } from './ToDo';
 import reducer, {
   toDoMapStateToProps,
@@ -7,10 +8,8 @@ import reducer, {
 } from '../store/toDo';
 import Spinier from '../components/Spinier';
 import { useThemeContext } from '../contexts/Theme';
-import { Link } from 'react-router-dom';
 import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
-import withInjectReducer from 'tool/redux/withInjectReducer';
 import Button from '../components/Button';
 import { IHistory } from '../interfaces';
 

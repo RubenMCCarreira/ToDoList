@@ -1,4 +1,3 @@
-import Layout from '../containers/Layout';
 import ToDos from '../containers/ToDos';
 import { IHistory } from '../interfaces';
 
@@ -7,11 +6,7 @@ interface IAll {
 }
 
 const All = ({ history }: IAll) => {
-  return (
-    <Layout>
-      <ToDos history={history} all />
-    </Layout>
-  );
+  return <ToDos history={history} all />;
 };
 
 export default All;

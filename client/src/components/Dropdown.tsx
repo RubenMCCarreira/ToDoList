@@ -1,5 +1,5 @@
-import { useThemeContext } from '../contexts/Theme';
 import { MouseEventHandler } from 'react';
+import { useThemeContext } from '../contexts/Theme';
 
 interface IDropdown {
   value: string;

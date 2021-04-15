@@ -12,7 +12,7 @@ $black-1: saturate($black-main, 20%);
 $black-2: lighten($black-main, 65%);
 $black-3: darken($black-main, 7%);
 
-main {
+#root {
   margin: auto;
   max-width: 55%;
 }

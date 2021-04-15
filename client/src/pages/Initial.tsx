@@ -2,7 +2,6 @@ import ToDos from '../containers/ToDos';
 import NewToDo from '../containers/NewToDo';
 import Dropdown from '../components/Dropdown';
 import { useThemeContext } from '../contexts/Theme';
-import Layout from '../containers/Layout';
 import { IHistory } from '../interfaces';
 import Button from '../components/Button';
 
@@ -22,7 +21,7 @@ const Initial = ({ history }: IInitial) => {
   };
 
   return (
-    <Layout>
+    <>
       <div className={`no-wrap ${theme} space-between`}>
         <Dropdown value={theme} values={themes} onChange={changeTheme} />
         <Button label="Chat" onClick={goChat} />
@@ -30,7 +29,7 @@ const Initial = ({ history }: IInitial) => {
       </div>
       <NewToDo />
       <ToDos history={history} />
-    </Layout>
+    </>
   );
 };
 
