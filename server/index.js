@@ -229,8 +229,6 @@ io.on('connect', (socket) => {
 
 //
 //
-// EXPLANATION: rooms
-
 // EXPLANATION: get rooms
 app.get('/api/room', (req, res) => {
   res.json(state.room.list);
@@ -248,6 +246,11 @@ app.post('/api/room/', (req, res) => {
   res.send({ id });
 });
 
+// EXPLANATION: get rooms
+app.get('/api/room/:id', (req, res) => {
+  res.json(state.room.list.find((it) => it.id == req.params.id));
+});
+
 // EXPLANATION: update room
 app.put('/api/room/', (req, res) => {
   const index = state.room.list.findIndex((it) => it.id == req.body.id);
@@ -259,4 +262,11 @@ app.put('/api/room/', (req, res) => {
   }
 
   res.send({ updated });
+});
+
+// EXPLANATION: reset room state
+app.get('/api/room/reset', (req, res) => {
+  roomActions.RESET(dispatch);
+
+  res.send({ reseted: true });
 });

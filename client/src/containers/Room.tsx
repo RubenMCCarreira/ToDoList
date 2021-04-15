@@ -3,12 +3,23 @@ import { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import { getLogin } from '../tools/cookies';
 import { useSocketContext } from '../contexts/Socket';
+import Button from '../components/Button';
+import reducer, {
+  roomMapDispatchToProps,
+  roomMapStateToProps,
+  stateRoomKey
+} from '../store/room';
+import withInjectReducer from 'tool/redux/withInjectReducer';
+
+export interface IRoom {
+  id: number;
+  name: string;
+}
 
 interface RoomProps {
-  item: null | {
-    id: number;
-    name: string;
-  };
+  activeId: null | number;
+  item: null | IRoom;
+  getItem: Function;
 }
 
 interface IMessages {
@@ -18,8 +29,8 @@ interface IMessages {
   room: string;
 }
 
-const Room = ({ item }: RoomProps) => {
-  const [message, setMessage] = useState<null | string>(null);
+const Room = ({ activeId, item, getItem }: RoomProps) => {
+  const [message, setMessage] = useState({ value: null, error: false });
   const [messages, setMessages] = useState<IMessages[]>([]);
   const { theme } = useThemeContext();
   const {
@@ -32,6 +43,12 @@ const Room = ({ item }: RoomProps) => {
     onRoomData,
     sendMessage
   } = useSocketContext();
+
+  useEffect(() => {
+    if (activeId && (!item || activeId != item.id)) {
+      getItem(activeId);
+    }
+  }, [activeId, item]);
 
   useEffect(() => {
     if (item) {
@@ -70,10 +87,10 @@ const Room = ({ item }: RoomProps) => {
     e.preventDefault();
 
     if (socket) {
-      sendMessage(message, () => console.log('sent'));
+      sendMessage(message.value, () => console.log('sent'));
     }
 
-    setMessage(null);
+    setMessage({ value: null, error: false });
   };
 
   return item ? (
@@ -90,8 +107,12 @@ const Room = ({ item }: RoomProps) => {
       </div>
 
       <form className={`no-wrap ${theme}`} onSubmit={handleSendMessage}>
-        <Input value={message} placeholder="Message" onChange={setMessage} />
-        <button type="submit">Send</button>
+        <Input
+          item={message}
+          placeholder="Message"
+          onChange={(value) => setMessage((current) => ({ ...current, value }))}
+        />
+        <Button label="Send" type="submit" />
       </form>
     </div>
   ) : (
@@ -99,4 +120,10 @@ const Room = ({ item }: RoomProps) => {
   );
 };
 
-export default Room;
+export default withInjectReducer(
+  stateRoomKey,
+  reducer,
+  roomMapStateToProps,
+  roomMapDispatchToProps,
+  Room
+);

@@ -4,6 +4,7 @@ import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
+import { IState } from '../interfaces';
 
 export interface IToDo {
   id: number;
@@ -21,17 +22,20 @@ interface ToDoProps {
 
 const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   const [showEdit, setShowEdit] = useState(false);
-  const [title, setTitle] = useState<null | string>(null);
-  const [description, setDescription] = useState<null | string>(null);
-  const [removed, setRemoved] = useState<boolean>(false);
-  const [priority, setPriority] = useState<null | number>(null);
-  const [done, setDone] = useState<null | boolean>(null);
+  const [title, setTitle] = useState<IState>({ value: null, error: false });
+  const [description, setDescription] = useState<IState>({
+    value: null,
+    error: false
+  });
+  const [removed, setRemoved] = useState(false);
+  const [priority, setPriority] = useState<number | null>(null);
+  const [done, setDone] = useState(false);
 
   const { theme } = useThemeContext();
 
   useEffect(() => {
-    setTitle(item.title);
-    setDescription(item.description);
+    setTitle((current) => ({ ...current, value: item.title }));
+    setDescription((current) => ({ ...current, value: item.description }));
     setRemoved(item.removed);
     setPriority(item.priority);
     setDone(item.done);
@@ -42,7 +46,14 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   }, [item, updateItem]);
 
   const handleUpdate = useCallback(() => {
-    updateItem({ ...item, title, description, removed, priority, done });
+    updateItem({
+      ...item,
+      title: title.value,
+      description: description.value,
+      removed,
+      priority,
+      done
+    });
     setShowEdit(false);
   }, [item, updateItem, title, description, removed, priority, done]);
 
@@ -51,8 +62,8 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   }, [item, updateItem]);
 
   const handleCancel = useCallback(() => {
-    setTitle(item.title);
-    setDescription(item.description);
+    setTitle({ value: item.title, error: false });
+    setDescription({ value: item.description, error: false });
     setShowEdit(false);
   }, [item]);
 
@@ -62,11 +73,19 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
         <>
           <div className={`no-wrap ${theme} pushes`}>
             <form className="to-do-edit">
-              <Input value={title} placeholder="Title" onChange={setTitle} />
               <Input
-                value={description}
+                item={title}
+                placeholder="Title"
+                onChange={(value) =>
+                  setTitle((current) => ({ ...current, value }))
+                }
+              />
+              <Input
+                item={description}
                 placeholder="Description"
-                onChange={setDescription}
+                onChange={(value) =>
+                  setDescription((current) => ({ ...current, value }))
+                }
               />
             </form>
             <Priority value={priority} onChange={setPriority} />
@@ -74,12 +93,12 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
           <div className={`no-wrap ${theme} pushes`}>
             <Checkbox
               title="Done"
-              checked={!!done}
+              checked={done}
               onChange={() => setDone(!done)}
             />
             <div className={`space-between`}>
-              <button onClick={handleCancel}>Cancel</button>
-              <button onClick={handleUpdate}>Save</button>
+              <Button label="Cancel" onClick={handleCancel} />
+              <Button label="Save" onClick={handleUpdate} />
             </div>
           </div>
         </>
@@ -87,8 +106,8 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
         <>
           <div className={`no-wrap ${theme} pushes`}>
             <div>
-              <h3>{title}</h3>
-              <p>{description}</p>
+              <h3>{title.value}</h3>
+              <p>{description.value}</p>
             </div>
             <Priority value={priority} disabled />
           </div>

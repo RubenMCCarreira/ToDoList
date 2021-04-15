@@ -4,6 +4,7 @@ import Dropdown from '../components/Dropdown';
 import { useThemeContext } from '../contexts/Theme';
 import Layout from '../containers/Layout';
 import { IHistory } from '../interfaces';
+import Button from '../components/Button';
 
 interface IInitial {
   history: IHistory;
@@ -24,11 +25,11 @@ const Initial = ({ history }: IInitial) => {
     <Layout>
       <div className={`no-wrap ${theme} space-between`}>
         <Dropdown value={theme} values={themes} onChange={changeTheme} />
-        <button onClick={goChat}>Chat</button>
-        <button onClick={onClick}>Log out</button>
+        <Button label="Chat" onClick={goChat} />
+        <Button label="Log out" onClick={onClick} />
       </div>
       <NewToDo />
-      <ToDos />
+      <ToDos history={history} />
     </Layout>
   );
 };

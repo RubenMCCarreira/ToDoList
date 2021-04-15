@@ -7,6 +7,7 @@ import reducer, {
   toDoMapDispatchToProps,
   toDoMapStateToProps
 } from '../store/toDo';
+import Button from '../components/Button';
 
 type NewToDoProps = {
   saveItem: Function;
@@ -15,25 +16,35 @@ type NewToDoProps = {
 const NewToDo = React.memo(({ saveItem }: NewToDoProps) => {
   const { theme } = useThemeContext();
 
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
+  const [title, setTitle] = useState({ value: null, error: false });
+  const [description, setDescription] = useState({ value: null, error: false });
 
   const handleChange = (e) => {
     e.preventDefault();
-    saveItem({ title, description });
-    setTitle(null);
-    setDescription(null);
+
+    if (title) {
+      saveItem({ title: title.value, description: description.value });
+    }
+
+    setTitle({ value: null, error: false });
+    setDescription({ value: null, error: false });
   };
 
   return (
     <form className={`no-wrap ${theme}`} onSubmit={handleChange}>
-      <Input value={title} placeholder="Title" onChange={setTitle} />
       <Input
-        value={description}
-        placeholder="Description"
-        onChange={setDescription}
+        item={title}
+        placeholder="Title"
+        onChange={(value) => setTitle((current) => ({ ...current, value }))}
       />
-      <button type="submit">Submit</button>
+      <Input
+        item={description}
+        placeholder="Description"
+        onChange={(value) =>
+          setDescription((current) => ({ ...current, value }))
+        }
+      />
+      <Button label="Submit" type="submit" />
     </form>
   );
 });

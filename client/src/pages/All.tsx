@@ -1,10 +1,15 @@
 import Layout from '../containers/Layout';
 import ToDos from '../containers/ToDos';
+import { IHistory } from '../interfaces';
 
-const All = () => {
+interface IAll {
+  history: IHistory;
+}
+
+const All = ({ history }: IAll) => {
   return (
     <Layout>
-      <ToDos all />
+      <ToDos history={history} all />
     </Layout>
   );
 };

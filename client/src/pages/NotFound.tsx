@@ -1,16 +1,23 @@
-import { Link } from 'react-router-dom';
+import Button from '../components/Button';
 import Layout from '../containers/Layout';
 import { useThemeContext } from '../contexts/Theme';
+import { IHistory } from '../interfaces';
 
-const NotFound = () => {
+interface NotFoundProps {
+  history: IHistory;
+}
+
+const NotFound = ({ history }: NotFoundProps) => {
   const { theme } = useThemeContext();
 
   return (
     <Layout>
       <h2>Not Found</h2>
-      <Link to="/" className={`button-home-${theme}`}>
-        <button>Home</button>
-      </Link>
+      <Button
+        label="Home"
+        onClick={() => history.push('/')}
+        className={`button-home-${theme}`}
+      />
     </Layout>
   );
 };

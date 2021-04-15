@@ -9,17 +9,33 @@ import reducer, {
   stateRoomKey
 } from '../store/room';
 import withInjectReducer from 'tool/redux/withInjectReducer';
-import Room from '../containers/Room';
+import Room, { IRoom } from '../containers/Room';
 import Spinier from '../components/Spinier';
+import { IHistory, IState } from '../interfaces';
 
-interface IActiveRoom {
-  id: number;
-  name: string;
+interface ChatProps {
+  history: IHistory;
+  getList: Function;
+  list: IRoom[] | null;
+  reset: Function;
+  saveItem: Function;
+  loading: boolean | null;
+  error: boolean | null;
+  saved: null | number;
 }
 
-const Chat = ({ history, getList, list, reset, saveItem, loading, error }) => {
-  const [name, setName] = useState(null);
-  const [activeRoom, setActiveRoom] = useState<IActiveRoom | null>(null);
+const Chat = ({
+  history,
+  getList,
+  list,
+  reset,
+  saveItem,
+  loading,
+  error,
+  saved
+}: ChatProps) => {
+  const [name, setName] = useState<IState>({ value: null, error: false });
+  const [activeRoomId, setActiveRoomId] = useState<null | number>(null);
   const { theme } = useThemeContext();
 
   useEffect(() => {
@@ -41,14 +57,24 @@ const Chat = ({ history, getList, list, reset, saveItem, loading, error }) => {
   const handleCreateRoom = (e) => {
     e.preventDefault();
 
-    saveItem({ name });
+    if (name.value) {
+      saveItem({ name: name.value });
 
-    setName(null);
+      setName({ value: null, error: false });
+    } else {
+      setName((current) => ({ ...current, error: true }));
+    }
   };
+
+  useEffect(() => {
+    if (saved) {
+      setActiveRoomId(saved);
+    }
+  }, [saved]);
 
   return (
     <Layout>
-      {loading && <Spinier />}
+      <>{loading && <Spinier />}</>
       <div className={`no-wrap ${theme} pushes`}>
         <h2>Chat</h2>
         {!!error && <h4 className="error">{error}</h4>}
@@ -58,25 +84,33 @@ const Chat = ({ history, getList, list, reset, saveItem, loading, error }) => {
       </div>
 
       <form className={`no-wrap ${theme}`} onSubmit={handleCreateRoom}>
-        <Input value={name} placeholder="New room" onChange={setName} />
+        <Input
+          item={name}
+          placeholder="New room"
+          onChange={(value) => setName((current) => ({ ...current, value }))}
+        />
         <Button label="Create" type="submit" />
       </form>
 
-      <div className={`rooms`}>
-        <div className={`list ${theme}`}>
-          {(list || []).map((it) => (
-            <p
-              key={it.id}
-              onClick={() => setActiveRoom(it)}
-              className={`${it.id == activeRoom?.id ? 'active' : ''}`}
-            >
-              {it.name}
-            </p>
-          ))}
-        </div>
+      {list && list.length ? (
+        <div className={`rooms`}>
+          <div className={`list ${theme}`}>
+            {(list || []).map(({ id, name }) => (
+              <p
+                key={id}
+                onClick={() => setActiveRoomId(id)}
+                className={`${id == activeRoomId ? 'active' : ''}`}
+              >
+                {name}
+              </p>
+            ))}
+          </div>
 
-        <Room item={activeRoom} />
-      </div>
+          <Room activeId={activeRoomId} />
+        </div>
+      ) : (
+        <p>No rooms</p>
+      )}
     </Layout>
   );
 };

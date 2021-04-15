@@ -153,6 +153,11 @@ select {
   color: $red-main;
 }
 
+.missing {
+  color: $red-main;
+  font-size: 12px;
+}
+
 .to-dos-options {
   margin-bottom: 0.5rem;
 

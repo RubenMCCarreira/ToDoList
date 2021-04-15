@@ -5,16 +5,23 @@ interface IButton {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   type?: 'button' | 'submit';
+  className?: string;
 }
 
 const Button = ({
   label,
   onClick,
   disabled = false,
-  type = 'button'
+  type = 'button',
+  className
 }: IButton) => {
   return (
-    <button onClick={onClick} disabled={disabled} type={type}>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      type={type}
+      className={className}
+    >
       {label}
     </button>
   );

@@ -11,8 +11,11 @@ import { Link } from 'react-router-dom';
 import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
 import withInjectReducer from 'tool/redux/withInjectReducer';
+import Button from '../components/Button';
+import { IHistory } from '../interfaces';
 
 interface ToDosProps {
+  history: IHistory;
   all: boolean;
   getList: Function;
   list: IToDo[] | null;
@@ -23,6 +26,7 @@ interface ToDosProps {
 }
 
 const ToDos = ({
+  history,
   all,
   getList,
   list,
@@ -38,13 +42,13 @@ const ToDos = ({
     return () => {
       reset();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!list) {
       getList(all);
     }
-  }, [list, all]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [list, all]);
 
   const handleSortOrder = (nextOrder) => {
     setCurrentOrder(nextOrder);
@@ -60,13 +64,9 @@ const ToDos = ({
           {!!error && <h4 className="error">{error}</h4>}
         </div>
         {all ? (
-          <Link to="/">
-            <button>Back</button>
-          </Link>
+          <Button label="Back" onClick={() => history.push('/')} />
         ) : (
-          <Link to="/all">
-            <button>See All</button>
-          </Link>
+          <Button label="See All" onClick={() => history.push('/all')} />
         )}
       </div>
       <div className={`to-dos-options ${theme}`}>
