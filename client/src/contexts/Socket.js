@@ -18,15 +18,6 @@ const SocketProvider = ({ children }) => {
       socket.on('connection', () => {
         console.log(`I'm connected with the back-end`);
       });
-      socket.emit(
-        'join',
-        { name: getLogin()?.username, room: 'room' },
-        (error) => {
-          if (error) {
-            // alert(error);
-          }
-        }
-      );
       socket.on('disconnect', () => {
         console.log(`I'm disconnect with the back-end`);
       });
@@ -49,6 +40,15 @@ const SocketProvider = ({ children }) => {
       setSocket(null);
     }
   }, [socket]);
+
+  const onJoin = useCallback(
+    (name, room, callback) => {
+      if (socket) {
+        socket.emit('join', { name, room }, callback);
+      }
+    },
+    [socket]
+  );
 
   const onMessage = useCallback(
     (callback) => {
@@ -90,6 +90,7 @@ const SocketProvider = ({ children }) => {
     socket,
     connect,
     disconnect,
+    onJoin,
     onMessage,
     onWelcome,
     onRoomData,

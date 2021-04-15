@@ -3,6 +3,7 @@ const cors = require('cors');
 const { todoActions } = require('./store/todo');
 const { themeActions } = require('./store/theme');
 const { loginActions } = require('./store/login');
+const { roomActions } = require('./store/room');
 const { state, dispatch } = require('./store');
 const http = require('http');
 const socketio = require('socket.io');
@@ -224,4 +225,38 @@ io.on('connect', (socket) => {
       // io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
     }
   });
+});
+
+//
+//
+// EXPLANATION: rooms
+
+// EXPLANATION: get rooms
+app.get('/api/room', (req, res) => {
+  res.json(state.room.list);
+});
+
+// EXPLANATION: create new room
+app.post('/api/room/', (req, res) => {
+  const id = state.room.list.length + 1;
+
+  roomActions.ADD(dispatch, {
+    id,
+    ...req.body,
+  });
+
+  res.send({ id });
+});
+
+// EXPLANATION: update room
+app.put('/api/room/', (req, res) => {
+  const index = state.room.list.findIndex((it) => it.id == req.body.id);
+  let updated = false;
+
+  if (index > -1) {
+    roomActions.EDIT(dispatch, { index, item: req.body });
+    updated = req.body.id;
+  }
+
+  res.send({ updated });
 });

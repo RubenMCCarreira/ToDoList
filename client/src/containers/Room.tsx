@@ -1,40 +1,59 @@
 import { useThemeContext } from '../contexts/Theme';
-import Layout from '../containers/Layout';
 import { useEffect, useState } from 'react';
 import Input from '../components/Input';
 import { getLogin } from '../tools/cookies';
 import { useSocketContext } from '../contexts/Socket';
 
-const Chat = ({ history }) => {
-  const [message, setMessage] = useState(null);
-  const [messages, setMessages] = useState([]);
+interface RoomProps {
+  item: null | {
+    id: number;
+    name: string;
+  };
+}
+
+interface IMessages {
+  id: string;
+  user: string;
+  text: string;
+  room: string;
+}
+
+const Room = ({ item }: RoomProps) => {
+  const [message, setMessage] = useState<null | string>(null);
+  const [messages, setMessages] = useState<IMessages[]>([]);
   const { theme } = useThemeContext();
   const {
     socket,
     connect,
     disconnect,
+    onJoin,
     onMessage,
     onWelcome,
     onRoomData,
     sendMessage
   } = useSocketContext();
 
-  const onBack = () => {
-    history.goBack();
-  };
-
   useEffect(() => {
-    setMessages([]);
-    connect();
+    if (item) {
+      setMessages([]);
+      connect();
+    }
 
     return () => {
-      disconnect();
-      setMessages([]);
+      if (item) {
+        disconnect();
+        setMessages([]);
+      }
     };
-  }, [connect, disconnect]);
+  }, [connect, disconnect, item]);
 
   useEffect(() => {
-    if (socket) {
+    if (socket && item) {
+      onJoin(getLogin()?.username, item.name, (error) => {
+        if (error) {
+          console.log(error);
+        }
+      });
       onMessage((data) => {
         setMessages((messages) => [...messages, data]);
       });
@@ -45,7 +64,7 @@ const Chat = ({ history }) => {
         setMessages((messages) => [...messages, ...newMessages]);
       });
     }
-  }, [socket]);
+  }, [socket, item]);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -57,12 +76,8 @@ const Chat = ({ history }) => {
     setMessage(null);
   };
 
-  return (
-    <Layout>
-      <div className={`no-wrap ${theme}`}>
-        <button onClick={onBack}>Back</button>
-      </div>
-
+  return item ? (
+    <div className={`${theme}`}>
       <div className={`messages ${theme}`}>
         {messages.map(({ id, user, text }) => (
           <p
@@ -78,8 +93,10 @@ const Chat = ({ history }) => {
         <Input value={message} placeholder="Message" onChange={setMessage} />
         <button type="submit">Send</button>
       </form>
-    </Layout>
+    </div>
+  ) : (
+    <div className={`${theme}`} />
   );
 };
 
-export default Chat;
+export default Room;
