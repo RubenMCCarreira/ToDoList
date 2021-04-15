@@ -3,6 +3,7 @@ import withInjectReducer from 'tool/redux/withInjectReducer';
 import Input from '../components/Input';
 import Layout from '../containers/Layout';
 import { useThemeContext } from '../contexts/Theme';
+import { IHistory, IMatch } from '../interfaces';
 import reducer, {
   loginMapDispatchToProps,
   loginMapStateToProps,
@@ -10,11 +11,19 @@ import reducer, {
 } from '../store/login';
 import { getLogin } from '../tools/cookies';
 
-const Login = ({ saveItem, updateItem, reset, history, match }) => {
+interface ILogin {
+  saveItem: Function;
+  updateItem: Function;
+  reset: Function;
+  history: IHistory;
+  match: IMatch;
+}
+
+const Login = ({ saveItem, updateItem, reset, history, match }: ILogin) => {
   const { theme } = useThemeContext();
 
-  const [username, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUserName] = useState(null);
+  const [password, setPassword] = useState(null);
 
   if (match && match.path === '/logout') {
     reset();

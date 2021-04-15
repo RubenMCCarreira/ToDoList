@@ -3,8 +3,13 @@ import NewToDo from '../containers/NewToDo';
 import Dropdown from '../components/Dropdown';
 import { useThemeContext } from '../contexts/Theme';
 import Layout from '../containers/Layout';
+import { IHistory } from '../interfaces';
 
-const Initial = ({ history }) => {
+interface IInitial {
+  history: IHistory;
+}
+
+const Initial = ({ history }: IInitial) => {
   const { theme, changeTheme, themes } = useThemeContext();
 
   const onClick = () => {

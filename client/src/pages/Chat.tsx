@@ -2,6 +2,7 @@ import { useThemeContext } from '../contexts/Theme';
 import Layout from '../containers/Layout';
 import { useEffect, useState } from 'react';
 import Input from '../components/Input';
+import Button from '../components/Button';
 import reducer, {
   roomMapDispatchToProps,
   roomMapStateToProps,
@@ -9,13 +10,14 @@ import reducer, {
 } from '../store/room';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import Room from '../containers/Room';
+import Spinier from '../components/Spinier';
 
 interface IActiveRoom {
   id: number;
   name: string;
 }
 
-const Chat = ({ history, getList, list, reset, saveItem }) => {
+const Chat = ({ history, getList, list, reset, saveItem, loading, error }) => {
   const [name, setName] = useState(null);
   const [activeRoom, setActiveRoom] = useState<IActiveRoom | null>(null);
   const { theme } = useThemeContext();
@@ -46,13 +48,18 @@ const Chat = ({ history, getList, list, reset, saveItem }) => {
 
   return (
     <Layout>
-      <div className={`no-wrap ${theme}`}>
-        <button onClick={onBack}>Back</button>
+      {loading && <Spinier />}
+      <div className={`no-wrap ${theme} pushes`}>
+        <h2>Chat</h2>
+        {!!error && <h4 className="error">{error}</h4>}
+        <div className={`no-wrap ${theme}`}>
+          <Button label="Back" onClick={onBack} />
+        </div>
       </div>
 
       <form className={`no-wrap ${theme}`} onSubmit={handleCreateRoom}>
         <Input value={name} placeholder="New room" onChange={setName} />
-        <button type="submit">Create</button>
+        <Button label="Create" type="submit" />
       </form>
 
       <div className={`rooms`}>

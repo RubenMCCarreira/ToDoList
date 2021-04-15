@@ -5,14 +5,17 @@ import Input from '../components/Input';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
 
+export interface IToDo {
+  id: number;
+  title: string;
+  description: string;
+  removed: boolean;
+  priority: number;
+  done: boolean;
+}
+
 interface ToDoProps {
-  item: {
-    title: string;
-    description: string;
-    removed: boolean;
-    priority: number;
-    done: boolean;
-  };
+  item: IToDo;
   updateItem: Function;
 }
 
@@ -71,7 +74,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
           <div className={`no-wrap ${theme} pushes`}>
             <Checkbox
               title="Done"
-              checked={done}
+              checked={!!done}
               onChange={() => setDone(!done)}
             />
             <div className={`space-between`}>

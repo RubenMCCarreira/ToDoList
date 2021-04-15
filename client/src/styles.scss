@@ -273,6 +273,8 @@ select {
   }
 
   > span {
+    cursor: pointer;
+
     > img {
       width: 10px;
       height: 10px;

@@ -1,10 +1,25 @@
 import withInjectReducer from 'tool/redux/withInjectReducer';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactChild,
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 import reducer, {
   themeMapStateToProps,
   themeMapDispatchToProps,
   stateThemeKey
 } from '../store/theme';
+
+interface IThemeProvider {
+  children: ReactChild;
+  saveItem: Function;
+  getItem: Function;
+  item: null | {
+    color: string;
+  };
+}
 
 const COLORS = ['black', 'green', 'red'];
 
@@ -14,7 +29,12 @@ const ThemeContext = createContext({
   themes: COLORS
 });
 
-const ThemeProvider = ({ children, saveItem, getItem, item }) => {
+const ThemeProvider = ({
+  children,
+  saveItem,
+  getItem,
+  item
+}: IThemeProvider) => {
   const [tryGet, setTryGet] = useState(false);
   const [color, setColor] = useState('');
 

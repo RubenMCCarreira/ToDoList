@@ -1,4 +1,18 @@
-const Checkbox = ({ title, checked, onChange, disabled = false }) => {
+import { ChangeEventHandler } from 'react';
+
+interface ICheckbox {
+  title: string;
+  checked: boolean;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  disabled?: boolean;
+}
+
+const Checkbox = ({
+  title,
+  checked = false,
+  onChange,
+  disabled = false
+}: ICheckbox) => {
   return (
     <label>
       <input

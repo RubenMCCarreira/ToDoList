@@ -1,7 +1,13 @@
+interface ISortOrder {
+  values: string[];
+  currentOrder: { prop: string | null; value: string | null };
+  onChange: Function;
+}
+
 const ASC = 'ASC';
 const DSC = 'DSC';
 
-const SortOrder = ({ values, currentOrder, onChange }) => {
+const SortOrder = ({ values, currentOrder, onChange }: ISortOrder) => {
   const { prop, value } = currentOrder;
 
   const handleChange = (event) => {

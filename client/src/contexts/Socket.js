@@ -5,7 +5,6 @@ import {
   useEffect,
   useState
 } from 'react';
-import { getLogin } from '../tools/cookies';
 import socketClient from 'socket.io-client';
 
 const SocketContext = createContext();

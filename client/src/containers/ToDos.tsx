@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ToDo from './ToDo';
+import ToDo, { IToDo } from './ToDo';
 import reducer, {
   toDoMapStateToProps,
   toDoMapDispatchToProps,
@@ -12,8 +12,26 @@ import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 
-const ToDos = ({ all, getList, list, reset, saveItem, loading, error }) => {
-  const [currentOrder, setCurrentOrder] = useState({});
+interface ToDosProps {
+  all: boolean;
+  getList: Function;
+  list: IToDo[] | null;
+  reset: Function;
+  saveItem: Function;
+  loading: boolean | null;
+  error: boolean | null;
+}
+
+const ToDos = ({
+  all,
+  getList,
+  list,
+  reset,
+  saveItem,
+  loading,
+  error
+}: ToDosProps) => {
+  const [currentOrder, setCurrentOrder] = useState({ prop: null, value: null });
   const { theme } = useThemeContext();
 
   useEffect(() => {
