@@ -1,13 +1,13 @@
 import { MouseEventHandler } from 'react';
 import { useThemeContext } from '../contexts/Theme';
 
-interface IDropdown {
+interface DropdownProps {
   value: string;
   onChange: MouseEventHandler<HTMLButtonElement>;
   values: string[];
 }
 
-const Dropdown = ({ value, values, onChange }: IDropdown) => {
+const Dropdown = ({ value, values, onChange }: DropdownProps) => {
   const { theme } = useThemeContext();
 
   const handleOnChange = (e) => {

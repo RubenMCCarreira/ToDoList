@@ -1,7 +1,7 @@
 export const GET = async (uri, headers = {}) => {
   let payload = await fetch(uri, {
     method: 'GET',
-    headers
+    headers,
   });
   payload = await payload.json();
 
@@ -13,9 +13,9 @@ export const PUT = async (uri, data, headers = {}) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      ...headers
+      ...headers,
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   payload = await payload.json();
 
@@ -27,9 +27,9 @@ export const POST = async (uri, data, headers = {}) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...headers
+      ...headers,
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
   payload = await payload.json();
 
@@ -39,7 +39,7 @@ export const POST = async (uri, data, headers = {}) => {
 export const DELETE = async (uri, headers = {}) => {
   let payload = await fetch(uri, {
     method: 'DELETE',
-    headers
+    headers,
   });
   payload = await payload.json();
 

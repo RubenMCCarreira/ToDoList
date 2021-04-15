@@ -1,4 +1,4 @@
-interface ISortOrder {
+interface SortOrderProps {
   values: string[];
   currentOrder: { prop: string | null; value: string | null };
   onChange: Function;
@@ -7,7 +7,7 @@ interface ISortOrder {
 const ASC = 'ASC';
 const DSC = 'DSC';
 
-const SortOrder = ({ values, currentOrder, onChange }: ISortOrder) => {
+const SortOrder = ({ values, currentOrder, onChange }: SortOrderProps) => {
   const { prop, value } = currentOrder;
 
   const handleChange = (event) => {

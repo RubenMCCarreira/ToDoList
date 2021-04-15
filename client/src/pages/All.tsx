@@ -1,11 +1,11 @@
 import ToDos from '../containers/ToDos';
 import { IHistory } from '../interfaces';
 
-interface IAll {
+interface AllProps {
   history: IHistory;
 }
 
-const All = ({ history }: IAll) => {
+const All = ({ history }: AllProps) => {
   return <ToDos history={history} all />;
 };
 

@@ -1,7 +1,7 @@
 FROM node:alpine
 
 ADD package*.json ./
-RUN npm i
+RUN npm i --force
 
 ADD . .
 

@@ -12,7 +12,7 @@ import reducer, {
   stateThemeKey
 } from '../store/theme';
 
-interface IThemeProvider {
+interface IThemeProviderProps {
   children: ReactChild;
   saveItem: Function;
   getItem: Function;
@@ -34,7 +34,7 @@ const ThemeProvider = ({
   saveItem,
   getItem,
   item
-}: IThemeProvider) => {
+}: IThemeProviderProps) => {
   const [tryGet, setTryGet] = useState(false);
   const [color, setColor] = useState('');
 

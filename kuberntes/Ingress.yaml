@@ -14,7 +14,7 @@ spec:
               service:
                 name: to-do-server-service
                 port:
-                  number: 4000
+                  number: 5000
           - path: /
             pathType: Prefix
             backend:

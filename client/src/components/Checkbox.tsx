@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from 'react';
 
-interface ICheckbox {
+interface CheckboxProps {
   title: string;
   checked: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -12,7 +12,7 @@ const Checkbox = ({
   checked = false,
   onChange,
   disabled = false
-}: ICheckbox) => {
+}: CheckboxProps) => {
   return (
     <label>
       <input

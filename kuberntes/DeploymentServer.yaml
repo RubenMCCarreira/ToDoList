@@ -22,7 +22,7 @@ spec:
           resources: {}
 
           ports:
-            - containerPort: 4000
+            - containerPort: 5000
 
 ---
 apiVersion: v1
@@ -35,5 +35,5 @@ spec:
     app: to-do-server
 
   ports:
-    - port: 4000
-      targetPort: 4000
+    - port: 5000
+      targetPort: 5000

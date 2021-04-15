@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import { useThemeContext } from '../contexts/Theme';
-import Input from '../components/Input';
 import { getLogin } from '../tools/cookies';
 import { useSocketContext } from '../contexts/Socket';
-import Button from '../components/Button';
 import reducer, {
   roomMapDispatchToProps,
   roomMapStateToProps,
   stateRoomKey
 } from '../store/room';
+import Form from './Form';
 
 export interface IRoom {
   id: number;
@@ -30,7 +29,6 @@ interface IMessages {
 }
 
 const Room = ({ activeId, item, getItem }: RoomProps) => {
-  const [message, setMessage] = useState({ value: null, error: false });
   const [messages, setMessages] = useState<IMessages[]>([]);
   const { theme } = useThemeContext();
   const {
@@ -83,14 +81,10 @@ const Room = ({ activeId, item, getItem }: RoomProps) => {
     }
   }, [socket, item]);
 
-  const handleSendMessage = (e) => {
-    e.preventDefault();
-
+  const handleSendMessage = (item) => {
     if (socket) {
-      sendMessage(message.value, () => console.log('sent'));
+      sendMessage(item.message, () => console.log('sent'));
     }
-
-    setMessage({ value: null, error: false });
   };
 
   return item ? (
@@ -106,14 +100,11 @@ const Room = ({ activeId, item, getItem }: RoomProps) => {
         ))}
       </div>
 
-      <form className={`no-wrap ${theme}`} onSubmit={handleSendMessage}>
-        <Input
-          item={message}
-          placeholder="Message"
-          onChange={(value) => setMessage((current) => ({ ...current, value }))}
-        />
-        <Button label="Send" type="submit" />
-      </form>
+      <Form
+        items={[{ prop: 'message', placeholder: 'Message', mandatory: true }]}
+        callback={handleSendMessage}
+        label="Send"
+      />
     </div>
   ) : (
     <div className={`${theme}`} />

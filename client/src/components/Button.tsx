@@ -1,6 +1,6 @@
 import { MouseEventHandler } from 'react';
 
-interface IButton {
+interface ButtonProps {
   label: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
@@ -14,7 +14,7 @@ const Button = ({
   disabled = false,
   type = 'button',
   className
-}: IButton) => {
+}: ButtonProps) => {
   return (
     <button
       onClick={onClick}

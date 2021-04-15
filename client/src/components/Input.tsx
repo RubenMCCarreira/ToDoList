@@ -1,20 +1,27 @@
 import { IItemState } from '../interfaces';
 import Missing from './Missing';
 
-interface IInput {
+interface InputProps {
   item: IItemState;
+  prop?: string;
   onChange: Function;
   placeholder: string;
   type?: 'text' | 'password';
 }
 
-const Input = ({ item, onChange, placeholder, type = 'text' }: IInput) => {
+const Input = ({
+  item,
+  prop,
+  onChange,
+  placeholder,
+  type = 'text'
+}: InputProps) => {
   return (
     <>
       <input
         placeholder={placeholder}
         value={item.value || ''}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value, prop)}
         type={type}
       />
       {item.error && <Missing />}

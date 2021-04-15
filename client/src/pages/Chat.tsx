@@ -1,7 +1,6 @@
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import { useThemeContext } from '../contexts/Theme';
 import { useEffect, useState } from 'react';
-import Input from '../components/Input';
 import Button from '../components/Button';
 import reducer, {
   roomMapDispatchToProps,
@@ -11,6 +10,7 @@ import reducer, {
 import Room, { IRoom } from '../containers/Room';
 import Spinier from '../components/Spinier';
 import { IHistory, IItemState } from '../interfaces';
+import Form from '../containers/Form';
 
 interface ChatProps {
   history: IHistory;
@@ -53,18 +53,6 @@ const Chat = ({
     history.goBack();
   };
 
-  const handleCreateRoom = (e) => {
-    e.preventDefault();
-
-    if (name.value) {
-      saveItem({ name: name.value });
-
-      setName({ value: null, error: false });
-    } else {
-      setName((current) => ({ ...current, error: true }));
-    }
-  };
-
   useEffect(() => {
     if (saved) {
       setActiveRoomId(saved);
@@ -82,14 +70,11 @@ const Chat = ({
         </div>
       </div>
 
-      <form className={`no-wrap ${theme}`} onSubmit={handleCreateRoom}>
-        <Input
-          item={name}
-          placeholder="New room"
-          onChange={(value) => setName((current) => ({ ...current, value }))}
-        />
-        <Button label="Create" type="submit" />
-      </form>
+      <Form
+        items={[{ prop: 'name', placeholder: 'New room', mandatory: true }]}
+        onSubmit={saveItem}
+        label="Create"
+      />
 
       {list && list.length ? (
         <div className={`rooms`}>

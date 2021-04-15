@@ -5,11 +5,11 @@ import { useThemeContext } from '../contexts/Theme';
 import { IHistory } from '../interfaces';
 import Button from '../components/Button';
 
-interface IInitial {
+interface InitialProps {
   history: IHistory;
 }
 
-const Initial = ({ history }: IInitial) => {
+const Initial = ({ history }: InitialProps) => {
   const { theme, changeTheme, themes } = useThemeContext();
 
   const onClick = () => {

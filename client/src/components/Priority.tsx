@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 
-interface IPriority {
+interface PriorityProps {
   value: number | null;
   onChange?: Function;
   disabled?: boolean;
 }
 
-const Priority = ({ value, onChange, disabled = false }: IPriority) => {
+const Priority = ({ value, onChange, disabled = false }: PriorityProps) => {
   const options = [
     { value: 1, name: 'arrow-very-low' },
     { value: 2, name: 'arrow-low' },
