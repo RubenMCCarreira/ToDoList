@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import Form from '../containers/Form';
+import Layout from '../containers/Layout';
 import { IHistory, IMatch } from '../interfaces';
 import reducer, {
   loginMapDispatchToProps,
@@ -32,14 +33,16 @@ const Login = ({ saveItem, updateItem, reset, history, match }: LoginProps) => {
   }, [!!withLogin]);
 
   return (
-    <Form
-      items={[
-        { prop: 'username', placeholder: 'Username', mandatory: true },
-        { prop: 'password', placeholder: 'Password', mandatory: true }
-      ]}
-      onSubmit={saveItem}
-      label="Log In"
-    />
+    <Layout title="Login">
+      <Form
+        items={[
+          { prop: 'username', placeholder: 'Username', mandatory: true },
+          { prop: 'password', placeholder: 'Password', mandatory: true }
+        ]}
+        onSubmit={saveItem}
+        label="Log In"
+      />
+    </Layout>
   );
 };
 

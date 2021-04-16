@@ -19,6 +19,7 @@ const NewToDo = React.memo(({ saveItem }: NewToDoProps) => {
         { prop: 'description', placeholder: 'Description' }
       ]}
       onSubmit={saveItem}
+      label="Create"
     />
   );
 });

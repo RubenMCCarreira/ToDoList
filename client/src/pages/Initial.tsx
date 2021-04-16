@@ -3,7 +3,7 @@ import NewToDo from '../containers/NewToDo';
 import Dropdown from '../components/Dropdown';
 import { useThemeContext } from '../contexts/Theme';
 import { IHistory } from '../interfaces';
-import Button from '../components/Button';
+import Layout from '../containers/Layout';
 
 interface InitialProps {
   history: IHistory;
@@ -12,24 +12,14 @@ interface InitialProps {
 const Initial = ({ history }: InitialProps) => {
   const { theme, changeTheme, themes } = useThemeContext();
 
-  const onClick = () => {
-    history.push('/logout');
-  };
-
-  const goChat = () => {
-    history.push('/chat');
-  };
-
   return (
-    <>
+    <Layout history={history}>
       <div className={`no-wrap ${theme} space-between`}>
         <Dropdown value={theme} values={themes} onChange={changeTheme} />
-        <Button label="Chat" onClick={goChat} />
-        <Button label="Log out" onClick={onClick} />
       </div>
       <NewToDo />
-      <ToDos history={history} />
-    </>
+      <ToDos />
+    </Layout>
   );
 };
 

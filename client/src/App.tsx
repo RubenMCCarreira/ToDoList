@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import All from './pages/All';
 import Initial from './pages/Initial';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
 import Chat from './pages/Chat';
+import { loginMapStateToProps } from './store/login';
 
 const App = () => {
-  const login = useSelector((state) => state['login']);
+  const login = useSelector(loginMapStateToProps);
 
   if (!login || !login.saved) {
     return <Login />;
@@ -17,7 +17,6 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Initial} />
-        <Route exact path="/all" component={All} />
         <Route exact path="/chat" component={Chat} />
         <Route exact path="/logout" component={Login} />
         <Route component={NotFound} />

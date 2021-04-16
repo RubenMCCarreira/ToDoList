@@ -1,16 +1,15 @@
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import { useThemeContext } from '../contexts/Theme';
 import { useEffect, useState } from 'react';
-import Button from '../components/Button';
 import reducer, {
   roomMapDispatchToProps,
   roomMapStateToProps,
   stateRoomKey
 } from '../store/room';
 import Room, { IRoom } from '../containers/Room';
-import Spinier from '../components/Spinier';
-import { IHistory, IItemState } from '../interfaces';
+import { IHistory } from '../interfaces';
 import Form from '../containers/Form';
+import Layout from '../containers/Layout';
 
 interface ChatProps {
   history: IHistory;
@@ -19,7 +18,7 @@ interface ChatProps {
   reset: Function;
   saveItem: Function;
   loading: boolean | null;
-  error: boolean | null;
+  error: string | null;
   saved: null | number;
 }
 
@@ -33,7 +32,6 @@ const Chat = ({
   error,
   saved
 }: ChatProps) => {
-  const [name, setName] = useState<IItemState>({ value: null, error: false });
   const [activeRoomId, setActiveRoomId] = useState<null | number>(null);
   const { theme } = useThemeContext();
 
@@ -49,10 +47,6 @@ const Chat = ({
     }
   }, [list]);
 
-  const onBack = () => {
-    history.goBack();
-  };
-
   useEffect(() => {
     if (saved) {
       setActiveRoomId(saved);
@@ -60,42 +54,35 @@ const Chat = ({
   }, [saved]);
 
   return (
-    <>
-      <>{loading && <Spinier />}</>
-      <div className={`no-wrap ${theme} pushes`}>
-        <h2>Chat</h2>
-        {!!error && <h4 className="error">{error}</h4>}
-        <div className={`no-wrap ${theme}`}>
-          <Button label="Back" onClick={onBack} />
-        </div>
-      </div>
-
+    <Layout history={history} title="Chat" loading={loading} error={error}>
       <Form
         items={[{ prop: 'name', placeholder: 'New room', mandatory: true }]}
         onSubmit={saveItem}
         label="Create"
       />
 
-      {list && list.length ? (
-        <div className={`rooms`}>
-          <div className={`list ${theme}`}>
-            {(list || []).map(({ id, name }) => (
-              <p
-                key={id}
-                onClick={() => setActiveRoomId(id)}
-                className={`${id == activeRoomId ? 'active' : ''}`}
-              >
-                {name}
-              </p>
-            ))}
-          </div>
+      <div className={`rooms ${theme}`}>
+        {list && list.length ? (
+          <>
+            <div className={`list`}>
+              {(list || []).map(({ id, name }) => (
+                <p
+                  key={id}
+                  onClick={() => setActiveRoomId(id)}
+                  className={`${id == activeRoomId ? 'active' : ''}`}
+                >
+                  {name}
+                </p>
+              ))}
+            </div>
 
-          <Room activeId={activeRoomId} />
-        </div>
-      ) : (
-        <p>No rooms</p>
-      )}
-    </>
+            <Room activeId={activeRoomId} />
+          </>
+        ) : (
+          <p>No rooms</p>
+        )}
+      </div>
+    </Layout>
   );
 };
 

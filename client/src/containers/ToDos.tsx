@@ -11,11 +11,8 @@ import { useThemeContext } from '../contexts/Theme';
 import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
 import Button from '../components/Button';
-import { IHistory } from '../interfaces';
 
 interface ToDosProps {
-  history: IHistory;
-  all: boolean;
   getList: Function;
   list: IToDo[] | null;
   reset: Function;
@@ -25,8 +22,6 @@ interface ToDosProps {
 }
 
 const ToDos = ({
-  history,
-  all,
   getList,
   list,
   reset,
@@ -35,6 +30,7 @@ const ToDos = ({
   error
 }: ToDosProps) => {
   const [currentOrder, setCurrentOrder] = useState({ prop: null, value: null });
+  const [all, setAll] = useState(false);
   const { theme } = useThemeContext();
 
   useEffect(() => {
@@ -42,6 +38,10 @@ const ToDos = ({
       reset();
     };
   }, []);
+
+  useEffect(() => {
+    reset();
+  }, [all]);
 
   useEffect(() => {
     if (!list) {
@@ -63,9 +63,9 @@ const ToDos = ({
           {!!error && <h4 className="error">{error}</h4>}
         </div>
         {all ? (
-          <Button label="Back" onClick={() => history.push('/')} />
+          <Button label="See Active" onClick={() => setAll(false)} />
         ) : (
-          <Button label="See All" onClick={() => history.push('/all')} />
+          <Button label="See All" onClick={() => setAll(true)} />
         )}
       </div>
       <div className={`to-dos-options ${theme}`}>

@@ -12,7 +12,7 @@ $black-1: saturate($black-main, 20%);
 $black-2: lighten($black-main, 65%);
 $black-3: darken($black-main, 7%);
 
-#root {
+main {
   margin: auto;
   max-width: 55%;
 }
@@ -315,17 +315,34 @@ select {
 .rooms {
   display: flex;
 
-  .list {
-    & > p {
+  > .list {
+    > p {
       cursor: pointer;
       padding: 0.2rem;
+      margin: 0;
 
       &.active {
         font-weight: bold;
       }
     }
+  }
 
-    &.green {
+  & > div {
+    border-style: solid;
+    padding: 0.5rem;
+
+    &:last-of-type {
+      margin-left: 0.5rem;
+      flex: 1 1;
+    }
+  }
+
+  &.green {
+    > p {
+      color: $green-3;
+    }
+
+    > .list {
       & > p {
         color: $green-3;
 
@@ -336,7 +353,17 @@ select {
       }
     }
 
-    &.red {
+    > div {
+      border-color: $green-3;
+    }
+  }
+
+  &.red {
+    > p {
+      color: $red-3;
+    }
+
+    > .list {
       & > p {
         color: $red-3;
 
@@ -346,23 +373,92 @@ select {
         }
       }
     }
+
+    > div {
+      border-color: $red-3;
+    }
+  }
+}
+
+nav {
+  margin: auto;
+  max-width: 65%;
+  display: flex;
+  background-color: $black-2;
+  padding: 5px;
+  align-items: center;
+
+  > button:first-of-type {
+    margin: 0 auto 0 0;
   }
 
-  & > div {
-    border-style: solid;
-    padding: 0.5rem;
+  > button:last-of-type {
+    margin: 0 0 0 auto;
+  }
 
-    &.green {
+  > ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    > li {
+      > a {
+        text-decoration: none;
+        color: $black-1;
+
+        &.active {
+          color: $black-3;
+          font-weight: bold;
+        }
+      }
+
+      &:not(:last-of-type) {
+        margin-right: 30px;
+      }
+    }
+  }
+
+  &.green {
+    background-color: $green-2;
+
+    > button {
+      background-color: $green-1;
       border-color: $green-3;
     }
 
-    &.red {
+    > ul {
+      > li {
+        > a {
+          color: $green-1;
+
+          &.active {
+            color: $green-3;
+          }
+        }
+      }
+    }
+  }
+
+  &.red {
+    background-color: $red-2;
+
+    > button {
+      background-color: $red-1;
       border-color: $red-3;
     }
 
-    &:last-of-type {
-      margin-left: 0.5rem;
-      flex: 1 1;
+    > ul {
+      > li {
+        > a {
+          color: $red-1;
+
+          &.active {
+            color: $red-3;
+          }
+        }
+      }
     }
   }
 }

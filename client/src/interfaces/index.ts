@@ -1,6 +1,9 @@
 export interface IHistory {
   push: Function;
   goBack: Function;
+  location: {
+    pathname: string;
+  };
 }
 
 export interface IMatch {
