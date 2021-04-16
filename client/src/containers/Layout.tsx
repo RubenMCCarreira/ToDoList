@@ -24,6 +24,10 @@ const LINKS = [
   {
     page: '/chat',
     title: 'Chat'
+  },
+  {
+    page: '/map',
+    title: 'Map'
   }
 ];
 

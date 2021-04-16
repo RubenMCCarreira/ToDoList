@@ -159,16 +159,19 @@ select {
   &.black {
     background-color: $black-2;
     border-color: $black-3;
+    color: $white-main;
   }
 
   &.green {
     background-color: $green-2;
     border-color: $green-3;
+    color: $black-main;
   }
 
   &.red {
     background-color: $red-2;
     border-color: $red-3;
+    color: $black-main;
   }
 }
 
@@ -388,4 +391,14 @@ select {
 .priority {
   width: 20px;
   height: -webkit-fill-available;
+}
+
+#map {
+  border-style: solid;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
