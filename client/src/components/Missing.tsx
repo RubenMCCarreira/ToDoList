@@ -1,5 +1,7 @@
+import Span from './Span';
+
 const Missing = () => {
-  return <span className="missing">Missing</span>;
+  return <Span className="missing">Missing</Span>;
 };
 
 export default Missing;

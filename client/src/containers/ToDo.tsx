@@ -2,9 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
+import H3 from '../components/H3';
+import P from '../components/P';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
 import { IItemState } from '../interfaces';
+import Article from '../components/Article';
+import Div from '../components/Div';
 
 export interface IToDo {
   id: number;
@@ -68,10 +72,10 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   }, [item]);
 
   return (
-    <article className={`to-do ${theme}`} {...rest}>
+    <Article className={`to-do`} {...rest}>
       {showEdit ? (
         <>
-          <div className={`no-wrap ${theme} pushes`}>
+          <Div noWrap pushes>
             <form className="to-do-edit">
               <Input
                 item={title}
@@ -89,36 +93,36 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
               />
             </form>
             <Priority value={priority} onChange={setPriority} />
-          </div>
-          <div className={`no-wrap ${theme} pushes`}>
+          </Div>
+          <Div noWrap pushes>
             <Checkbox
               title="Done"
               checked={done}
               onChange={() => setDone(!done)}
             />
-            <div className={`space-between`}>
+            <Div spaceBetween>
               <Button label="Cancel" onClick={handleCancel} />
               <Button label="Save" onClick={handleUpdate} />
-            </div>
-          </div>
+            </Div>
+          </Div>
         </>
       ) : (
         <>
-          <div className={`no-wrap ${theme} pushes`}>
-            <div>
-              <h3>{title.value}</h3>
-              <p>{description.value}</p>
-            </div>
+          <Div noWrap pushes>
+            <Div>
+              <H3>{title.value}</H3>
+              <P>{description.value}</P>
+            </Div>
             <Priority value={priority} disabled />
-          </div>
-          <div className={`no-wrap ${theme} pushes`}>
+          </Div>
+          <Div noWrap pushes>
             <Checkbox
               title="Done"
               checked={item.done}
               disabled={removed}
               onChange={handleMarkDone}
             />
-            <div className={`space-between`}>
+            <Div spaceBetween>
               <Button
                 label="Edit"
                 onClick={() => setShowEdit(true)}
@@ -129,11 +133,11 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
                 onClick={handleRemove}
                 disabled={removed}
               />
-            </div>
-          </div>
+            </Div>
+          </Div>
         </>
       )}
-    </article>
+    </Article>
   );
 });
 

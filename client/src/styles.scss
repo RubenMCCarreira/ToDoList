@@ -17,45 +17,109 @@ main {
   max-width: 55%;
 }
 
+nav {
+  margin: 0 auto 30px;
+  max-width: 65%;
+  display: flex;
+  padding: 5px;
+  align-items: center;
+
+  > button {
+    &:first-of-type {
+      margin: 0 auto 0 0;
+    }
+
+    &:last-of-type {
+      margin: 0 0 0 auto;
+    }
+  }
+
+  > ul {
+    display: flex;
+    flex-direction: row;
+
+    > li {
+      > a {
+        text-decoration: none;
+
+        &.active {
+          font-weight: bold;
+        }
+      }
+
+      &:not(:last-of-type) {
+        margin-right: 30px;
+      }
+    }
+  }
+
+  &.black {
+    background-color: $black-2;
+  }
+
+  &.green {
+    background-color: $green-2;
+  }
+
+  &.red {
+    background-color: $red-2;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 h3,
 p {
   margin-top: 0;
   margin-bottom: 0.5rem;
 }
 
-%input {
+span,
+label,
+a,
+h3,
+p {
+  &.black {
+    color: $black-1;
+  }
+
+  &.green {
+    color: $green-1;
+  }
+
+  &.red {
+    color: $red-1;
+  }
+}
+
+div,
+article {
+  &.black {
+    border-color: $black-3;
+  }
+
+  &.green {
+    border-color: $green-3;
+  }
+
+  &.red {
+    border-color: $red-3;
+  }
+}
+
+%measures {
   padding: 0.5em;
   border: 2px solid;
   margin: 0.5rem 0;
 }
 
-input[type='submit'],
 button {
-  @extend %input;
+  @extend %measures;
 
-  border-color: $black-3;
-  background-color: $black-1;
-  color: $white-main;
-}
-
-input[type='text'],
-input[type='password'],
-select {
-  @extend %input;
-
-  flex: 1;
-  background-color: $black-2;
-}
-
-select {
-  text-transform: capitalize;
-  height: 32px;
-}
-
-button,
-input[type='submit'],
-input[type='checkbox'],
-select {
   &:hover {
     cursor: pointer;
     opacity: 0.8;
@@ -65,6 +129,53 @@ select {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  &.black {
+    border-color: $black-3;
+    background-color: $black-1;
+    color: $white-main;
+  }
+
+  &.green {
+    border-color: $green-3;
+    background-color: $green-1;
+    color: $white-main;
+  }
+
+  &.red {
+    border-color: $red-3;
+    background-color: $red-1;
+    color: $white-main;
+  }
+}
+
+input[type='text'],
+input[type='password'],
+select {
+  @extend %measures;
+
+  flex: 1;
+
+  &.black {
+    background-color: $black-2;
+    border-color: $black-3;
+  }
+
+  &.green {
+    background-color: $green-2;
+    border-color: $green-3;
+  }
+
+  &.red {
+    background-color: $red-2;
+    border-color: $red-3;
+  }
+}
+
+select {
+  text-transform: capitalize;
+  height: 32px;
+  width: 100%;
 }
 
 .no-wrap {
@@ -79,50 +190,6 @@ select {
 
     > :not(:last-child) {
       margin-right: 0;
-    }
-  }
-
-  &.green {
-    select {
-      color: $black-main;
-      border-color: $green-3;
-      background-color: $green-2;
-    }
-    button {
-      border-color: $green-3;
-      background-color: $green-1;
-    }
-    input {
-      border-color: $green-3;
-      background-color: $green-2;
-    }
-    h2,
-    h3,
-    p,
-    label {
-      color: $green-main;
-    }
-  }
-
-  &.red {
-    select {
-      color: $black-main;
-      border-color: $red-3;
-      background-color: $red-2;
-    }
-    button {
-      border-color: $red-3;
-      background-color: $red-1;
-    }
-    input {
-      border-color: $red-3;
-      background-color: $red-2;
-    }
-    h2,
-    h3,
-    p,
-    label {
-      color: $red-main;
     }
   }
 }
@@ -160,14 +227,6 @@ select {
 
 .to-dos-options {
   margin-bottom: 0.5rem;
-
-  &.green {
-    color: $green-main;
-  }
-
-  &.red {
-    color: $red-main;
-  }
 }
 
 .to-do {
@@ -175,12 +234,8 @@ select {
   margin-bottom: 0.5rem;
   padding: 0.5rem;
 
-  &.green {
-    border-color: $green-3;
-  }
-
-  &.red {
-    border-color: $red-3;
+  &:last-of-type {
+    margin-bottom: 0;
   }
 }
 
@@ -272,7 +327,7 @@ select {
   }
 }
 
-.sort-order {
+#sort-order {
   > p {
     font-weight: bold;
   }
@@ -292,9 +347,9 @@ select {
   }
 }
 
-.messages {
+#messages {
   > p {
-    &.my-self {
+    &.user-self {
       text-align: right;
     }
 
@@ -302,20 +357,12 @@ select {
       font-weight: bold;
     }
   }
-
-  &.green {
-    color: $green-3;
-  }
-
-  &.red {
-    color: $red-3;
-  }
 }
 
-.rooms {
+#rooms {
   display: flex;
 
-  > .list {
+  > #list {
     > p {
       cursor: pointer;
       padding: 0.2rem;
@@ -336,129 +383,9 @@ select {
       flex: 1 1;
     }
   }
-
-  &.green {
-    > p {
-      color: $green-3;
-    }
-
-    > .list {
-      & > p {
-        color: $green-3;
-
-        &:hover,
-        &.active {
-          background-color: $green-2;
-        }
-      }
-    }
-
-    > div {
-      border-color: $green-3;
-    }
-  }
-
-  &.red {
-    > p {
-      color: $red-3;
-    }
-
-    > .list {
-      & > p {
-        color: $red-3;
-
-        &:hover,
-        &.active {
-          background-color: $red-2;
-        }
-      }
-    }
-
-    > div {
-      border-color: $red-3;
-    }
-  }
 }
 
-nav {
-  margin: auto;
-  max-width: 65%;
-  display: flex;
-  background-color: $black-2;
-  padding: 5px;
-  align-items: center;
-
-  > button:first-of-type {
-    margin: 0 auto 0 0;
-  }
-
-  > button:last-of-type {
-    margin: 0 0 0 auto;
-  }
-
-  > ul {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-
-    > li {
-      > a {
-        text-decoration: none;
-        color: $black-1;
-
-        &.active {
-          color: $black-3;
-          font-weight: bold;
-        }
-      }
-
-      &:not(:last-of-type) {
-        margin-right: 30px;
-      }
-    }
-  }
-
-  &.green {
-    background-color: $green-2;
-
-    > button {
-      background-color: $green-1;
-      border-color: $green-3;
-    }
-
-    > ul {
-      > li {
-        > a {
-          color: $green-1;
-
-          &.active {
-            color: $green-3;
-          }
-        }
-      }
-    }
-  }
-
-  &.red {
-    background-color: $red-2;
-
-    > button {
-      background-color: $red-1;
-      border-color: $red-3;
-    }
-
-    > ul {
-      > li {
-        > a {
-          color: $red-1;
-
-          &.active {
-            color: $red-3;
-          }
-        }
-      }
-    }
-  }
+.priority {
+  width: 20px;
+  height: -webkit-fill-available;
 }

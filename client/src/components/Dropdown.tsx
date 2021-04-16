@@ -15,11 +15,7 @@ const Dropdown = ({ value, values, onChange }: DropdownProps) => {
   };
 
   return (
-    <select
-      className={`dropdown-${theme}`}
-      value={value}
-      onChange={handleOnChange}
-    >
+    <select className={`${theme}`} value={value} onChange={handleOnChange}>
       {values.map((it) => (
         <option key={`option-${it}`} value={it}>
           {it}

@@ -7,10 +7,12 @@ import reducer, {
   stateToDoKey
 } from '../store/toDo';
 import Spinier from '../components/Spinier';
-import { useThemeContext } from '../contexts/Theme';
 import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
 import Button from '../components/Button';
+import H2 from '../components/H2';
+import H4 from '../components/H4';
+import Div from '../components/Div';
 
 interface ToDosProps {
   getList: Function;
@@ -18,7 +20,7 @@ interface ToDosProps {
   reset: Function;
   saveItem: Function;
   loading: boolean | null;
-  error: boolean | null;
+  error: string | null;
 }
 
 const ToDos = ({
@@ -31,7 +33,6 @@ const ToDos = ({
 }: ToDosProps) => {
   const [currentOrder, setCurrentOrder] = useState({ prop: null, value: null });
   const [all, setAll] = useState(false);
-  const { theme } = useThemeContext();
 
   useEffect(() => {
     return () => {
@@ -57,24 +58,24 @@ const ToDos = ({
   return (
     <>
       {loading && <Spinier />}
-      <div className={`no-wrap ${theme} pushes`}>
-        <div>
-          <h2>To Dos ({(list || []).length})</h2>
-          {!!error && <h4 className="error">{error}</h4>}
-        </div>
+      <Div noWrap pushes>
+        <Div>
+          <H2>To Dos ({(list || []).length})</H2>
+          <>{!!error && <H4 className="error">{error}</H4>}</>
+        </Div>
         {all ? (
           <Button label="See Active" onClick={() => setAll(false)} />
         ) : (
           <Button label="See All" onClick={() => setAll(true)} />
         )}
-      </div>
-      <div className={`to-dos-options ${theme}`}>
+      </Div>
+      <Div className={`to-dos-options`}>
         <SortOrder
           values={['title', 'done', 'priority']}
           currentOrder={currentOrder}
           onChange={handleSortOrder}
         />
-      </div>
+      </Div>
       {all ? (
         (list || []).map((it) => (
           <ToDo key={it.id} item={it} updateItem={saveItem} />

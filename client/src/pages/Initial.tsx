@@ -14,9 +14,7 @@ const Initial = ({ history }: InitialProps) => {
 
   return (
     <Layout history={history}>
-      <div className={`no-wrap ${theme} space-between`}>
-        <Dropdown value={theme} values={themes} onChange={changeTheme} />
-      </div>
+      <Dropdown value={theme} values={themes} onChange={changeTheme} />
       <NewToDo />
       <ToDos />
     </Layout>

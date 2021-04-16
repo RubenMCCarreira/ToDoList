@@ -39,7 +39,7 @@ const Priority = ({ value, onChange, disabled = false }: PriorityProps) => {
       key={index}
       onClick={onClick}
       src={`/priority/${options[index].name}.png`}
-      style={{ width: '20px', height: '-webkit-fill-available' }}
+      className="priority"
     />
   );
 };

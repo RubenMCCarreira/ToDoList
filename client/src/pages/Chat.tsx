@@ -1,5 +1,4 @@
 import withInjectReducer from 'tool/redux/withInjectReducer';
-import { useThemeContext } from '../contexts/Theme';
 import { useEffect, useState } from 'react';
 import reducer, {
   roomMapDispatchToProps,
@@ -10,6 +9,8 @@ import Room, { IRoom } from '../containers/Room';
 import { IHistory } from '../interfaces';
 import Form from '../containers/Form';
 import Layout from '../containers/Layout';
+import P from '../components/P';
+import Div from '../components/Div';
 
 interface ChatProps {
   history: IHistory;
@@ -33,7 +34,6 @@ const Chat = ({
   saved
 }: ChatProps) => {
   const [activeRoomId, setActiveRoomId] = useState<null | number>(null);
-  const { theme } = useThemeContext();
 
   useEffect(() => {
     return () => {
@@ -61,27 +61,27 @@ const Chat = ({
         label="Create"
       />
 
-      <div className={`rooms ${theme}`}>
+      <Div id="rooms">
         {list && list.length ? (
           <>
-            <div className={`list`}>
+            <Div id="list">
               {(list || []).map(({ id, name }) => (
-                <p
+                <P
                   key={id}
                   onClick={() => setActiveRoomId(id)}
                   className={`${id == activeRoomId ? 'active' : ''}`}
                 >
                   {name}
-                </p>
+                </P>
               ))}
-            </div>
+            </Div>
 
             <Room activeId={activeRoomId} />
           </>
         ) : (
-          <p>No rooms</p>
+          <P>No rooms</P>
         )}
-      </div>
+      </Div>
     </Layout>
   );
 };

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
-import { useThemeContext } from '../contexts/Theme';
 
 interface IFormItem {
   prop: string;
@@ -40,7 +39,6 @@ const Form = ({
   className
 }: FormProps) => {
   const [nextItems, setNextItems] = useState({});
-  const { theme } = useThemeContext();
 
   useEffect(() => {
     setNextItems(reset(items));
@@ -93,7 +91,7 @@ const Form = ({
   };
 
   return (
-    <form className={className || `no-wrap ${theme}`} onSubmit={handleSubmit}>
+    <form className={`${className || 'no-wrap'}`} onSubmit={handleSubmit}>
       {Object.keys(nextItems).map((it) => (
         <Input
           key={nextItems[it].prop}

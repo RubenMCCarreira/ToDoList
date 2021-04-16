@@ -1,3 +1,4 @@
+import { useThemeContext } from '../contexts/Theme';
 import { IItemState } from '../interfaces';
 import Missing from './Missing';
 
@@ -16,9 +17,12 @@ const Input = ({
   placeholder,
   type = 'text'
 }: InputProps) => {
+  const { theme } = useThemeContext();
+
   return (
     <>
       <input
+        className={`${theme}`}
         placeholder={placeholder}
         value={item.value || ''}
         onChange={(e) => onChange(e.target.value, prop)}

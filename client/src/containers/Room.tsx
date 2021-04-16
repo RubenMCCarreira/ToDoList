@@ -9,6 +9,9 @@ import reducer, {
   stateRoomKey
 } from '../store/room';
 import Form from './Form';
+import P from '../components/P';
+import Span from '../components/Span';
+import Div from '../components/Div';
 
 export interface IRoom {
   id: number;
@@ -88,26 +91,27 @@ const Room = ({ activeId, item, getItem }: RoomProps) => {
   };
 
   return item ? (
-    <div className={`${theme}`}>
-      <div className={`messages ${theme}`}>
-        {messages.map(({ id, user, text }) => (
-          <p
-            key={id}
-            className={`${user == getLogin().username ? 'my-self' : ''}`}
-          >
-            <span>{user}:</span> {text}
-          </p>
-        ))}
-      </div>
+    <Div>
+      <Div id="messages">
+        {messages.map(({ id, user, text }) => {
+          const userSelf = user == getLogin().username;
+
+          return (
+            <P key={id} className={`${userSelf ? 'user-self' : ''}`}>
+              <Span>{userSelf ? 'You' : user}:</Span> {text}
+            </P>
+          );
+        })}
+      </Div>
 
       <Form
         items={[{ prop: 'message', placeholder: 'Message', mandatory: true }]}
         callback={handleSendMessage}
         label="Send"
       />
-    </div>
+    </Div>
   ) : (
-    <div className={`${theme}`} />
+    <Div />
   );
 };
 

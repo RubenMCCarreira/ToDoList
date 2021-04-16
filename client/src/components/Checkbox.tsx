@@ -1,4 +1,5 @@
 import { ChangeEventHandler } from 'react';
+import { useThemeContext } from '../contexts/Theme';
 
 interface CheckboxProps {
   title: string;
@@ -13,8 +14,10 @@ const Checkbox = ({
   onChange,
   disabled = false
 }: CheckboxProps) => {
+  const { theme } = useThemeContext();
+
   return (
-    <label>
+    <label className={`${theme}`}>
       <input
         type="checkbox"
         checked={checked}

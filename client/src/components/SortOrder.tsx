@@ -1,3 +1,6 @@
+import P from './P';
+import Span from './Span';
+
 interface SortOrderProps {
   values: string[];
   currentOrder: { prop: string | null; value: string | null };
@@ -32,15 +35,17 @@ const SortOrder = ({ values, currentOrder, onChange }: SortOrderProps) => {
   };
 
   return (
-    <div className="sort-order">
-      <p>Sort Order</p>
+    <div id="sort-order">
+      <P>Sort Order</P>
       {values.map((it) => (
-        <span key={`sort-order-${it}`} onClick={() => handleChange(it)}>
-          {it}
-          {!!(currentOrder.prop == it && currentOrder.value) && (
-            <img src={`/sortOrder/arrow-${currentOrder.value}.png`} />
-          )}
-        </span>
+        <Span key={`sort-order-${it}`} onClick={() => handleChange(it)}>
+          <>
+            {it}
+            {!!(currentOrder.prop == it && currentOrder.value) && (
+              <img src={`/sortOrder/arrow-${currentOrder.value}.png`} />
+            )}
+          </>
+        </Span>
       ))}
     </div>
   );

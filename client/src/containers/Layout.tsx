@@ -1,9 +1,12 @@
 import { ReactChild } from 'react';
 import Button from '../components/Button';
 import { IHistory } from '../interfaces';
-import { Link } from 'react-router-dom';
 import { useThemeContext } from '../contexts/Theme';
 import Spinier from '../components/Spinier';
+import H2 from '../components/H2';
+import H4 from '../components/H4';
+import MyLink from '../components/MyLink';
+import Div from '../components/Div';
 
 interface LayoutProps {
   children: ReactChild | ReactChild[];
@@ -47,14 +50,14 @@ const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
           <ul>
             {LINKS.map(({ page, title }) => (
               <li key={page}>
-                <Link
+                <MyLink
                   to={page}
                   className={`${
                     history.location.pathname == page ? 'active' : ''
                   }`}
                 >
                   {title}
-                </Link>
+                </MyLink>
               </li>
             ))}
           </ul>
@@ -62,10 +65,14 @@ const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
         </nav>
       )}
       <main>
-        <div className={`no-wrap ${theme}`}>
-          {!!title && <h2>{title}</h2>}
-          {!!error && <h4 className="error">{error}</h4>}
-        </div>
+        {(!!title || !!error) && (
+          <Div noWrap>
+            <>
+              {!!title && <H2>{title}</H2>}
+              {!!error && <H4 className="error">{error}</H4>}
+            </>
+          </Div>
+        )}
         {loading && <Spinier />}
         {children}
       </main>
