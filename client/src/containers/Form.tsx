@@ -6,6 +6,7 @@ interface IFormItem {
   prop: string;
   placeholder?: string;
   mandatory?: true;
+  type?: string;
 }
 
 interface INextFormItem {

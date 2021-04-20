@@ -5,7 +5,7 @@ import { useThemeContext } from '../contexts/Theme';
 import Spinier from '../components/Spinier';
 import H2 from '../components/H2';
 import H4 from '../components/H4';
-import MyLink from '../components/MyLink';
+import Link from '../components/Link';
 import Div from '../components/Div';
 
 interface LayoutProps {
@@ -54,14 +54,14 @@ const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
           <ul>
             {LINKS.map(({ page, title }) => (
               <li key={page}>
-                <MyLink
+                <Link
                   to={page}
                   className={`${
                     history.location.pathname == page ? 'active' : ''
                   }`}
                 >
                   {title}
-                </MyLink>
+                </Link>
               </li>
             ))}
           </ul>

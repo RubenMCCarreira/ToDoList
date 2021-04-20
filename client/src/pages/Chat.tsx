@@ -9,7 +9,7 @@ import Room, { IRoom } from '../containers/Room';
 import { IHistory } from '../interfaces';
 import Form from '../containers/Form';
 import Layout from '../containers/Layout';
-import P from '../components/P';
+import Paragraph from '../components/Paragraph';
 import Div from '../components/Div';
 
 interface ChatProps {
@@ -66,20 +66,20 @@ const Chat = ({
           <>
             <Div id="list">
               {(list || []).map(({ id, name }) => (
-                <P
+                <Paragraph
                   key={id}
                   onClick={() => setActiveRoomId(id)}
                   className={`${id == activeRoomId ? 'active' : ''}`}
                 >
                   {name}
-                </P>
+                </Paragraph>
               ))}
             </Div>
 
             <Room activeId={activeRoomId} />
           </>
         ) : (
-          <P>No rooms</P>
+          <Paragraph>No rooms</Paragraph>
         )}
       </Div>
     </Layout>

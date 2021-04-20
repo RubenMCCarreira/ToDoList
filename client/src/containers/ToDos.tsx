@@ -76,17 +76,19 @@ const ToDos = ({
           onChange={handleSortOrder}
         />
       </Div>
-      {all ? (
-        (list || []).map((it) => (
-          <ToDo key={it.id} item={it} updateItem={saveItem} />
-        ))
-      ) : (
-        <DragDropList
-          list={list || []}
-          component={ToDo}
-          updateItem={saveItem}
-        />
-      )}
+      <Div className={`to-dos`}>
+        {all ? (
+          (list || []).map((it) => (
+            <ToDo key={it.id} item={it} updateItem={saveItem} />
+          ))
+        ) : (
+          <DragDropList
+            list={list || []}
+            component={ToDo}
+            updateItem={saveItem}
+          />
+        )}
+      </Div>
     </>
   );
 };

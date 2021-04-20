@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import Input from '../components/Input';
 import H3 from '../components/H3';
-import P from '../components/P';
+import Paragraph from '../components/Paragraph';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
 import { IItemState } from '../interfaces';
@@ -111,7 +111,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
           <Div noWrap pushes>
             <Div>
               <H3>{title.value}</H3>
-              <P>{description.value}</P>
+              <Paragraph>{description.value}</Paragraph>
             </Div>
             <Priority value={priority} disabled />
           </Div>

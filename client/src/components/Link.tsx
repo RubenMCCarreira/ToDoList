@@ -1,6 +1,6 @@
 import { ReactChild } from 'react';
 import { useThemeContext } from '../contexts/Theme';
-import { Link } from 'react-router-dom';
+import { Link as LinkDom } from 'react-router-dom';
 import { nextClassNames } from '../tools/classnames';
 
 interface LinkProps {
@@ -9,14 +9,14 @@ interface LinkProps {
   className?: string;
 }
 
-const MyLink = ({ children, to, className = '' }: LinkProps) => {
+const Link = ({ children, to, className = '' }: LinkProps) => {
   const { theme } = useThemeContext();
 
   return (
-    <Link to={to} className={nextClassNames([theme, className])}>
+    <LinkDom to={to} className={nextClassNames([theme, className])}>
       {children}
-    </Link>
+    </LinkDom>
   );
 };
 
-export default MyLink;
+export default Link;

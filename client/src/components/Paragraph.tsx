@@ -2,13 +2,13 @@ import { MouseEventHandler, ReactChild } from 'react';
 import { useThemeContext } from '../contexts/Theme';
 import { nextClassNames } from '../tools/classnames';
 
-interface H3Props {
+interface ParagraphProps {
   children: string | null | ReactChild | ReactChild[];
   className?: string;
   onClick?: MouseEventHandler<HTMLParagraphElement>;
 }
 
-const H3 = ({ children, className = '', onClick }: H3Props) => {
+const Paragraph = ({ children, className = '', onClick }: ParagraphProps) => {
   const { theme } = useThemeContext();
 
   return (
@@ -18,4 +18,4 @@ const H3 = ({ children, className = '', onClick }: H3Props) => {
   );
 };
 
-export default H3;
+export default Paragraph;

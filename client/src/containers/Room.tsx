@@ -9,7 +9,7 @@ import reducer, {
   stateRoomKey
 } from '../store/room';
 import Form from './Form';
-import P from '../components/P';
+import Paragraph from '../components/Paragraph';
 import Span from '../components/Span';
 import Div from '../components/Div';
 
@@ -97,9 +97,9 @@ const Room = ({ activeId, item, getItem }: RoomProps) => {
           const userSelf = user == getLogin().username;
 
           return (
-            <P key={id} className={`${userSelf ? 'user-self' : ''}`}>
+            <Paragraph key={id} className={`${userSelf ? 'user-self' : ''}`}>
               <Span>{userSelf ? 'You' : user}:</Span> {text}
-            </P>
+            </Paragraph>
           );
         })}
       </Div>

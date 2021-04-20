@@ -96,6 +96,13 @@ p {
   }
 }
 
+a,
+p {
+  &.active {
+    font-weight: bold;
+  }
+}
+
 div,
 article {
   &.black {
@@ -236,10 +243,6 @@ select {
   border-style: solid;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
 }
 
 %spinier {

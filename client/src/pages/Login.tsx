@@ -16,9 +16,17 @@ interface LoginProps {
   reset: Function;
   history: IHistory;
   match: IMatch;
+  error: string | null;
 }
 
-const Login = ({ saveItem, updateItem, reset, history, match }: LoginProps) => {
+const Login = ({
+  saveItem,
+  updateItem,
+  reset,
+  history,
+  match,
+  error
+}: LoginProps) => {
   if (match && match.path === '/logout') {
     reset();
     history.push('/');
@@ -33,11 +41,16 @@ const Login = ({ saveItem, updateItem, reset, history, match }: LoginProps) => {
   }, [!!withLogin]);
 
   return (
-    <Layout title="Login">
+    <Layout title="Login" error={error}>
       <Form
         items={[
           { prop: 'username', placeholder: 'Username', mandatory: true },
-          { prop: 'password', placeholder: 'Password', mandatory: true }
+          {
+            prop: 'password',
+            placeholder: 'Password',
+            type: 'password',
+            mandatory: true
+          }
         ]}
         onSubmit={saveItem}
         label="Log In"
