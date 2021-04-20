@@ -65,7 +65,10 @@ const ThemeProvider = ({
   );
 };
 
-export const useThemeContext = () => useContext(ThemeContext);
+export const useThemeContext = () => {
+  const { theme, changeTheme, themes } = useContext(ThemeContext);
+  return { theme, changeTheme, themes };
+};
 
 export default withInjectReducer(
   stateThemeKey,

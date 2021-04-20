@@ -111,7 +111,9 @@ const Room = ({ activeId, item, getItem }: RoomProps) => {
       />
     </Div>
   ) : (
-    <Div />
+    <Div>
+      <Paragraph>Select one room</Paragraph>
+    </Div>
   );
 };
 

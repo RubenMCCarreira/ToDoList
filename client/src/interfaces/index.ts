@@ -14,3 +14,8 @@ export interface IItemState {
   value: null | string;
   error: boolean;
 }
+
+export interface ICoordinates {
+  0: number;
+  1: number;
+}

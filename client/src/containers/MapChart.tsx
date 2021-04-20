@@ -1,19 +1,29 @@
-import { useEffect, useState } from 'react';
-import {
-  ComposableMap,
-  Geographies,
-  Geography,
-  Sphere,
-  Graticule,
-  ZoomableGroup,
-  Marker,
-  Line,
-  Annotation
-} from 'react-simple-maps';
-import Button from '../components/Button';
-import Div from '../components/Div';
-
+import { useCallback, useEffect, useState } from 'react';
+import { Geographies, Geography } from 'react-simple-maps';
+import Map from '../components/Map';
+import MapAnnotation from '../components/MapAnnotation';
+import MapDotMarker from '../components/MapDotMarker';
+import MapLine from '../components/MapLine';
+import MapLineFromTo from '../components/MapLineFromTo';
+import MapPointMarker from '../components/MapPointMarker';
+import MapTextMarker from '../components/MapTextMarker';
+import { useThemeContext } from '../contexts/Theme';
 import dataCSV from './csvjson.json';
+
+const markers = [
+  { markerOffset: -5, name: 'Buenos Aires', coordinates: [-58.3816, -34.6037] },
+  { markerOffset: 5, name: 'La Paz', coordinates: [-68.1193, -16.4897] },
+  { markerOffset: 5, name: 'Brasilia', coordinates: [-47.8825, -15.7942] },
+  { markerOffset: 5, name: 'Santiago', coordinates: [-70.6693, -33.4489] },
+  { markerOffset: 5, name: 'Bogota', coordinates: [-74.0721, 4.711] },
+  { markerOffset: 5, name: 'Quito', coordinates: [-78.4678, -0.1807] },
+  { markerOffset: -5, name: 'Georgetown', coordinates: [-58.1551, 6.8013] },
+  { markerOffset: -5, name: 'Asuncion', coordinates: [-57.5759, -25.2637] },
+  { markerOffset: 5, name: 'Paramaribo', coordinates: [-55.2038, 5.852] },
+  { markerOffset: 5, name: 'Montevideo', coordinates: [-56.1645, -34.9011] },
+  { markerOffset: 5, name: 'Caracas', coordinates: [-66.9036, 10.4806] },
+  { markerOffset: 5, name: 'Lima', coordinates: [-77.0428, -12.0464] }
+];
 
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
@@ -23,141 +33,94 @@ interface IMapValues {
   Name: string;
 }
 
-const colorScale = (scale) => {
-  // rgb(65, 90, 60)
-  // rgb(195, 245, 180)
-  const r = Math.floor((65 + 195) * scale);
-  const g = Math.floor((90 + 245) * scale);
-  const b = Math.floor((60 + 180) * scale);
-  return { r, g, b };
-};
-
 const MapChart = () => {
   const [data, setData] = useState<IMapValues[]>([]);
-  const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
+  const { theme, themes } = useThemeContext();
+
+  const colorScale = useCallback(
+    (scale) => {
+      let r, g, b;
+
+      if (theme === themes[0]) {
+        // rgb(175, 170, 170)
+        // rgb(55, 50, 50)
+        r = Math.floor((175 + 55) * scale);
+        g = Math.floor((170 + 50) * scale);
+        b = Math.floor((170 + 50) * scale);
+      } else if (theme === themes[1]) {
+        // rgb(195, 245, 180)
+        // rgb(65, 90, 60)
+        r = Math.floor((195 + 65) * scale);
+        g = Math.floor((245 + 90) * scale);
+        b = Math.floor((180 + 60) * scale);
+      } else if (theme === themes[2]) {
+        // rgb(250, 180, 180)
+        // rgb(135, 15, 15)
+        r = Math.floor((250 + 135) * scale);
+        g = Math.floor((180 + 15) * scale);
+        b = Math.floor((180 + 15) * scale);
+      }
+
+      return { r, g, b };
+    },
+    [theme, themes]
+  );
 
   useEffect(() => {
     setData(dataCSV);
   }, []);
 
-  const handleReset = () => {
-    setPosition({ coordinates: [0, 0], zoom: 1 });
-  };
-
-  const handleZoomOut = () => {
-    const zoom = position.zoom - 0.5;
-    let coordinates = position.coordinates;
-    if (zoom < 1) return;
-    if (zoom == 1) {
-      coordinates = [0, 0];
-    }
-    setPosition({ coordinates, zoom: zoom });
-  };
-
-  const handleZoomIn = () => {
-    if (position.zoom > 8) return;
-    setPosition((pos) => ({ ...pos, zoom: pos.zoom + 0.5 }));
-  };
-
-  const handleMoveEnd = (position) => {
-    setPosition(position);
-  };
-
   return (
-    <Div id="map">
-      <ComposableMap
-        width={500}
-        height={300}
-        projectionConfig={{
-          rotate: [0, 0, 0],
-          scale: 100
-        }}
-      >
-        <ZoomableGroup
-          zoom={position.zoom}
-          center={position.coordinates}
-          onMoveEnd={handleMoveEnd}
-        >
-          <Sphere stroke="#E4E5E6" strokeWidth={0.5} />
-          <Graticule stroke="#E4E5E6" strokeWidth={0.5} />
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => {
-                const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
+    <Map>
+      <>
+        <Geographies geography={geoUrl}>
+          {({ geographies }) =>
+            geographies.map((geo) => {
+              const d = data.find((s) => s.ISO3 === geo.properties.ISO_A3);
 
-                let r = 200,
-                  g = 200,
-                  b = 200;
-                if (d) {
-                  const result = colorScale(d['2017']);
-                  r = result.r;
-                  g = result.g;
-                  b = result.b;
-                }
+              let r = 255,
+                g = 255,
+                b = 255;
+              if (d) {
+                const result = colorScale(d['2017']);
+                r = result.r;
+                g = result.g;
+                b = result.b;
+              }
 
-                return (
-                  <Geography
-                    key={geo.rsmKey}
-                    geography={geo}
-                    fill={`rgb(${r},${g},${b})`}
-                  />
-                );
-              })
-            }
-          </Geographies>
-          <Marker coordinates={[-74.006, 40.7128]}>
-            <circle r={1} fill="#F53" />
-          </Marker>
-          <Marker coordinates={[-101, 53]} fill="#777">
-            <text textAnchor="middle" fill="#F53">
-              Canada
-            </text>
-          </Marker>
-          <Line
-            from={[2.3522, 48.8566]}
-            to={[-94.006, 30.7128]}
-            stroke="#FF5533"
-            strokeWidth={1}
-            strokeLinecap="round"
+              return (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill={`rgb(${r},${g},${b})`}
+                />
+              );
+            })
+          }
+        </Geographies>
+        <MapLineFromTo from={[2.3522, 48.8566]} to={[-94.006, 30.7128]} />
+        <MapLine
+          coordinates={[
+            [-180, 0],
+            [-90, 0],
+            [0, 0],
+            [90, 0],
+            [180, 0]
+          ]}
+        />
+        <MapDotMarker coordinates={[-74.006, 40.7128]} />
+        <MapTextMarker coordinates={[-101, 53]} title="Canada" />
+        {markers.map(({ name, coordinates, markerOffset }) => (
+          <MapPointMarker
+            key={name}
+            coordinates={[coordinates[0], coordinates[1]]}
+            title={name}
+            markerOffset={markerOffset}
           />
-          <Line
-            coordinates={[
-              [-180, 0],
-              [-90, 0],
-              [0, 0],
-              [90, 0],
-              [180, 0]
-            ]}
-            stroke="#F53"
-            strokeWidth={1}
-          />
-          <Annotation
-            subject={[2.3522, 48.8566]}
-            dx={-30}
-            dy={-10}
-            connectorProps={{
-              stroke: '#FF5533',
-              strokeWidth: 1,
-              strokeLinecap: 'round'
-            }}
-          >
-            <text
-              x="-4"
-              textAnchor="end"
-              alignmentBaseline="middle"
-              fill="#F53"
-            >
-              Paris
-            </text>
-          </Annotation>
-        </ZoomableGroup>
-      </ComposableMap>
-      <Div spaceBetween>
-        <Button label="-" onClick={handleZoomOut} />
-        <Button label="Reset View" onClick={handleReset} />
-        <Button label="+" onClick={handleZoomIn} />
-      </Div>
-    </Div>
+        ))}
+        <MapAnnotation coordinates={[2.3522, 48.8566]} title="Paris" />
+      </>
+    </Map>
   );
 };
 

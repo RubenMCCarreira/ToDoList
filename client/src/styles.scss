@@ -12,6 +12,11 @@ $black-1: saturate($black-main, 20%);
 $black-2: lighten($black-main, 65%);
 $black-3: darken($black-main, 7%);
 
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.05rem;
+}
+
 main {
   margin: auto;
   max-width: 55%;
@@ -78,22 +83,16 @@ p {
   margin-bottom: 0.5rem;
 }
 
-span,
-label,
-a,
-h3,
-p {
-  &.black {
-    color: $black-1;
-  }
+.black {
+  color: $black-1;
+}
 
-  &.green {
-    color: $green-1;
-  }
+.green {
+  color: $green-1;
+}
 
-  &.red {
-    color: $red-1;
-  }
+.red {
+  color: $red-1;
 }
 
 a,
@@ -126,6 +125,9 @@ article {
 
 button {
   @extend %measures;
+
+  border-radius: 5px;
+  font-weight: bold;
 
   &:hover {
     cursor: pointer;
@@ -404,4 +406,8 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+path.rsm-geography {
+  outline: none;
 }
