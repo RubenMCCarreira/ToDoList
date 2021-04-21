@@ -7,6 +7,7 @@ import H2 from '../components/H2';
 import H4 from '../components/H4';
 import Link from '../components/Link';
 import Div from '../components/Div';
+import { ROUTES } from '../tools/pages';
 
 interface LayoutProps {
   children: ReactChild | ReactChild[];
@@ -15,21 +16,6 @@ interface LayoutProps {
   loading?: boolean | null;
   error?: string | null;
 }
-
-const LINKS = [
-  {
-    page: '/',
-    title: 'To Dos'
-  },
-  {
-    page: '/chat',
-    title: 'Chat'
-  },
-  {
-    page: '/map',
-    title: 'Map'
-  }
-];
 
 const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
   const { theme } = useThemeContext();
@@ -52,7 +38,7 @@ const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
         <nav className={theme}>
           <Button label="Back" onClick={onBack} />
           <ul>
-            {LINKS.map(({ page, title }) => (
+            {ROUTES.map(({ page, title }) => (
               <li key={page}>
                 <Link
                   to={page}

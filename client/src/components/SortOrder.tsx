@@ -1,4 +1,3 @@
-import Paragraph from './Paragraph';
 import Span from './Span';
 
 interface SortOrderProps {
@@ -36,7 +35,7 @@ const SortOrder = ({ values, currentOrder, onChange }: SortOrderProps) => {
 
   return (
     <div id="sort-order">
-      <Paragraph>Sort Order</Paragraph>
+      <Span bold>Sort Order: </Span>
       {values.map((it) => (
         <Span key={`sort-order-${it}`} onClick={() => handleChange(it)}>
           <>

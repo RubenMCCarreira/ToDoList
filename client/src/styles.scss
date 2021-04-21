@@ -14,7 +14,7 @@ $black-3: darken($black-main, 7%);
 
 * {
   font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.03rem;
 }
 
 main {
@@ -96,8 +96,13 @@ p {
 }
 
 a,
-p {
+p,
+span {
   &.active {
+    font-weight: bold;
+  }
+
+  &.bold {
     font-weight: bold;
   }
 }
@@ -158,12 +163,14 @@ button {
   }
 }
 
+input[type='file'],
 input[type='text'],
 input[type='password'],
 select {
   @extend %measures;
 
   flex: 1;
+  border-radius: 5px;
 
   &.black {
     background-color: $black-2;
@@ -410,4 +417,123 @@ select {
 
 path.rsm-geography {
   outline: none;
+}
+
+#images {
+  display: flex;
+  align-items: center;
+}
+
+#image {
+  width: 49%;
+  margin-bottom: 1%;
+
+  &:not(:last-of-type) {
+    margin-right: 1%;
+  }
+}
+
+#carrousel {
+  &.black {
+    background-color: $black-2;
+  }
+
+  &.green {
+    background-color: $green-2;
+  }
+
+  &.red {
+    background-color: $red-2;
+  }
+
+  > #top {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    padding: 5px 0;
+
+    > span {
+      position: absolute;
+      cursor: pointer;
+      font-weight: bold;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:first-of-type {
+        left: 0px;
+      }
+
+      &:last-of-type {
+        right: 0px;
+      }
+    }
+
+    > img {
+      max-width: 100%;
+      max-height: 300px;
+    }
+
+    #dots {
+      position: absolute;
+      bottom: 0;
+
+      > span {
+        cursor: pointer;
+        height: 0.75rem;
+        width: 0.75rem;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0.5rem;
+
+        &.current.black {
+          background-color: $black-1;
+        }
+
+        &.current.green {
+          background-color: $green-1;
+        }
+
+        &.current.red {
+          background-color: $red-1;
+        }
+      }
+    }
+  }
+
+  > #footer {
+    display: flex;
+    margin-top: 2%;
+    border-top: 2px solid;
+    padding: 5px;
+    overflow-x: auto;
+
+    > img {
+      max-width: 100%;
+      max-height: 100px;
+      border-bottom: 5px solid transparent;
+
+      &:not(:last-of-type) {
+        margin-right: 1%;
+      }
+
+      &.current.black {
+        border-color: $black-1;
+      }
+
+      &.current.green {
+        border-color: $green-1;
+      }
+
+      &.current.red {
+        border-color: $red-1;
+      }
+    }
+  }
 }

@@ -19,3 +19,8 @@ export interface ICoordinates {
   0: number;
   1: number;
 }
+
+export interface IFile extends Blob {
+  name: string;
+  src: string;
+}

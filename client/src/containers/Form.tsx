@@ -98,8 +98,9 @@ const Form = ({
           key={nextItems[it].prop}
           item={{ value: nextItems[it].value, error: nextItems[it].error }}
           prop={nextItems[it].prop}
-          placeholder={nextItems[it].placeholder}
           onChange={onChange}
+          placeholder={nextItems[it].placeholder}
+          type={nextItems[it].type}
         />
       ))}
       <Button label={label} type="submit" />
