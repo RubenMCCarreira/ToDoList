@@ -6,7 +6,7 @@ interface MapLineProps {
 }
 
 const MapLine = ({ coordinates }: MapLineProps) => {
-  return <Line coordinates={coordinates} stroke="#F53" strokeWidth={1} />;
+  return <Line coordinates={coordinates} stroke="#F53" strokeWidth={0.5} />;
 };
 
 export default MapLine;

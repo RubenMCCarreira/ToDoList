@@ -11,7 +11,7 @@ const MapLineFromTo = ({ from, to, round }: MapLineFromToProps) => {
   return (
     <Line
       stroke="#F53"
-      strokeWidth={1}
+      strokeWidth={0.5}
       from={from}
       to={to}
       strokeLinecap={round ? 'round' : null}

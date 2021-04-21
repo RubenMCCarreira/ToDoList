@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Button from '../components/Button';
+import Dropdown from '../components/Dropdown';
 import Input from '../components/Input';
 
 interface IFormItem {
@@ -7,6 +8,7 @@ interface IFormItem {
   placeholder?: string;
   mandatory?: true;
   type?: string;
+  values?: any[];
 }
 
 interface INextFormItem {
@@ -32,6 +34,16 @@ const reset = (items) => {
   return next;
 };
 
+const mapTypeToComponent = (type) => {
+  const map = {
+    input: Input,
+    password: Input,
+    select: Dropdown
+  };
+
+  return map[type] || Input;
+};
+
 const Form = ({
   items,
   onSubmit,
@@ -46,6 +58,8 @@ const Form = ({
   }, [items]);
 
   const onChange = (value, prop) => {
+    console.log(value, prop);
+
     setNextItems((current) => ({
       ...current,
       [prop]: {
@@ -93,16 +107,20 @@ const Form = ({
 
   return (
     <form className={`${className || 'no-wrap'}`} onSubmit={handleSubmit}>
-      {Object.keys(nextItems).map((it) => (
-        <Input
-          key={nextItems[it].prop}
-          item={{ value: nextItems[it].value, error: nextItems[it].error }}
-          prop={nextItems[it].prop}
-          onChange={onChange}
-          placeholder={nextItems[it].placeholder}
-          type={nextItems[it].type}
-        />
-      ))}
+      {Object.keys(nextItems).map((it) => {
+        const Component = mapTypeToComponent(nextItems[it].type);
+        return (
+          <Component
+            key={nextItems[it].prop}
+            item={{ value: nextItems[it].value, error: nextItems[it].error }}
+            prop={nextItems[it].prop}
+            onChange={onChange}
+            placeholder={nextItems[it].placeholder}
+            type={nextItems[it].type}
+            values={nextItems[it].values}
+          />
+        );
+      })}
       <Button label={label} type="submit" />
     </form>
   );

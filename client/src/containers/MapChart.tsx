@@ -9,21 +9,14 @@ import MapPointMarker from '../components/MapPointMarker';
 import MapTextMarker from '../components/MapTextMarker';
 import { useThemeContext } from '../contexts/Theme';
 import dataCSV from './csvjson.json';
-
-const markers = [
-  { markerOffset: -5, name: 'Buenos Aires', coordinates: [-58.3816, -34.6037] },
-  { markerOffset: 5, name: 'La Paz', coordinates: [-68.1193, -16.4897] },
-  { markerOffset: 5, name: 'Brasilia', coordinates: [-47.8825, -15.7942] },
-  { markerOffset: 5, name: 'Santiago', coordinates: [-70.6693, -33.4489] },
-  { markerOffset: 5, name: 'Bogota', coordinates: [-74.0721, 4.711] },
-  { markerOffset: 5, name: 'Quito', coordinates: [-78.4678, -0.1807] },
-  { markerOffset: -5, name: 'Georgetown', coordinates: [-58.1551, 6.8013] },
-  { markerOffset: -5, name: 'Asuncion', coordinates: [-57.5759, -25.2637] },
-  { markerOffset: 5, name: 'Paramaribo', coordinates: [-55.2038, 5.852] },
-  { markerOffset: 5, name: 'Montevideo', coordinates: [-56.1645, -34.9011] },
-  { markerOffset: 5, name: 'Caracas', coordinates: [-66.9036, 10.4806] },
-  { markerOffset: 5, name: 'Lima', coordinates: [-77.0428, -12.0464] }
-];
+import capitalsCSV from './capitals.json';
+import withInjectReducer from 'tool/redux/withInjectReducer';
+import reducer, {
+  stateMapRouteKey,
+  mapRouteMapDispatchToProps,
+  mapRouteMapStateToProps
+} from '../store/mapRoute';
+import { ICoordinates } from '../interfaces';
 
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
@@ -33,8 +26,20 @@ interface IMapValues {
   Name: string;
 }
 
-const MapChart = () => {
+interface ICountry {
+  country: string;
+  capital: string;
+  coordinates: number[];
+}
+
+interface MapCharProps {
+  getList: Function;
+  list: any[];
+}
+
+const MapChart = ({ getList, list }: MapCharProps) => {
   const [data, setData] = useState<IMapValues[]>([]);
+  const [capitals, setCapitals] = useState<ICountry[]>([]);
   const { theme, themes } = useThemeContext();
 
   const colorScale = useCallback(
@@ -68,7 +73,14 @@ const MapChart = () => {
 
   useEffect(() => {
     setData(dataCSV);
+    setCapitals(capitalsCSV);
   }, []);
+
+  useEffect(() => {
+    if (!list) {
+      getList();
+    }
+  }, [list]);
 
   return (
     <Map>
@@ -98,7 +110,13 @@ const MapChart = () => {
             })
           }
         </Geographies>
-        <MapLineFromTo from={[2.3522, 48.8566]} to={[-94.006, 30.7128]} />
+        {(list || []).map((it) => (
+          <MapLineFromTo
+            key={it.id}
+            from={[it.from.coordinates[1], it.from.coordinates[0]]}
+            to={[it.to.coordinates[1], it.to.coordinates[0]]}
+          />
+        ))}
         <MapLine
           coordinates={[
             [-180, 0],
@@ -110,18 +128,23 @@ const MapChart = () => {
         />
         <MapDotMarker coordinates={[-74.006, 40.7128]} />
         <MapTextMarker coordinates={[-101, 53]} title="Canada" />
-        {markers.map(({ name, coordinates, markerOffset }) => (
+        <MapAnnotation coordinates={[2.3522, 48.8566]} title="Paris" />
+        {capitals.map(({ capital, coordinates }, index) => (
           <MapPointMarker
-            key={name}
-            coordinates={[coordinates[0], coordinates[1]]}
-            title={name}
-            markerOffset={markerOffset}
+            key={index}
+            coordinates={[coordinates[1], coordinates[0]]}
+            title={capital}
           />
         ))}
-        <MapAnnotation coordinates={[2.3522, 48.8566]} title="Paris" />
       </>
     </Map>
   );
 };
 
-export default MapChart;
+export default withInjectReducer(
+  stateMapRouteKey,
+  reducer,
+  mapRouteMapStateToProps,
+  mapRouteMapDispatchToProps,
+  MapChart
+);

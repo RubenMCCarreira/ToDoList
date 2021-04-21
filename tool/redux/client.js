@@ -1,4 +1,4 @@
-const DEFAULT_ACTIONS = ['LOADING', 'ERROR', 'LIST', 'ITEM', 'SAVE', 'DELETE', 'RESET'];
+const DEFAULT_ACTIONS = ['LOADING', 'ERROR', 'LIST', 'ITEM', 'SAVE', 'DELETE', 'RESET', 'OTHER'];
 
 const generateActions = (prefix) => {
   const types = DEFAULT_ACTIONS.reduce((acc, current) => {
@@ -15,6 +15,7 @@ const generateActions = (prefix) => {
       SAVE: (dispatch, payload) => dispatch({ type: types.SAVE, payload }),
       DELETE: (dispatch, payload) => dispatch({ type: types.DELETE, payload }),
       RESET: (dispatch) => dispatch({ type: types.RESET }),
+      OTHER: (dispatch, payload) => dispatch({ type: types.OTHER, payload }),
     },
   ];
 };
@@ -82,6 +83,12 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
         item: null,
         error: null,
         deleted: action.payload,
+      };
+
+    case actionTypes.OTHER:
+      return {
+        ...draft,
+        ...action.payload,
       };
   }
 };

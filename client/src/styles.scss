@@ -537,3 +537,33 @@ path.rsm-geography {
     }
   }
 }
+
+#tabs {
+  border-bottom: 2px solid;
+
+  > span {
+    padding: 5px 10px;
+    min-width: 50px;
+    display: flex;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+
+    &.active.black {
+      background-color: $black-2;
+    }
+
+    &.active.green {
+      background-color: $green-2;
+    }
+
+    &.active.red {
+      background-color: $red-2;
+    }
+  }
+}
+
+#tabs-content {
+  padding: 5px;
+}

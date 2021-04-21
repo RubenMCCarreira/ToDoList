@@ -1,0 +1,1167 @@
+[
+  {
+    "country": "Albania",
+    "capital": "Tirana",
+    "coordinates": [41.3317, 19.8172]
+  },
+  {
+    "country": "Andorra",
+    "capital": "Andorra la Vella",
+    "coordinates": [42.5075, 1.5218]
+  },
+  {
+    "country": "Austria",
+    "capital": "Vienna",
+    "coordinates": [48.2092, 16.3728]
+  },
+  {
+    "country": "Belarus",
+    "capital": "Minsk",
+    "coordinates": [53.9678, 27.5766]
+  },
+  {
+    "country": "Belgium",
+    "capital": "Brussels",
+    "coordinates": [50.8371, 4.3676]
+  },
+  {
+    "country": "Bosnia and Herzegovina",
+    "capital": "Sarajevo",
+    "coordinates": [43.8608, 18.4214]
+  },
+  {
+    "country": "Bulgaria",
+    "capital": "Sofia",
+    "coordinates": [42.7105, 23.3238]
+  },
+  {
+    "country": "Croatia",
+    "capital": "Zagreb",
+    "coordinates": [45.815, 15.9785]
+  },
+  {
+    "country": "Czech Republic",
+    "capital": "Prague",
+    "coordinates": [50.0878, 14.4205]
+  },
+  {
+    "country": "Denmark",
+    "capital": "Copenhagen",
+    "coordinates": [55.6763, 12.5681]
+  },
+  {
+    "country": "Estonia",
+    "capital": "Tallinn",
+    "coordinates": [59.4389, 24.7545]
+  },
+  {
+    "country": "Finland",
+    "capital": "Helsinki",
+    "coordinates": [60.1699, 24.9384]
+  },
+  {
+    "country": "France",
+    "capital": "Paris",
+    "coordinates": [48.8567, 2.351]
+  },
+  {
+    "country": "Germany",
+    "capital": "Berlin",
+    "coordinates": [52.5235, 13.4115]
+  },
+  {
+    "country": "Greece",
+    "capital": "Athens",
+    "coordinates": [37.9792, 23.7166]
+  },
+  {
+    "country": "Hungary",
+    "capital": "Budapest",
+    "coordinates": [47.4984, 19.0408]
+  },
+  {
+    "country": "Iceland",
+    "capital": "Reykjavik",
+    "coordinates": [64.1353, -21.8952]
+  },
+  {
+    "country": "Ireland",
+    "capital": "Dublin",
+    "coordinates": [53.3441, -6.2675]
+  },
+  {
+    "country": "Italy",
+    "capital": "Rome",
+    "coordinates": [41.8955, 12.4823]
+  },
+  {
+    "country": "Kosovo",
+    "capital": "Pristina",
+    "coordinates": [42.674, 21.1788]
+  },
+  {
+    "country": "Latvia",
+    "capital": "Riga",
+    "coordinates": [56.9465, 24.1049]
+  },
+  {
+    "country": "Liechtenstein",
+    "capital": "Vaduz",
+    "coordinates": [47.1411, 9.5215]
+  },
+  {
+    "country": "Lithuania",
+    "capital": "Vilnius",
+    "coordinates": [54.6896, 25.2799]
+  },
+  {
+    "country": "Luxembourg",
+    "capital": "Luxembourg",
+    "coordinates": [49.61, 6.1296]
+  },
+  {
+    "country": "Malta",
+    "capital": "Valletta",
+    "coordinates": [35.9042, 14.5189]
+  },
+  {
+    "country": "Moldova",
+    "capital": "Chisinau",
+    "coordinates": [47.0167, 28.8497]
+  },
+  {
+    "country": "Monaco",
+    "capital": "Monaco",
+    "coordinates": [43.7325, 7.4189]
+  },
+  {
+    "country": "Montenegro",
+    "capital": "Podgorica",
+    "coordinates": [42.4602, 19.2595]
+  },
+  {
+    "country": "Netherlands",
+    "capital": "Amsterdam",
+    "coordinates": [52.3738, 4.891]
+  },
+  {
+    "country": "North Macedonia",
+    "capital": "Skopje",
+    "coordinates": [42.0024, 21.4361]
+  },
+  {
+    "country": "Norway",
+    "capital": "Oslo",
+    "coordinates": [59.9138, 10.7387]
+  },
+  {
+    "country": "Poland",
+    "capital": "Warsaw",
+    "coordinates": [52.2297, 21.0122]
+  },
+  {
+    "country": "Portugal",
+    "capital": "Lisbon",
+    "coordinates": [38.7072, -9.1355]
+  },
+  {
+    "country": "Romania",
+    "capital": "Bucharest",
+    "coordinates": [44.4479, 26.0979]
+  },
+  {
+    "country": "Russia",
+    "capital": "Moscow",
+    "coordinates": [55.7558, 37.6176]
+  },
+  {
+    "country": "San Marino",
+    "capital": "San Marino",
+    "coordinates": [43.9424, 12.4578]
+  },
+  {
+    "country": "Serbia",
+    "capital": "Belgrade",
+    "coordinates": [44.8048, 20.4781]
+  },
+  {
+    "country": "Slovakia",
+    "capital": "Bratislava",
+    "coordinates": [48.2116, 17.1547]
+  },
+  {
+    "country": "Slovenia",
+    "capital": "Ljubljana",
+    "coordinates": [46.0514, 14.506]
+  },
+  {
+    "country": "Spain",
+    "capital": "Madrid",
+    "coordinates": [40.4167, -3.7033]
+  },
+  {
+    "country": "Sweden",
+    "capital": "Stockholm",
+    "coordinates": [59.3328, 18.0645]
+  },
+  {
+    "country": "Switzerland",
+    "capital": "Bern",
+    "coordinates": [46.948, 7.4481]
+  },
+  {
+    "country": "Ukraine",
+    "capital": "Kiev",
+    "coordinates": [50.4422, 30.5367]
+  },
+  {
+    "country": "United Kingdom",
+    "capital": "London",
+    "coordinates": [51.5002, -0.1262]
+  },
+  {
+    "country": "Faroe Islands",
+    "capital": "Torshavn",
+    "coordinates": [62.0177, -6.7719]
+  },
+  {
+    "country": "Gibraltar",
+    "capital": "Gibraltar",
+    "coordinates": [36.1377, -5.3453]
+  },
+  {
+    "country": "Guernsey",
+    "capital": "Saint Peter Port",
+    "coordinates": [49.466, -2.5522]
+  },
+  {
+    "country": "Isle of Man",
+    "capital": "Douglas",
+    "coordinates": [54.167, -4.4821]
+  },
+  {
+    "country": "Jersey",
+    "capital": "Saint Helier",
+    "coordinates": [49.1919, -2.1071]
+  },
+  {
+    "country": "Svalbard",
+    "capital": "Longyearbyen",
+    "coordinates": [78.2186, 15.6488]
+  },
+  {
+    "country": "Afghanistan",
+    "capital": "Kabul",
+    "coordinates": [34.5155, 69.1952]
+  },
+  {
+    "country": "Armenia",
+    "capital": "Yerevan",
+    "coordinates": [40.1596, 44.509]
+  },
+  {
+    "country": "Azerbaijan",
+    "capital": "Baku",
+    "coordinates": [40.3834, 49.8932]
+  },
+  {
+    "country": "Bahrain",
+    "capital": "Manama",
+    "coordinates": [26.1921, 50.5354]
+  },
+  {
+    "country": "Bangladesh",
+    "capital": "Dhaka",
+    "coordinates": [23.7106, 90.3978]
+  },
+  {
+    "country": "Bhutan",
+    "capital": "Thimphu",
+    "coordinates": [27.4405, 89.673]
+  },
+  {
+    "country": "Brunei",
+    "capital": "Bandar Seri Begawan",
+    "coordinates": [4.9431, 114.9425]
+  },
+  {
+    "country": "Cambodia",
+    "capital": "Phnom Penh",
+    "coordinates": [11.5434, 104.8984]
+  },
+  {
+    "country": "China",
+    "capital": "Peking",
+    "coordinates": [39.9056, 116.3958]
+  },
+  {
+    "country": "Cyprus",
+    "capital": "Nicosia",
+    "coordinates": [35.1676, 33.3736]
+  },
+  {
+    "country": "Georgia",
+    "capital": "Tiflis",
+    "coordinates": [41.701, 44.793]
+  },
+  {
+    "country": "India",
+    "capital": "New Delhi",
+    "coordinates": [28.6353, 77.225]
+  },
+  {
+    "country": "Indonesia",
+    "capital": "Jakarta",
+    "coordinates": [-6.1862, 106.8063]
+  },
+  {
+    "country": "Iran",
+    "capital": "Teheran",
+    "coordinates": [35.7061, 51.4358]
+  },
+  {
+    "country": "Iraq",
+    "capital": "Baghdad",
+    "coordinates": [33.3157, 44.3922]
+  },
+  {
+    "country": "Israel",
+    "capital": "Jerusalem",
+    "coordinates": [31.7857, 35.2007]
+  },
+  {
+    "country": "Japan",
+    "capital": "Tokyo",
+    "coordinates": [35.6785, 139.6823]
+  },
+  {
+    "country": "Jordan",
+    "capital": "Amman",
+    "coordinates": [31.9394, 35.9349]
+  },
+  {
+    "country": "Kazakhstan",
+    "capital": "Astana",
+    "coordinates": [51.1796, 71.4475]
+  },
+  {
+    "country": "Kuwait",
+    "capital": "Kuwait",
+    "coordinates": [29.3721, 47.9824]
+  },
+  {
+    "country": "Kyrgyzstan",
+    "capital": "Bishkek",
+    "coordinates": [42.8679, 74.5984]
+  },
+  {
+    "country": "Laos",
+    "capital": "Vientiane",
+    "coordinates": [17.9689, 102.6137]
+  },
+  {
+    "country": "Lebanon",
+    "capital": "Beirut",
+    "coordinates": [33.8872, 35.5134]
+  },
+  {
+    "country": "Malaysia",
+    "capital": "Kuala Lumpur",
+    "coordinates": [3.1502, 101.7077]
+  },
+  {
+    "country": "Maldives",
+    "capital": "Male",
+    "coordinates": [4.1742, 73.5109]
+  },
+  {
+    "country": "Mongolia",
+    "capital": "Ulan Bator",
+    "coordinates": [47.9138, 106.922]
+  },
+  {
+    "country": "Burma",
+    "capital": "Naypyidaw",
+    "coordinates": [19.754, 96.1345]
+  },
+  {
+    "country": "Nepal",
+    "capital": "Kathmandu",
+    "coordinates": [27.7058, 85.3157]
+  },
+  {
+    "country": "North Korea",
+    "capital": "P'yongyang",
+    "coordinates": [39.0187, 125.7468]
+  },
+  {
+    "country": "Oman",
+    "capital": "Muscat",
+    "coordinates": [23.6086, 58.5922]
+  },
+  {
+    "country": "Pakistan",
+    "capital": "Islamabad",
+    "coordinates": [33.6751, 73.0946]
+  },
+  {
+    "country": "Philippines",
+    "capital": "Manila",
+    "coordinates": [14.579, 120.9726]
+  },
+  {
+    "country": "Qatar",
+    "capital": "Doha",
+    "coordinates": [25.2948, 51.5082]
+  },
+  {
+    "country": "Saudi Arabia",
+    "capital": "Riyadh",
+    "coordinates": [24.6748, 46.6977]
+  },
+  {
+    "country": "Singapore",
+    "capital": "Singapore",
+    "coordinates": [1.2894, 103.85]
+  },
+  {
+    "country": "South Korea",
+    "capital": "Seoul",
+    "coordinates": [37.5139, 126.9828]
+  },
+  {
+    "country": "Sri Lanka",
+    "capital": "Colombo",
+    "coordinates": [6.9155, 79.8572]
+  },
+  {
+    "country": "Syria",
+    "capital": "Damascus",
+    "coordinates": [33.5158, 36.2939]
+  },
+  {
+    "country": "Tajikistan",
+    "capital": "Dushanbe",
+    "coordinates": [38.5737, 68.7738]
+  },
+  {
+    "country": "Thailand",
+    "capital": "Bangkok",
+    "coordinates": [13.7573, 100.502]
+  },
+  {
+    "country": "East Timor",
+    "capital": "Dili",
+    "coordinates": [-8.5662, 125.588]
+  },
+  {
+    "country": "Turkey",
+    "capital": "Ankara",
+    "coordinates": [39.9439, 32.856]
+  },
+  {
+    "country": "Turkmenistan",
+    "capital": "Ashgabat",
+    "coordinates": [37.9509, 58.3794]
+  },
+  {
+    "country": "United Arab Emirates",
+    "capital": "Abu Dhabi",
+    "coordinates": [24.4764, 54.3705]
+  },
+  {
+    "country": "Uzbekistan",
+    "capital": "Tashkent",
+    "coordinates": [41.3193, 69.2481]
+  },
+  {
+    "country": "Vietnam",
+    "capital": "Hanoi",
+    "coordinates": [21.0341, 105.8372]
+  },
+  {
+    "country": "Yemen",
+    "capital": "Sanaa",
+    "coordinates": [15.3556, 44.2081]
+  },
+  {
+    "country": "Taiwan",
+    "capital": "Taipei",
+    "coordinates": [25.0338, 121.5645]
+  },
+  {
+    "country": "Antigua and Barbuda",
+    "capital": "Saint John's",
+    "coordinates": [17.1175, -61.8456]
+  },
+  {
+    "country": "Argentina",
+    "capital": "Buenos Aires",
+    "coordinates": [-34.6118, -58.4173]
+  },
+  {
+    "country": "Bahamas",
+    "capital": "Nassau",
+    "coordinates": [25.0661, -77.339]
+  },
+  {
+    "country": "Barbados",
+    "capital": "Bridgetown",
+    "coordinates": [13.0935, -59.6105]
+  },
+  {
+    "country": "Belize",
+    "capital": "Belmopan",
+    "coordinates": [17.2534, -88.7713]
+  },
+  {
+    "country": "Bolivia",
+    "capital": "Sucre",
+    "coordinates": [-19.0421, -65.2559]
+  },
+  {
+    "country": "Brazil",
+    "capital": "Brasilia",
+    "coordinates": [-15.7801, -47.9292]
+  },
+  {
+    "country": "Canada",
+    "capital": "Ottawa",
+    "coordinates": [45.4235, -75.6979]
+  },
+  {
+    "country": "Chile",
+    "capital": "Santiago",
+    "coordinates": [-33.4691, -70.642]
+  },
+  {
+    "country": "Colombia",
+    "capital": "Bogota",
+    "coordinates": [4.6473, -74.0962]
+  },
+  {
+    "country": "Costa Rica",
+    "capital": "San Jose",
+    "coordinates": [9.9402, -84.1002]
+  },
+  {
+    "country": "Cuba",
+    "capital": "Havana",
+    "coordinates": [23.1333, -82.3667]
+  },
+  {
+    "country": "Dominica",
+    "capital": "Roseau",
+    "coordinates": [15.2976, -61.39]
+  },
+  {
+    "country": "Dominican Republic",
+    "capital": "Santo Domingo",
+    "coordinates": [18.479, -69.8908]
+  },
+  {
+    "country": "Ecuador",
+    "capital": "Quito",
+    "coordinates": [-0.2295, -78.5243]
+  },
+  {
+    "country": "El Salvador",
+    "capital": "San Salvador",
+    "coordinates": [13.7034, -89.2073]
+  },
+  {
+    "country": "Grenada",
+    "capital": "Saint George's",
+    "coordinates": [12.054, -61.7486]
+  },
+  {
+    "country": "Guatemala",
+    "capital": "Guatemala",
+    "coordinates": [14.6248, -90.5328]
+  },
+  {
+    "country": "Guyana",
+    "capital": "Georgetown",
+    "coordinates": [6.8046, -58.1548]
+  },
+  {
+    "country": "Haiti",
+    "capital": "Port-au-Prince",
+    "coordinates": [18.5392, -72.3288]
+  },
+  {
+    "country": "Honduras",
+    "capital": "Tegucigalpa",
+    "coordinates": [14.0821, -87.2063]
+  },
+  {
+    "country": "Jamaica",
+    "capital": "Kingston (J)",
+    "coordinates": [17.9927, -76.792]
+  },
+  {
+    "country": "Mexico",
+    "capital": "Ciudad de Mexico",
+    "coordinates": [19.4271, -99.1276]
+  },
+  {
+    "country": "Nicaragua",
+    "capital": "Managua",
+    "coordinates": [12.1475, -86.2734]
+  },
+  {
+    "country": "Panama",
+    "capital": "Panama",
+    "coordinates": [8.9943, -79.5188]
+  },
+  {
+    "country": "Paraguay",
+    "capital": "Asuncion",
+    "coordinates": [-25.3005, -57.6362]
+  },
+  {
+    "country": "Peru",
+    "capital": "Lima",
+    "coordinates": [-12.0931, -77.0465]
+  },
+  {
+    "country": "St. Kitts and Nevis",
+    "capital": "Basseterre",
+    "coordinates": [17.2968, -62.7138]
+  },
+  {
+    "country": "St. Lucia",
+    "capital": "Castries",
+    "coordinates": [13.9972, -60.0018]
+  },
+  {
+    "country": "St. Vincent and the Grenadines",
+    "capital": "Kingstown",
+    "coordinates": [13.2035, -61.2653]
+  },
+  {
+    "country": "Suriname",
+    "capital": "Paramaribo",
+    "coordinates": [5.8232, -55.1679]
+  },
+  {
+    "country": "Trinidad and Tobago",
+    "capital": "Port of Spain",
+    "coordinates": [10.6596, -61.4789]
+  },
+  {
+    "country": "United States",
+    "capital": "Washington",
+    "coordinates": [38.8921, -77.0241]
+  },
+  {
+    "country": "Uruguay",
+    "capital": "Montevideo",
+    "coordinates": [-34.8941, -56.0675]
+  },
+  {
+    "country": "Venezuela",
+    "capital": "Caracas",
+    "coordinates": [10.4961, -66.8983]
+  },
+  {
+    "country": "Anguilla",
+    "capital": "The Valley",
+    "coordinates": [18.2249, -63.0669]
+  },
+  {
+    "country": "Aruba",
+    "capital": "Oranjestad",
+    "coordinates": [12.5246, -70.0265]
+  },
+  {
+    "country": "Bermuda",
+    "capital": "Hamilton",
+    "coordinates": [32.293, -64.782]
+  },
+  {
+    "country": "British Virgin Islands",
+    "capital": "Road Town",
+    "coordinates": [18.4328, -64.6235]
+  },
+  {
+    "country": "Cayman Islands",
+    "capital": "George Town",
+    "coordinates": [19.3022, -81.3857]
+  },
+  {
+    "country": "Falkland Islands",
+    "capital": "Stanley",
+    "coordinates": [-51.701, -57.8492]
+  },
+  {
+    "country": "French Guiana",
+    "capital": "Cayenne",
+    "coordinates": [4.9346, -52.3303]
+  },
+  {
+    "country": "Greenland",
+    "capital": "Nuuk",
+    "coordinates": [64.1836, -51.7214]
+  },
+  {
+    "country": "Guadeloupe",
+    "capital": "Basse-Terre",
+    "coordinates": [15.9985, -61.722]
+  },
+  {
+    "country": "Martinique",
+    "capital": "Fort-de-France",
+    "coordinates": [14.5997, -61.076]
+  },
+  {
+    "country": "Montserrat",
+    "capital": "Plymouth",
+    "coordinates": [16.6802, -62.2014]
+  },
+  {
+    "country": "Netherlands Antilles",
+    "capital": "Willemstad",
+    "coordinates": [12.1034, -68.9335]
+  },
+  {
+    "country": "Puerto Rico",
+    "capital": "San Juan",
+    "coordinates": [18.45, -66.0667]
+  },
+  {
+    "country": "St. Pierre and Miquelon",
+    "capital": "Saint-Pierre",
+    "coordinates": [46.7878, -56.1968]
+  },
+  {
+    "country": "Turks- and Caicos Islands",
+    "capital": "Cockburn Town",
+    "coordinates": [21.4608, -71.1363]
+  },
+  {
+    "country": "United States Virgin Islands",
+    "capital": "Charlotte Amalie",
+    "coordinates": [18.3405, -64.9326]
+  },
+  {
+    "country": "Algeria",
+    "capital": "Algiers",
+    "coordinates": [36.7755, 3.0597]
+  },
+  {
+    "country": "Angola",
+    "capital": "Luanda",
+    "coordinates": [-8.8159, 13.2306]
+  },
+  {
+    "country": "Benin",
+    "capital": "Porto-Novo",
+    "coordinates": [6.4779, 2.6323]
+  },
+  {
+    "country": "Botswana",
+    "capital": "Gaborone",
+    "coordinates": [-24.657, 25.9089]
+  },
+  {
+    "country": "Burkina Faso",
+    "capital": "Ouagadougou",
+    "coordinates": [12.3569, -1.5352]
+  },
+  {
+    "country": "Burundi",
+    "capital": "Bujumbura",
+    "coordinates": [-3.3818, 29.3622]
+  },
+  {
+    "country": "Cameroon",
+    "capital": "Yaounde",
+    "coordinates": [3.8612, 11.5217]
+  },
+  {
+    "country": "Cape Verde",
+    "capital": "Praia",
+    "coordinates": [14.9195, -23.5153]
+  },
+  {
+    "country": "Central African Republic",
+    "capital": "Bangui",
+    "coordinates": [4.3621, 18.5873]
+  },
+  {
+    "country": "Chad",
+    "capital": "N'djamena",
+    "coordinates": [12.1121, 15.0355]
+  },
+  {
+    "country": "Comoros",
+    "capital": "Moroni",
+    "coordinates": [-11.7004, 43.2412]
+  },
+  {
+    "country": "Congo",
+    "capital": "Brazzaville",
+    "coordinates": [-4.2767, 15.2662]
+  },
+  {
+    "country": "Congo",
+    "capital": "Kinshasa",
+    "coordinates": [-4.3369, 15.3271]
+  },
+  {
+    "country": "Cote d'Ivoire",
+    "capital": "Yamoussoukro",
+    "coordinates": [6.8067, -5.2728]
+  },
+  {
+    "country": "Djibouti",
+    "capital": "Djibouti",
+    "coordinates": [11.5806, 43.1425]
+  },
+  {
+    "country": "Egypt",
+    "capital": "Cairo",
+    "coordinates": [30.0571, 31.2272]
+  },
+  {
+    "country": "Equatorial Guinea",
+    "capital": "Malabo",
+    "coordinates": [3.7523, 8.7741]
+  },
+  {
+    "country": "Eritrea",
+    "capital": "Asmara",
+    "coordinates": [15.3315, 38.9183]
+  },
+  {
+    "country": "Ethiopia",
+    "capital": "Addis Abeba",
+    "coordinates": [9.0084, 38.7575]
+  },
+  {
+    "country": "Gabon",
+    "capital": "Libreville",
+    "coordinates": [0.3858, 9.4496]
+  },
+  {
+    "country": "Gambia",
+    "capital": "Banjul",
+    "coordinates": [13.4399, -16.6775]
+  },
+  {
+    "country": "Ghana",
+    "capital": "Accra",
+    "coordinates": [5.5401, -0.2074]
+  },
+  {
+    "country": "Guinea",
+    "capital": "Conakry",
+    "coordinates": [9.537, -13.6785]
+  },
+  {
+    "country": "Guinea-Bissau",
+    "capital": "Bissau",
+    "coordinates": [11.8598, -15.5875]
+  },
+  {
+    "country": "Kenya",
+    "capital": "Nairobi",
+    "coordinates": [-1.2762, 36.7965]
+  },
+  {
+    "country": "Lesotho",
+    "capital": "Maseru",
+    "coordinates": [-29.2976, 27.4854]
+  },
+  {
+    "country": "Liberia",
+    "capital": "Monrovia",
+    "coordinates": [6.3106, -10.8047]
+  },
+  {
+    "country": "Libya",
+    "capital": "Tripoli",
+    "coordinates": [32.883, 13.1897]
+  },
+  {
+    "country": "Madagascar",
+    "capital": "Antananarivo",
+    "coordinates": [-18.9201, 47.5237]
+  },
+  {
+    "country": "Malawi",
+    "capital": "Lilongwe",
+    "coordinates": [-13.9899, 33.7703]
+  },
+  {
+    "country": "Mali",
+    "capital": "Bamako",
+    "coordinates": [12.653, -7.9864]
+  },
+  {
+    "country": "Mauritania",
+    "capital": "Nouakchott",
+    "coordinates": [18.0669, -15.99]
+  },
+  {
+    "country": "Mauritius",
+    "capital": "Port Louis",
+    "coordinates": [-20.1654, 57.4896]
+  },
+  {
+    "country": "Morocco",
+    "capital": "Rabat",
+    "coordinates": [33.9905, -6.8704]
+  },
+  {
+    "country": "Mozambique",
+    "capital": "Maputo",
+    "coordinates": [-25.9686, 32.5804]
+  },
+  {
+    "country": "Namibia",
+    "capital": "Windhoek",
+    "coordinates": [-22.5749, 17.0805]
+  },
+  {
+    "country": "Niger",
+    "capital": "Niamey",
+    "coordinates": [13.5164, 2.1157]
+  },
+  {
+    "country": "Nigeria",
+    "capital": "Abuja",
+    "coordinates": [9.058, 7.4891]
+  },
+  {
+    "country": "Rwanda",
+    "capital": "Kigali",
+    "coordinates": [-1.9441, 30.0619]
+  },
+  {
+    "country": "Sao Tome and Principe",
+    "capital": "Sao Tome",
+    "coordinates": [0.336, 6.7311]
+  },
+  {
+    "country": "Senegal",
+    "capital": "Dakar",
+    "coordinates": [14.6953, -17.4439]
+  },
+  {
+    "country": "Seychelles",
+    "capital": "Victoria",
+    "coordinates": [-4.6167, 55.45]
+  },
+  {
+    "country": "Sierra Leone",
+    "capital": "Freetown",
+    "coordinates": [8.4697, -13.2659]
+  },
+  {
+    "country": "Somalia",
+    "capital": "Mogadishu",
+    "coordinates": [2.0411, 45.3426]
+  },
+  {
+    "country": "South Africa",
+    "capital": "Pretoria",
+    "coordinates": [-25.7463, 28.1876]
+  },
+  {
+    "country": "Sudan (North)",
+    "capital": "Khartoum",
+    "coordinates": [15.5501, 32.5322]
+  },
+  {
+    "country": "Sudan (South)",
+    "capital": "Juba",
+    "coordinates": [4.8496, 31.6046]
+  },
+  {
+    "country": "Swaziland",
+    "capital": "Mbabane",
+    "coordinates": [-26.3186, 31.141]
+  },
+  {
+    "country": "Tanzania",
+    "capital": "Dodoma",
+    "coordinates": [-6.167, 35.7497]
+  },
+  {
+    "country": "Togo",
+    "capital": "Lome",
+    "coordinates": [6.1228, 1.2255]
+  },
+  {
+    "country": "Tunisia",
+    "capital": "Tunis",
+    "coordinates": [36.8117, 10.1761]
+  },
+  {
+    "country": "Uganda",
+    "capital": "Kampala",
+    "coordinates": [0.3133, 32.5714]
+  },
+  {
+    "country": "Zambia",
+    "capital": "Lusaka",
+    "coordinates": [-15.4145, 28.2809]
+  },
+  {
+    "country": "Zimbabwe",
+    "capital": "Harare",
+    "coordinates": [-17.8227, 31.0496]
+  },
+  {
+    "country": "Mayotte",
+    "capital": "Mamoudzou",
+    "coordinates": [-12.7806, 45.2278]
+  },
+  {
+    "country": "Reunion",
+    "capital": "Saint Denis",
+    "coordinates": [-20.8732, 55.4603]
+  },
+  {
+    "country": "St. Helena",
+    "capital": "Jamestown",
+    "coordinates": [-15.9244, -5.7181]
+  },
+  {
+    "country": "Western Sahara",
+    "capital": "El Aaiun",
+    "coordinates": [27.1536, -13.2033]
+  },
+  {
+    "country": "Australia",
+    "capital": "Canberra",
+    "coordinates": [-35.282, 149.1286]
+  },
+  {
+    "country": "Fiji",
+    "capital": "Suva",
+    "coordinates": [-18.1416, 178.4419]
+  },
+  {
+    "country": "Kiribati",
+    "capital": "Bairiki",
+    "coordinates": [1.3282, 172.9784]
+  },
+  {
+    "country": "Marshall Islands",
+    "capital": "Dalap-Uliga-Darrit",
+    "coordinates": [7.1167, 171.3667]
+  },
+  {
+    "country": "Micronesia",
+    "capital": "Palikir",
+    "coordinates": [6.9177, 158.1854]
+  },
+  {
+    "country": "Nauru",
+    "capital": "Yaren",
+    "coordinates": [-0.5434, 166.9196]
+  },
+  {
+    "country": "New Zealand",
+    "capital": "Wellington",
+    "coordinates": [-41.2865, 174.7762]
+  },
+  {
+    "country": "Palau",
+    "capital": "Melekeok",
+    "coordinates": [7.5007, 134.6241]
+  },
+  {
+    "country": "Papua New Guinea",
+    "capital": "Port Moresby",
+    "coordinates": [-9.4656, 147.1969]
+  },
+  {
+    "country": "Samoa",
+    "capital": "Apia",
+    "coordinates": [-13.8314, -171.7518]
+  },
+  {
+    "country": "Solomon Islands",
+    "capital": "Honiara",
+    "coordinates": [-9.4333, 159.95]
+  },
+  {
+    "country": "Tonga",
+    "capital": "Nuku'alofa",
+    "coordinates": [-21.136, -175.2164]
+  },
+  {
+    "country": "Tuvalu",
+    "capital": "Vaiaku",
+    "coordinates": [-8.521, 179.1983]
+  },
+  {
+    "country": "Vanuatu",
+    "capital": "Port Vila",
+    "coordinates": [-17.7404, 168.321]
+  },
+  {
+    "country": "American Samoa",
+    "capital": "Pago Pago",
+    "coordinates": [-14.2793, -170.7009]
+  },
+  {
+    "country": "Christmas Island",
+    "capital": "Flying Fish Cove",
+    "coordinates": [-10.4286, 105.6807]
+  },
+  {
+    "country": "Cocos Islands",
+    "capital": "West Island",
+    "coordinates": [-12.1869, 96.8283]
+  },
+  {
+    "country": "Cook Islands",
+    "capital": "Avarua",
+    "coordinates": [-21.2039, -159.7658]
+  },
+  {
+    "country": "French Polynesia",
+    "capital": "Papeete",
+    "coordinates": [-17.535, -149.5696]
+  },
+  {
+    "country": "Guam",
+    "capital": "Hagatna",
+    "coordinates": [13.4667, 144.747]
+  },
+  {
+    "country": "New Caledonia",
+    "capital": "Noumea",
+    "coordinates": [-22.2758, 166.4581]
+  },
+  {
+    "country": "Niue",
+    "capital": "Alofi",
+    "coordinates": [-19.0565, -169.9237]
+  },
+  {
+    "country": "Norfolk Island",
+    "capital": "Kingston (NI)",
+    "coordinates": [-29.0545, 167.9666]
+  },
+  {
+    "country": "Northern Mariana Islands",
+    "capital": "Garapan",
+    "coordinates": [15.2069, 145.7197]
+  },
+  {
+    "country": "Pitcairn Islands",
+    "capital": "Adamstown",
+    "coordinates": [-25.0662, -130.1027]
+  },
+  {
+    "country": "Wallis and Futuna",
+    "capital": "Mata-Utu",
+    "coordinates": [-13.2784, -176.143]
+  }
+]

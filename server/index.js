@@ -4,7 +4,10 @@ const { todoActions } = require('./store/todo');
 const { themeActions } = require('./store/theme');
 const { loginActions } = require('./store/login');
 const { roomActions } = require('./store/room');
+const { mapRouteActions } = require('./store/map-route');
 const { state, dispatch } = require('./store');
+const capitals = require('./files/capitals.json');
+const { compare } = require('./tools/sortOrder');
 const http = require('http');
 const socketio = require('socket.io');
 const {
@@ -246,7 +249,7 @@ app.post('/api/room/', (req, res) => {
   res.send({ id });
 });
 
-// EXPLANATION: get rooms
+// EXPLANATION: get room
 app.get('/api/room/:id', (req, res) => {
   res.json(state.room.list.find((it) => it.id == req.params.id));
 });
@@ -267,6 +270,56 @@ app.put('/api/room/', (req, res) => {
 // EXPLANATION: reset room state
 app.get('/api/room/reset', (req, res) => {
   roomActions.RESET(dispatch);
+
+  res.send({ reseted: true });
+});
+
+//
+//
+// EXPLANATION: get map routes data
+app.get('/api/map-routes/data', (req, res) => {
+  res.json({ capitals: capitals.sort(compare('capital')) });
+});
+
+// EXPLANATION: get map routes
+app.get('/api/map-routes', (req, res) => {
+  res.json(state.mapRoute.list);
+});
+
+// EXPLANATION: create new map routes
+app.post('/api/map-routes/', (req, res) => {
+  const id = state.mapRoute.list.length + 1;
+
+  mapRouteActions.ADD(dispatch, {
+    id,
+    from: capitals.find((it) => it.capital === req.body.from),
+    to: capitals.find((it) => it.capital === req.body.to),
+  });
+
+  res.send({ id });
+});
+
+// EXPLANATION: get map route
+app.get('/api/map-routes/:id', (req, res) => {
+  res.json(state.mapRoute.list.find((it) => it.id == req.params.id));
+});
+
+// EXPLANATION: update map route
+app.put('/api/map-routes/', (req, res) => {
+  const index = state.mapRoute.list.findIndex((it) => it.id == req.body.id);
+  let updated = false;
+
+  if (index > -1) {
+    mapRouteActions.EDIT(dispatch, { index, item: req.body });
+    updated = req.body.id;
+  }
+
+  res.send({ updated });
+});
+
+// EXPLANATION: reset map routes
+app.get('/api/map-routes/reset', (req, res) => {
+  mapRouteActions.RESET(dispatch);
 
   res.send({ reseted: true });
 });
