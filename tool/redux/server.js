@@ -58,7 +58,9 @@ const generateReducer = (actionTypes, moreState = {}) => (
     }
 
     case actionTypes.DELETE:
-      return Object.assign(draft, { deleted: action.payload });
+      const nextList = Object.assign([], draft.list);
+      nextList.splice(action.payload.index, 1);
+      return Object.assign(draft, { list: nextList });
   }
 };
 

@@ -16,7 +16,6 @@ import reducer, {
   mapRouteMapDispatchToProps,
   mapRouteMapStateToProps
 } from '../store/mapRoute';
-import { ICoordinates } from '../interfaces';
 
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
@@ -75,6 +74,7 @@ const MapChart = ({ getList, list }: MapCharProps) => {
     setData(dataCSV);
     setCapitals(capitalsCSV);
   }, []);
+  console.log(list);
 
   useEffect(() => {
     if (!list) {

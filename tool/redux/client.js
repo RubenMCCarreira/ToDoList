@@ -81,6 +81,7 @@ const generateReducer = (actionTypes) => (draft = DEFAULT_STATE, action) => {
         ...draft,
         loading: null,
         item: null,
+        list: null,
         error: null,
         deleted: action.payload,
       };

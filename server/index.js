@@ -304,6 +304,19 @@ app.get('/api/map-routes/:id', (req, res) => {
   res.json(state.mapRoute.list.find((it) => it.id == req.params.id));
 });
 
+// EXPLANATION: delete map route
+app.delete('/api/map-routes/:id', (req, res) => {
+  const index = state.mapRoute.list.findIndex((it) => it.id == req.params.id);
+  let deleted = false;
+
+  if (index > -1) {
+    mapRouteActions.DELETE(dispatch, { index });
+    deleted = req.body.id;
+  }
+
+  res.send({ deleted });
+});
+
 // EXPLANATION: update map route
 app.put('/api/map-routes/', (req, res) => {
   const index = state.mapRoute.list.findIndex((it) => it.id == req.body.id);

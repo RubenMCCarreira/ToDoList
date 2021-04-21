@@ -7,7 +7,7 @@ interface MapLineFromToProps {
   round?: boolean;
 }
 
-const MapLineFromTo = ({ from, to, round }: MapLineFromToProps) => {
+const MapLineFromTo = ({ from, to, round = true }: MapLineFromToProps) => {
   return (
     <Line
       stroke="#F53"
