@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/Input';
+import InputDate from '../components/InputDate';
 
 interface IFormItem {
   prop: string;
@@ -24,6 +25,7 @@ interface FormProps {
   label?: string;
   callback?: Function;
   className?: string;
+  grid?: boolean;
 }
 
 const reset = (items) => {
@@ -38,7 +40,8 @@ const mapTypeToComponent = (type) => {
   const map = {
     input: Input,
     password: Input,
-    select: Dropdown
+    select: Dropdown,
+    dateTime: InputDate
   };
 
   return map[type] || Input;
@@ -49,7 +52,8 @@ const Form = ({
   onSubmit,
   label = 'Submit',
   callback,
-  className
+  className,
+  grid = false
 }: FormProps) => {
   const [nextItems, setNextItems] = useState({});
 
@@ -58,8 +62,6 @@ const Form = ({
   }, [items]);
 
   const onChange = (value, prop) => {
-    console.log(value, prop);
-
     setNextItems((current) => ({
       ...current,
       [prop]: {
@@ -106,7 +108,10 @@ const Form = ({
   };
 
   return (
-    <form className={`${className || 'no-wrap'}`} onSubmit={handleSubmit}>
+    <form
+      className={`${className || (grid ? 'grid' : undefined) || 'no-wrap'}`}
+      onSubmit={handleSubmit}
+    >
       {Object.keys(nextItems).map((it) => {
         const Component = mapTypeToComponent(nextItems[it].type);
         return (

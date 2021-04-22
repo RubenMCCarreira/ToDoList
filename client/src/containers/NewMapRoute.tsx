@@ -34,6 +34,12 @@ const NewMapRoute = ({ other, getOther, saveItem }: NewMapRouteProps) => {
           }))
         },
         {
+          prop: 'departure',
+          placeholder: 'Departure',
+          mandatory: true,
+          type: 'dateTime'
+        },
+        {
           prop: 'to',
           placeholder: 'To',
           mandatory: true,
@@ -42,10 +48,17 @@ const NewMapRoute = ({ other, getOther, saveItem }: NewMapRouteProps) => {
             label: it.capital,
             value: it.capital
           }))
+        },
+        {
+          prop: 'arrive',
+          placeholder: 'Arrive',
+          mandatory: true,
+          type: 'dateTime'
         }
       ]}
       onSubmit={saveItem}
       label="Create"
+      grid
     />
   );
 };

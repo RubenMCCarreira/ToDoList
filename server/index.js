@@ -292,6 +292,7 @@ app.post('/api/map-routes/', (req, res) => {
 
   mapRouteActions.ADD(dispatch, {
     id,
+    ...req.body,
     from: capitals.find((it) => it.capital === req.body.from),
     to: capitals.find((it) => it.capital === req.body.to),
   });

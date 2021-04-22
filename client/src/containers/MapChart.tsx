@@ -74,7 +74,6 @@ const MapChart = ({ getList, list }: MapCharProps) => {
     setData(dataCSV);
     setCapitals(capitalsCSV);
   }, []);
-  console.log(list);
 
   useEffect(() => {
     if (!list) {

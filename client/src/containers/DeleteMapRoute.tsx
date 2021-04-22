@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
-import Paragraph from '../components/Paragraph';
-import Span from '../components/Span';
 import reducer, {
   stateMapRouteKey,
   mapRouteMapDispatchToProps,
   mapRouteMapStateToProps
 } from '../store/mapRoute';
+import { formatDate } from '../tools/date';
+import Table from './Table';
 
 type DeleteMapRouteProps = {
   list: any[];
@@ -21,14 +21,35 @@ const DeleteMapRoute = ({ list, getList, deleteItem }: DeleteMapRouteProps) => {
     }
   }, [list]);
 
-  return (list || []).map((it, index) => (
-    <Paragraph key={index}>
-      {`${it.from.capital} -> ${it.to.capital}`}
-      <Span onClick={() => deleteItem(it.id)} bold>
-        Remove
-      </Span>
-    </Paragraph>
-  ));
+  return (
+    <Table
+      headers={[
+        { prop: 'from.capital', label: 'From' },
+        {
+          prop: 'departure',
+          label: 'Departure',
+          callback: (value) => formatDate(value)
+        },
+        { prop: 'to.capital', label: 'To' },
+        {
+          prop: 'arrive',
+          label: 'Arrive',
+          callback: (value) => formatDate(value)
+        },
+        {
+          label: 'Options',
+          prop: null,
+          options: [
+            {
+              label: 'Remove',
+              callback: (row) => deleteItem(row.id)
+            }
+          ]
+        }
+      ]}
+      rows={list}
+    />
+  );
 };
 
 export default withInjectReducer(

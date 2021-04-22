@@ -105,6 +105,10 @@ span {
   &.bold {
     font-weight: bold;
   }
+
+  &.click {
+    cursor: pointer;
+  }
 }
 
 div,
@@ -166,6 +170,7 @@ button {
 input[type='file'],
 input[type='text'],
 input[type='password'],
+input[type='datetime-local'],
 select {
   @extend %measures;
 
@@ -194,6 +199,11 @@ select {
 select {
   text-transform: capitalize;
   height: 32px;
+  width: 100%;
+}
+
+input[type='datetime-local'] {
+  height: 15px;
   width: 100%;
 }
 
@@ -566,4 +576,29 @@ path.rsm-geography {
 
 #tabs-content {
   padding: 5px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1%;
+
+  > div {
+    width: 95%;
+  }
+}
+
+table {
+  width: 100%;
+
+  thead {
+    flex: 1;
+
+    tr {
+      td {
+        font-weight: bold;
+        border-bottom: 1px solid;
+      }
+    }
+  }
 }

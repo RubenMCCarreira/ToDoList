@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react';
 import { useThemeContext } from '../contexts/Theme';
 import Missing from './Missing';
 
@@ -18,10 +17,14 @@ const Dropdown = ({ item, value, values, onChange, prop }: DropdownProps) => {
   };
 
   return (
-    <>
-      <select className={`${theme}`} value={value} onChange={handleOnChange}>
-        <option disabled selected>
-          Select
+    <div>
+      <select
+        className={`${theme}`}
+        value={value || item?.value || 'Select One'}
+        onChange={handleOnChange}
+      >
+        <option disabled value="Select One">
+          Select One
         </option>
         {values.map((it) => (
           <option key={`option-${it.label || it}`} value={it.value || it}>
@@ -30,7 +33,7 @@ const Dropdown = ({ item, value, values, onChange, prop }: DropdownProps) => {
         ))}
       </select>
       {item?.error && <Missing />}
-    </>
+    </div>
   );
 };
 

@@ -6,19 +6,19 @@ interface PriorityProps {
   disabled?: boolean;
 }
 
-const Priority = ({ value, onChange, disabled = false }: PriorityProps) => {
-  const options = [
-    { value: 1, name: 'arrow-very-low' },
-    { value: 2, name: 'arrow-low' },
-    { value: 3, name: 'normal' },
-    { value: 4, name: 'arrow-high' },
-    { value: 5, name: 'arrow-very-high' }
-  ];
+const OPTIONS = [
+  { value: 1, name: 'arrow-very-low' },
+  { value: 2, name: 'arrow-low' },
+  { value: 3, name: 'normal' },
+  { value: 4, name: 'arrow-high' },
+  { value: 5, name: 'arrow-very-high' }
+];
 
+const Priority = ({ value, onChange, disabled = false }: PriorityProps) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const find = options.findIndex((it) => it.value == value);
+    const find = OPTIONS.findIndex((it) => it.value == value);
     setIndex(find > -1 ? find : 2);
   }, [value]);
 
@@ -27,9 +27,9 @@ const Priority = ({ value, onChange, disabled = false }: PriorityProps) => {
       return;
     }
     let nextIndex = index + 1;
-    nextIndex = nextIndex > options.length - 1 ? 0 : nextIndex;
+    nextIndex = nextIndex > OPTIONS.length - 1 ? 0 : nextIndex;
     if (onChange) {
-      onChange(options[nextIndex].value);
+      onChange(OPTIONS[nextIndex].value);
     }
     setIndex(nextIndex);
   };
@@ -38,7 +38,7 @@ const Priority = ({ value, onChange, disabled = false }: PriorityProps) => {
     <img
       key={index}
       onClick={onClick}
-      src={`/priority/${options[index].name}.png`}
+      src={`/priority/${OPTIONS[index].name}.png`}
       className="priority"
     />
   );

@@ -5,8 +5,8 @@ import { nextClassNames } from '../tools/classnames';
 interface SpanProps {
   children: ReactChild | ReactChild[];
   className?: string;
-  onClick?: MouseEventHandler<HTMLParagraphElement>;
-  bold?: boolean
+  onClick?: Function;
+  bold?: boolean;
 }
 
 const Span = ({ children, className = '', onClick, bold }: SpanProps) => {
@@ -15,11 +15,18 @@ const Span = ({ children, className = '', onClick, bold }: SpanProps) => {
   const nextClassName = nextClassNames([
     theme,
     bold ? 'bold' : '',
-    className
+    className,
+    onClick ? 'click' : ''
   ]);
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <span onClick={onClick} className={nextClassName}>
+    <span onClick={handleClick} className={nextClassName}>
       {children}
     </span>
   );

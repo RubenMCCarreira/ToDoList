@@ -8,7 +8,7 @@ interface H2Props {
 const H2 = ({ children }: H2Props) => {
   const { theme } = useThemeContext();
 
-  return <h3 className={`${theme}`}>{children}</h3>;
+  return <h2 className={`${theme}`}>{children}</h2>;
 };
 
 export default H2;

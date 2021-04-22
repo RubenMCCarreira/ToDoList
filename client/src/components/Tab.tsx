@@ -1,6 +1,6 @@
 interface TabProps {
   children: any;
-  title: any;
+  title: string;
 }
 
 const Tab = ({ children }: TabProps) => {
