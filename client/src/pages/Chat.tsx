@@ -5,8 +5,8 @@ import reducer, {
   roomMapStateToProps,
   stateRoomKey
 } from '../store/room';
-import Room, { IRoom } from '../containers/Room';
-import { IHistory } from '../interfaces';
+import Room from '../containers/Room';
+import { IHistory, IRoom } from '../interfaces';
 import Form from '../containers/Form';
 import Layout from '../containers/Layout';
 import Paragraph from '../components/Paragraph';

@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactChild } from 'react';
+import { ReactChild } from 'react';
 import { useThemeContext } from '../contexts/Theme';
 import { nextClassNames } from '../tools/classnames';
 

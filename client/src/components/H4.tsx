@@ -1,9 +1,8 @@
-import { ReactChild } from 'react';
 import { useThemeContext } from '../contexts/Theme';
 import { nextClassNames } from '../tools/classnames';
 
 interface H4Props {
-  children: string | null | ReactChild | ReactChild[];
+  children: string;
   className?: string;
 }
 

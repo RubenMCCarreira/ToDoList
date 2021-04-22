@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
-import ToDo, { IToDo } from './ToDo';
+import ToDo from './ToDo';
 import reducer, {
   toDoMapStateToProps,
   toDoMapDispatchToProps,
@@ -13,6 +13,7 @@ import Button from '../components/Button';
 import H2 from '../components/H2';
 import H4 from '../components/H4';
 import Div from '../components/Div';
+import { IToDo } from '../interfaces';
 
 interface ToDosProps {
   getList: Function;

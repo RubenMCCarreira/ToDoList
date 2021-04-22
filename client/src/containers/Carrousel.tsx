@@ -1,11 +1,11 @@
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react';
 import Div from '../components/Div';
 import { useThemeContext } from '../contexts/Theme';
-import { IFile } from '../interfaces';
+import { IImage } from '../interfaces';
 import { nextClassNames } from '../tools/classnames';
 
 interface CarrouselProps {
-  items: IFile[];
+  items: IImage[];
   circular?: boolean;
   showFooter?: boolean;
   showDots?: boolean;
@@ -17,7 +17,7 @@ const Carrousel = ({
   circular = true,
   showFooter = false,
   showDots = true,
-  time = 3000
+  time = 5000
 }: CarrouselProps) => {
   const { theme } = useThemeContext();
   const [current, setCurrent] = useState(0);
@@ -72,8 +72,12 @@ const Carrousel = ({
     <Div id="carrousel">
       <Div id="top">
         <span onClick={() => onchangeCurrent(current - 1)}>{`<`}</span>
-        <img src={items[current].src} alt={items[current].name} />
+        <img
+          src={items[current].src}
+          alt={items[current].legend || items[current].name}
+        />
         <span onClick={() => onchangeCurrent(current + 1)}>{`>`}</span>
+        <Div id="legend">{items[current].legend || items[current].name}</Div>
         <>
           {showDots && (
             <Div id="dots">

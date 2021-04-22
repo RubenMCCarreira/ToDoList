@@ -5,12 +5,15 @@ $black-main: black;
 $red-1: saturate($red-main, 20%);
 $red-2: lighten($red-main, 40%);
 $red-3: darken($red-main, 15%);
+$red-4: lighten($red-main, 35%);
 $green-1: saturate($green-main, 20%);
 $green-2: lighten($green-main, 65%);
 $green-3: darken($green-main, 7%);
+$green-4: lighten($green-main, 70%);
 $black-1: saturate($black-main, 20%);
 $black-2: lighten($black-main, 65%);
 $black-3: darken($black-main, 7%);
+$black-4: lighten($black-main, 75%);
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -171,7 +174,8 @@ input[type='file'],
 input[type='text'],
 input[type='password'],
 input[type='datetime-local'],
-select {
+select,
+textarea {
   @extend %measures;
 
   flex: 1;
@@ -474,19 +478,48 @@ path.rsm-geography {
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: rgba($white-main, 0.3);
+      border-radius: 50%;
 
       &:first-of-type {
-        left: 0px;
+        left: 10px;
       }
 
       &:last-of-type {
-        right: 0px;
+        right: 10px;
       }
     }
 
     > img {
       max-width: 100%;
       max-height: 300px;
+    }
+
+    #legend {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      width: 200px;
+      min-height: 50px;
+      word-break: break-all;
+      padding: 5px;
+      font-size: 12px;
+      border-radius: 10px;
+
+      &.black {
+        background: linear-gradient(to bottom, $black-4, transparent),
+          linear-gradient(to left, rgba(128, 182, 243, 0.5), transparent);
+      }
+
+      &.green {
+        background: linear-gradient(to bottom, $green-4, transparent),
+          linear-gradient(to left, rgba(128, 182, 243, 0.5), transparent);
+      }
+
+      &.red {
+        background: linear-gradient(to bottom, $red-4, transparent),
+          linear-gradient(to left, rgba(128, 182, 243, 0.5), transparent);
+      }
     }
 
     #dots {
@@ -501,17 +534,21 @@ path.rsm-geography {
         border-radius: 50%;
         display: inline-block;
         margin: 0.5rem;
+        border: 1px solid transparent;
 
         &.current.black {
-          background-color: $black-1;
+          background-color: rgba($black-1, 0.7);
+          border-color: $black-2;
         }
 
         &.current.green {
-          background-color: $green-1;
+          background-color: rgba($green-1, 0.7);
+          border-color: $green-2;
         }
 
         &.current.red {
-          background-color: $red-1;
+          background-color: rgba($red-1, 0.7);
+          border-color: $red-2;
         }
       }
     }
@@ -600,5 +637,12 @@ table {
         border-bottom: 1px solid;
       }
     }
+  }
+}
+
+#add-image {
+  img {
+    max-width: 300px;
+    max-height: 300px;
   }
 }

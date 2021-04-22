@@ -16,24 +16,14 @@ import reducer, {
   mapRouteMapDispatchToProps,
   mapRouteMapStateToProps
 } from '../store/mapRoute';
+import { ICountry, IMapRoute, IMapValues } from '../interfaces';
 
 const geoUrl =
   'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
 
-interface IMapValues {
-  ISO3: string;
-  Name: string;
-}
-
-interface ICountry {
-  country: string;
-  capital: string;
-  coordinates: number[];
-}
-
 interface MapCharProps {
   getList: Function;
-  list: any[];
+  list: IMapRoute[];
 }
 
 const MapChart = ({ getList, list }: MapCharProps) => {

@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react';
 import Div from './Div';
 import Span from './Span';
 
-const Tabs = ({ children }) => {
+interface TabsProps {
+  children: any;
+}
+
+const Tabs = ({ children }: TabsProps) => {
   const [active, setActive] = useState(0);
   const [nextChildren, setNextChildren] = useState<any[]>([]);
 

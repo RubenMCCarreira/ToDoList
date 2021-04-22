@@ -1,6 +1,6 @@
-import { IFile } from '../interfaces';
+import { IImage } from '../interfaces';
 
-export const fileToDataUri = (image: IFile) => {
+export const fileToDataUri = (image: IImage) => {
   return new Promise((res) => {
     const reader = new FileReader();
     const { type, name, size } = image;

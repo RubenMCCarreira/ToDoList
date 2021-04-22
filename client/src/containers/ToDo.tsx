@@ -6,18 +6,9 @@ import H3 from '../components/H3';
 import Paragraph from '../components/Paragraph';
 import Priority from '../components/Priority';
 import { useThemeContext } from '../contexts/Theme';
-import { IItemState } from '../interfaces';
+import { IItemState, IToDo } from '../interfaces';
 import Article from '../components/Article';
 import Div from '../components/Div';
-
-export interface IToDo {
-  id: number;
-  title: string;
-  description: string;
-  removed: boolean;
-  priority: number;
-  done: boolean;
-}
 
 interface ToDoProps {
   item: IToDo;

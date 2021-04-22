@@ -5,6 +5,7 @@ const { themeActions } = require('./store/theme');
 const { loginActions } = require('./store/login');
 const { roomActions } = require('./store/room');
 const { mapRouteActions } = require('./store/map-route');
+const { imageActions } = require('./store/image');
 const { state, dispatch } = require('./store');
 const capitals = require('./files/capitals.json');
 const { compare } = require('./tools/sortOrder');
@@ -24,7 +25,7 @@ const app = express();
 const port = 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 const server = http.createServer(app);
 const io = socketio(server);
@@ -334,6 +335,64 @@ app.put('/api/map-routes/', (req, res) => {
 // EXPLANATION: reset map routes
 app.get('/api/map-routes/reset', (req, res) => {
   mapRouteActions.RESET(dispatch);
+
+  res.send({ reseted: true });
+});
+
+//
+//
+// EXPLANATION: images
+// get all
+app.get('/api/images', (req, res) => {
+  res.json(state.image.list);
+});
+
+// create new
+app.post('/api/images/', (req, res) => {
+  const id = state.image.list.length + 1;
+
+  imageActions.ADD(dispatch, {
+    id,
+    ...req.body,
+  });
+
+  res.send({ id });
+});
+
+// get image
+app.get('/api/images/:id', (req, res) => {
+  res.json(state.image.list.find((it) => it.id == req.params.id));
+});
+
+// delete
+app.delete('/api/images/:id', (req, res) => {
+  const index = state.image.list.findIndex((it) => it.id == req.params.id);
+  let deleted = false;
+
+  if (index > -1) {
+    imageActions.DELETE(dispatch, { index });
+    deleted = req.body.id;
+  }
+
+  res.send({ deleted });
+});
+
+// update
+app.put('/api/images/', (req, res) => {
+  const index = state.image.list.findIndex((it) => it.id == req.body.id);
+  let updated = false;
+
+  if (index > -1) {
+    imageActions.EDIT(dispatch, { index, item: req.body });
+    updated = req.body.id;
+  }
+
+  res.send({ updated });
+});
+
+// reset
+app.get('/api/images/reset', (req, res) => {
+  imageActions.RESET(dispatch);
 
   res.send({ reseted: true });
 });

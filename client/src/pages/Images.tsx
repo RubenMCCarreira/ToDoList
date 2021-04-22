@@ -1,27 +1,40 @@
-import { IFile, IHistory } from '../interfaces';
+import withInjectReducer from 'tool/redux/withInjectReducer';
+import { useEffect } from 'react';
+import reducer, {
+  imageMapDispatchToProps,
+  imageMapStateToProps,
+  stateImageKey
+} from '../store/image';
+import { IImage, IHistory } from '../interfaces';
 import Layout from '../containers/Layout';
-import InputFile from '../components/InputFile';
-import { useState } from 'react';
 import Carrousel from '../containers/Carrousel';
+import AddImages from '../containers/AddImages';
 
 interface ImagesProps {
   history: IHistory;
+  getList: Function;
+  list: IImage[] | null;
 }
 
-const Images = ({ history }: ImagesProps) => {
-  const [images, setImages] = useState<IFile[]>([]);
-
-  const handleImages = (newImages) => {
-    setImages([...images, ...newImages]);
-  };
+const Images = ({ history, list, getList }: ImagesProps) => {
+  useEffect(() => {
+    if (!list) {
+      getList();
+    }
+  }, [list]);
 
   return (
     <Layout history={history}>
-      <InputFile onChange={handleImages} />
-
-      <Carrousel items={images} showFooter />
+      <Carrousel items={list || []} showFooter />
+      <AddImages />
     </Layout>
   );
 };
 
-export default Images;
+export default withInjectReducer(
+  stateImageKey,
+  reducer,
+  imageMapStateToProps,
+  imageMapDispatchToProps,
+  Images
+);

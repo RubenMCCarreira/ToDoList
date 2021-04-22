@@ -12,11 +12,7 @@ import Form from './Form';
 import Paragraph from '../components/Paragraph';
 import Span from '../components/Span';
 import Div from '../components/Div';
-
-export interface IRoom {
-  id: number;
-  name: string;
-}
+import { IRoom, IMessage } from '../interfaces';
 
 interface RoomProps {
   activeId: null | number;
@@ -24,15 +20,8 @@ interface RoomProps {
   getItem: Function;
 }
 
-interface IMessages {
-  id: string;
-  user: string;
-  text: string;
-  room: string;
-}
-
 const Room = ({ activeId, item, getItem }: RoomProps) => {
-  const [messages, setMessages] = useState<IMessages[]>([]);
+  const [messages, setMessages] = useState<IMessage[]>([]);
   const { theme } = useThemeContext();
   const {
     socket,

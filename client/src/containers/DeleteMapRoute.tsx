@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
+import { IMapRoute } from '../interfaces';
 import reducer, {
   stateMapRouteKey,
   mapRouteMapDispatchToProps,
@@ -9,7 +10,7 @@ import { formatDate } from '../tools/date';
 import Table from './Table';
 
 type DeleteMapRouteProps = {
-  list: any[];
+  list: IMapRoute[];
   getList: Function;
   deleteItem: Function;
 };
