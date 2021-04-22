@@ -9,13 +9,12 @@ import reducer, {
 import { formatDate } from '../tools/date';
 import Table from './Table';
 
-type DeleteMapRouteProps = {
+type MapRoutesProps = {
   list: IMapRoute[];
   getList: Function;
-  deleteItem: Function;
 };
 
-const DeleteMapRoute = ({ list, getList, deleteItem }: DeleteMapRouteProps) => {
+const MapRoutes = ({ list, getList }: MapRoutesProps) => {
   useEffect(() => {
     if (!list) {
       getList();
@@ -27,16 +26,16 @@ const DeleteMapRoute = ({ list, getList, deleteItem }: DeleteMapRouteProps) => {
       headers={[
         { prop: 'id', label: '#' },
         { prop: 'from.capital', label: 'From' },
+        {
+          prop: 'departure',
+          label: 'Departure',
+          callback: (value) => formatDate(value)
+        },
         { prop: 'to.capital', label: 'To' },
         {
-          label: 'Options',
-          prop: null,
-          options: [
-            {
-              label: 'Remove',
-              callback: (row) => deleteItem(row.id)
-            }
-          ]
+          prop: 'arrive',
+          label: 'Arrive',
+          callback: (value) => formatDate(value)
         }
       ]}
       rows={list}
@@ -49,5 +48,5 @@ export default withInjectReducer(
   reducer,
   mapRouteMapStateToProps,
   mapRouteMapDispatchToProps,
-  DeleteMapRoute
+  MapRoutes
 );

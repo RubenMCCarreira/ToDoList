@@ -3,6 +3,7 @@ import Button from '../components/Button';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/Input';
 import InputDate from '../components/InputDate';
+import get from 'lodash/get';
 
 interface IFormItem {
   prop: string;
@@ -26,12 +27,13 @@ interface FormProps {
   callback?: Function;
   className?: string;
   grid?: boolean;
+  item?: any;
 }
 
-const reset = (items) => {
+const reset = (items, item) => {
   const next = {};
   items.forEach((it) => {
-    next[it.prop] = { ...it, value: null, error: false };
+    next[it.prop] = { ...it, value: get(item, it.prop) || null, error: false };
   });
   return next;
 };
@@ -53,13 +55,14 @@ const Form = ({
   label = 'Submit',
   callback,
   className,
-  grid = false
+  grid = false,
+  item
 }: FormProps) => {
   const [nextItems, setNextItems] = useState({});
 
   useEffect(() => {
-    setNextItems(reset(items));
-  }, [items]);
+    setNextItems(reset(items, item));
+  }, [items, item]);
 
   const onChange = (value, prop) => {
     setNextItems((current) => ({
@@ -93,7 +96,7 @@ const Form = ({
         callback(toSend);
       }
 
-      setNextItems(reset(allNextItems));
+      setNextItems(reset(allNextItems, {}));
     } else {
       setNextItems(
         allNextItems.reduce((acc, current) => {

@@ -135,23 +135,29 @@ app.put('/api/theme/', (req, res) => {
   res.send({ updated: true });
 });
 
-// EXPLANATION: login
+//
+//
+// EXPLANATION: login and users
+// login
 app.post('/api/login', (req, res) => {
-  const token = generateToken();
+  const index = state.login.list.findIndex((it) => it.id == req.body.id);
 
-  const index = state.login.list.findIndex((it) => it.username == req.body.username);
-  const item = { ...req.body, token };
+  let item = {};
 
   if (index > -1) {
+    item = req.body;
     loginActions.EDIT(dispatch, { index, item });
   } else {
+    const token = generateToken();
+    const id = state.login.list.length + 1;
+    item = { id, ...req.body, token };
     loginActions.ADD(dispatch, item);
   }
 
   res.send(item);
 });
 
-// EXPLANATION: get token by username
+// get token by username
 app.post('/api/login/revalidate', (req, res) => {
   const token = generateToken();
 
@@ -166,6 +172,12 @@ app.post('/api/login/revalidate', (req, res) => {
   }
 
   res.send(toSend);
+});
+
+//
+// get user
+app.get('/api/login/:username', (req, res) => {
+  res.json(state.login.list.find((it) => it.username == req.params.username));
 });
 
 //

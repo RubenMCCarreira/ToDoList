@@ -2,6 +2,7 @@ import Chat from '../pages/Chat';
 import Images from '../pages/Images';
 import Initial from '../pages/Initial';
 import Map from '../pages/Map';
+import Profile from '../pages/Profile';
 
 export const ROUTES = [
   {
@@ -23,5 +24,10 @@ export const ROUTES = [
     page: '/images',
     title: 'Images',
     component: Images
+  },
+  {
+    page: '/profile',
+    title: 'Profile',
+    component: Profile
   }
 ];

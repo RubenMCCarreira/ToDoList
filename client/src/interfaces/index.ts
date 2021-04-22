@@ -65,3 +65,9 @@ export interface IMapRoute {
   to: ICountry;
   arrive: string;
 }
+
+export interface IProfile {
+  username: string;
+  password: string;
+  token: string;
+}

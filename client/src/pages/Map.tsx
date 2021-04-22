@@ -5,6 +5,7 @@ import Tabs from '../components/Tabs';
 import Tab from '../components/Tab';
 import NewMapRoute from '../containers/NewMapRoute';
 import DeleteMapRoute from '../containers/DeleteMapRoute';
+import MapRoutes from '../containers/MapRoutes';
 
 interface MapProps {
   history: IHistory;
@@ -15,6 +16,9 @@ const Map = ({ history }: MapProps) => {
     <Layout history={history}>
       <MapChart />
       <Tabs>
+        <Tab title="Routes">
+          <MapRoutes />
+        </Tab>
         <Tab title="Create new Route">
           <NewMapRoute />
         </Tab>

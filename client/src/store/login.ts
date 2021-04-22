@@ -1,6 +1,6 @@
 import generate from 'tool/redux/client';
 import { GET, POST } from 'tool/fetch';
-import { removeLogin, setLogin } from '../tools/cookies';
+import { removeLogin, setLogin, getLogin } from '../tools/cookies';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -13,11 +13,13 @@ export const resetAction = (dispatch) => {
   return LoginActions.RESET(dispatch);
 };
 
-export const getItemAction = async (dispatch, id) => {
+export const getItemAction = async (dispatch) => {
   try {
     LoginActions.LOADING(dispatch);
 
-    const payload = await GET(`${apiUrl}/login`);
+    const username = getLogin().username;
+
+    const payload = await GET(`${apiUrl}/login/${username}`);
 
     LoginActions.ITEM(dispatch, payload);
   } catch (error) {
@@ -63,7 +65,7 @@ export const updateItemAction = async (dispatch, data) => {
 
 export const loginMapDispatchToProps = (dispatch) => ({
   reset: () => resetAction(dispatch),
-  getItem: (id) => getItemAction(dispatch, id),
+  getItem: () => getItemAction(dispatch),
   saveItem: (data) => saveItemAction(dispatch, data),
   updateItem: (data) => updateItemAction(dispatch, data)
 });

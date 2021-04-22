@@ -18,7 +18,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
-  const { theme } = useThemeContext();
+  const { theme, themes, changeTheme } = useThemeContext();
 
   const onLogout = () => {
     if (history) {
