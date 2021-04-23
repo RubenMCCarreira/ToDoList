@@ -71,3 +71,8 @@ export interface IProfile {
   password: string;
   token: string;
 }
+
+export interface IOrder {
+  prop: null | string;
+  value: null | string;
+}

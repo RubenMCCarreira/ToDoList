@@ -5,7 +5,6 @@ import Input from '../components/Input';
 import H3 from '../components/H3';
 import Paragraph from '../components/Paragraph';
 import Priority from '../components/Priority';
-import { useThemeContext } from '../contexts/Theme';
 import { IItemState, IToDo } from '../interfaces';
 import Article from '../components/Article';
 import Div from '../components/Div';
@@ -25,8 +24,6 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   const [removed, setRemoved] = useState(false);
   const [priority, setPriority] = useState<number | null>(null);
   const [done, setDone] = useState(false);
-
-  const { theme } = useThemeContext();
 
   useEffect(() => {
     setTitle((current) => ({ ...current, value: item.title }));
@@ -63,7 +60,7 @@ const ToDo = React.memo(({ item, updateItem, ...rest }: ToDoProps) => {
   }, [item]);
 
   return (
-    <Article className={`to-do`} {...rest}>
+    <Article id={`to-do`} {...rest}>
       {showEdit ? (
         <>
           <Div noWrap pushes>

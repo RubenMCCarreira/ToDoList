@@ -4,14 +4,14 @@ import { nextClassNames } from '../tools/classnames';
 
 interface ArticleProps {
   children: ReactChild | ReactChild[];
-  className?: string;
+  id?: string;
 }
 
-const Article = ({ children, className = '', ...rest }: ArticleProps) => {
+const Article = ({ children, id, ...rest }: ArticleProps) => {
   const { theme } = useThemeContext();
 
   return (
-    <article className={nextClassNames([theme, className])} {...rest}>
+    <article id={id} className={nextClassNames([theme])} {...rest}>
       {children}
     </article>
   );

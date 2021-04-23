@@ -43,7 +43,7 @@ const AddImages = ({ saveItem }: AddImagesProps) => {
       </Div>
       <Div id="add-image">
         {images.map((it, index) => (
-          <Div noWrap>
+          <Div key={index} noWrap>
             <img src={it.src} />
             <TextArea
               item={{ value: it.legend || null, error: false }}

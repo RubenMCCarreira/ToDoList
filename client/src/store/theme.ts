@@ -11,7 +11,7 @@ export const resetAction = (dispatch) => {
   return ThemeActions.RESET(dispatch);
 };
 
-export const getItemAction = async (dispatch, id) => {
+export const getItemAction = async (dispatch) => {
   try {
     ThemeActions.LOADING(dispatch);
 
@@ -37,7 +37,7 @@ export const saveItemAction = async (dispatch, data) => {
 
 export const themeMapDispatchToProps = (dispatch) => ({
   reset: () => resetAction(dispatch),
-  getItem: (id) => getItemAction(dispatch, id),
+  getItem: () => getItemAction(dispatch),
   saveItem: (data) => saveItemAction(dispatch, data)
 });
 

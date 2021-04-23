@@ -54,6 +54,11 @@ const NewMapRoute = ({ other, getOther, saveItem }: NewMapRouteProps) => {
           placeholder: 'Arrive',
           mandatory: true,
           type: 'dateTime'
+        },
+        {
+          prop: 'description',
+          placeholder: 'Description',
+          type: 'textarea'
         }
       ]}
       onSubmit={saveItem}

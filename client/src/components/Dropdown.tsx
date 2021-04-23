@@ -1,5 +1,5 @@
 import { useThemeContext } from '../contexts/Theme';
-import Missing from './Missing';
+import { nextClassNames } from '../tools/classnames';
 
 interface DropdownProps {
   item?: any;
@@ -7,9 +7,17 @@ interface DropdownProps {
   onChange: Function;
   values: any[];
   prop?: string;
+  placeholder: string;
 }
 
-const Dropdown = ({ item, value, values, onChange, prop }: DropdownProps) => {
+const Dropdown = ({
+  item,
+  value,
+  values,
+  onChange,
+  prop,
+  placeholder
+}: DropdownProps) => {
   const { theme } = useThemeContext();
 
   const handleOnChange = (e) => {
@@ -17,7 +25,10 @@ const Dropdown = ({ item, value, values, onChange, prop }: DropdownProps) => {
   };
 
   return (
-    <div>
+    <label>
+      <span className={nextClassNames([theme, item?.error ? 'missing' : ''])}>
+        {placeholder}
+      </span>
       <select
         className={`${theme}`}
         value={value || item?.value || 'Select One'}
@@ -32,8 +43,7 @@ const Dropdown = ({ item, value, values, onChange, prop }: DropdownProps) => {
           </option>
         ))}
       </select>
-      {item?.error && <Missing />}
-    </div>
+    </label>
   );
 };
 

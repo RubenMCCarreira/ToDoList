@@ -6,8 +6,7 @@ import reducer, {
   mapRouteMapDispatchToProps,
   mapRouteMapStateToProps
 } from '../store/mapRoute';
-import { formatDate } from '../tools/date';
-import Table from './Table';
+import Table from '../components/Table';
 
 type DeleteMapRouteProps = {
   list: IMapRoute[];

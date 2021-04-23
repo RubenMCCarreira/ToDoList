@@ -94,7 +94,14 @@ const Room = ({ activeId, item, getItem }: RoomProps) => {
       </Div>
 
       <Form
-        items={[{ prop: 'message', placeholder: 'Message', mandatory: true }]}
+        items={[
+          {
+            prop: 'message',
+            placeholder: 'Message',
+            mandatory: true,
+            hideTitle: true
+          }
+        ]}
         callback={handleSendMessage}
         label="Send"
       />

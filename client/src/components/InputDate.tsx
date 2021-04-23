@@ -1,7 +1,7 @@
 import { useThemeContext } from '../contexts/Theme';
 import { IItemState } from '../interfaces';
+import { nextClassNames } from '../tools/classnames';
 import { zoneDateZone } from '../tools/date';
-import Missing from './Missing';
 
 interface InputDateProps {
   item: IItemState;
@@ -9,20 +9,34 @@ interface InputDateProps {
   onChange: Function;
   min: string;
   max: string;
+  placeholder: string;
 }
 
-const InputDate = ({ item, prop, onChange, min, max }: InputDateProps) => {
+const InputDate = ({
+  item,
+  prop,
+  onChange,
+  min,
+  max,
+  placeholder
+}: InputDateProps) => {
   const { theme } = useThemeContext();
 
   const handleChange = (e) => {
     const nextValue = new Date(e.target.value);
-    onChange(nextValue.toISOString(), prop);
+
+    if (nextValue instanceof Date && !isNaN(nextValue.valueOf())) {
+      onChange(nextValue.toISOString(), prop);
+    }
   };
 
   let stringValue = zoneDateZone(item.value);
 
   return (
-    <div>
+    <label>
+      <span className={nextClassNames([theme, item.error ? 'missing' : ''])}>
+        {placeholder}
+      </span>
       <input
         className={`${theme}`}
         value={stringValue}
@@ -31,8 +45,7 @@ const InputDate = ({ item, prop, onChange, min, max }: InputDateProps) => {
         min={min}
         max={max}
       />
-      {item.error && <Missing />}
-    </div>
+    </label>
   );
 };
 

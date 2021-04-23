@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import withInjectReducer from 'tool/redux/withInjectReducer';
 import ToDo from './ToDo';
 import reducer, {
@@ -6,78 +5,36 @@ import reducer, {
   toDoMapDispatchToProps,
   stateToDoKey
 } from '../store/toDo';
-import Spinier from '../components/Spinier';
 import DragDropList from '../components/DragDropList';
 import SortOrder from '../components/SortOrder';
-import Button from '../components/Button';
-import H2 from '../components/H2';
-import H4 from '../components/H4';
 import Div from '../components/Div';
-import { IToDo } from '../interfaces';
+import { IOrder, IToDo } from '../interfaces';
 
 interface ToDosProps {
-  getList: Function;
   list: IToDo[] | null;
-  reset: Function;
   saveItem: Function;
-  loading: boolean | null;
-  error: string | null;
+  handleSortOrder: Function;
+  currentOrder: IOrder;
+  all: boolean;
 }
 
 const ToDos = ({
-  getList,
   list,
-  reset,
   saveItem,
-  loading,
-  error
+  handleSortOrder,
+  currentOrder,
+  all
 }: ToDosProps) => {
-  const [currentOrder, setCurrentOrder] = useState({ prop: null, value: null });
-  const [all, setAll] = useState(false);
-
-  useEffect(() => {
-    return () => {
-      reset();
-    };
-  }, []);
-
-  useEffect(() => {
-    reset();
-  }, [all]);
-
-  useEffect(() => {
-    if (!list) {
-      getList(all);
-    }
-  }, [list, all]);
-
-  const handleSortOrder = (nextOrder) => {
-    setCurrentOrder(nextOrder);
-    getList(all, nextOrder);
-  };
-
   return (
     <>
-      {loading && <Spinier />}
-      <Div noWrap pushes>
-        <Div>
-          <H2>To Dos ({(list || []).length})</H2>
-          <>{!!error && <H4 className="error">{error}</H4>}</>
-        </Div>
-        {all ? (
-          <Button label="See Active" onClick={() => setAll(false)} />
-        ) : (
-          <Button label="See All" onClick={() => setAll(true)} />
-        )}
-      </Div>
-      <Div className={`to-dos-options`}>
+      <Div id={`to-dos-options`}>
         <SortOrder
           values={['title', 'done', 'priority']}
           currentOrder={currentOrder}
           onChange={handleSortOrder}
         />
       </Div>
-      <Div className={`to-dos`}>
+      <Div>
         {all ? (
           (list || []).map((it) => (
             <ToDo key={it.id} item={it} updateItem={saveItem} />

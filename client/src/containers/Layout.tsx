@@ -15,10 +15,18 @@ interface LayoutProps {
   history?: IHistory;
   loading?: boolean | null;
   error?: string | null;
+  options?: any;
 }
 
-const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
-  const { theme, themes, changeTheme } = useThemeContext();
+const Layout = ({
+  children,
+  title,
+  history,
+  loading,
+  error,
+  options
+}: LayoutProps) => {
+  const { theme } = useThemeContext();
 
   const onLogout = () => {
     if (history) {
@@ -56,11 +64,12 @@ const Layout = ({ children, title, history, loading, error }: LayoutProps) => {
       )}
       <main>
         {(!!title || !!error) && (
-          <Div noWrap>
-            <>
+          <Div noWrap pushes={!!options}>
+            <div>
               {!!title && <H2>{title}</H2>}
               {!!error && <H4 className="error">{error}</H4>}
-            </>
+            </div>
+            {options}
           </Div>
         )}
         {loading && <Spinier />}

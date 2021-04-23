@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Button from '../components/Button';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/Input';
 import InputDate from '../components/InputDate';
 import get from 'lodash/get';
+import TextArea from '../components/TextArea';
 
 interface IFormItem {
   prop: string;
@@ -11,6 +12,7 @@ interface IFormItem {
   mandatory?: true;
   type?: string;
   values?: any[];
+  hideTitle?: boolean;
 }
 
 interface INextFormItem {
@@ -18,6 +20,7 @@ interface INextFormItem {
   mandatory: undefined | true;
   value: string | null;
   error: boolean;
+  hideTitle?: boolean;
 }
 
 interface FormProps {
@@ -43,7 +46,8 @@ const mapTypeToComponent = (type) => {
     input: Input,
     password: Input,
     select: Dropdown,
-    dateTime: InputDate
+    dateTime: InputDate,
+    textarea: TextArea
   };
 
   return map[type] || Input;
@@ -110,12 +114,9 @@ const Form = ({
     }
   };
 
-  return (
-    <form
-      className={`${className || (grid ? 'grid' : undefined) || 'no-wrap'}`}
-      onSubmit={handleSubmit}
-    >
-      {Object.keys(nextItems).map((it) => {
+  const resolveItems = useMemo(
+    () =>
+      Object.keys(nextItems).map((it) => {
         const Component = mapTypeToComponent(nextItems[it].type);
         return (
           <Component
@@ -126,10 +127,29 @@ const Form = ({
             placeholder={nextItems[it].placeholder}
             type={nextItems[it].type}
             values={nextItems[it].values}
+            hideTitle={nextItems[it].hideTitle}
           />
         );
-      })}
-      <Button label={label} type="submit" />
+      }),
+    [nextItems]
+  );
+
+  return (
+    <form
+      className={`${className || (!grid ? 'no-wrap' : '')}`}
+      onSubmit={handleSubmit}
+    >
+      {grid ? (
+        <>
+          <div className={`grid`}>{resolveItems}</div>
+          <Button label={label} type="submit" />
+        </>
+      ) : (
+        <>
+          {resolveItems}
+          <Button label={label} type="submit" />
+        </>
+      )}
     </form>
   );
 };

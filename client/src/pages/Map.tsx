@@ -19,7 +19,7 @@ const Map = ({ history }: MapProps) => {
         <Tab title="Routes">
           <MapRoutes />
         </Tab>
-        <Tab title="Create new Route">
+        <Tab title="Create Route">
           <NewMapRoute />
         </Tab>
         <Tab title="Delete Route">

@@ -20,7 +20,7 @@ const Checkbox = ({
   };
 
   return (
-    <label className={`${theme}`}>
+    <label className={`${theme} no-wrap`}>
       <input
         type="checkbox"
         checked={checked}

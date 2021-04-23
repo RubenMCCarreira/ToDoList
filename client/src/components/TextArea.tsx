@@ -1,6 +1,6 @@
 import { useThemeContext } from '../contexts/Theme';
 import { IItemState } from '../interfaces';
-import Missing from './Missing';
+import { nextClassNames } from '../tools/classnames';
 
 interface TextAreaProps {
   item: IItemState;
@@ -13,18 +13,18 @@ const TextArea = ({ item, prop, onChange, placeholder }: TextAreaProps) => {
   const { theme } = useThemeContext();
 
   return (
-    <>
+    <label>
+      <span className={nextClassNames([theme, item.error ? 'missing' : ''])}>
+        {placeholder}
+      </span>
       <textarea
         className={`${theme}`}
         onChange={(e) => onChange(e.target.value, prop)}
         value={item.value || ''}
         placeholder={placeholder}
         rows={4}
-        cols={50}
       />
-
-      {item.error && <Missing />}
-    </>
+    </label>
   );
 };
 

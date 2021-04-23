@@ -7,7 +7,7 @@ import reducer, {
   mapRouteMapStateToProps
 } from '../store/mapRoute';
 import { formatDate } from '../tools/date';
-import Table from './Table';
+import Table from '../components/Table';
 
 type MapRoutesProps = {
   list: IMapRoute[];

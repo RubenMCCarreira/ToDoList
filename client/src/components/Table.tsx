@@ -1,5 +1,6 @@
 import get from 'lodash/get';
-import Span from '../components/Span';
+import Paragraph from './Paragraph';
+import Span from './Span';
 
 interface TableProps {
   headers: {
@@ -11,10 +12,12 @@ interface TableProps {
       callback: Function;
     }[];
   }[];
-  rows: any[];
+  rows: any[] | null;
 }
 
 const Table = ({ headers, rows }: TableProps) => {
+  if (!rows || !rows.length) return <Paragraph>No Results</Paragraph>;
+
   return (
     <table>
       <thead>

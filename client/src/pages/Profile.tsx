@@ -33,7 +33,12 @@ const Profile = ({ history, item, getItem, saveItem }: ProfileProps) => {
 
   return (
     <Layout history={history}>
-      <Dropdown value={theme} values={themes} onChange={changeTheme} />
+      <Dropdown
+        value={theme}
+        values={themes}
+        onChange={changeTheme}
+        placeholder="Theme"
+      />
       <Form
         items={[
           {
